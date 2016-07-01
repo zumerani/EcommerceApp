@@ -1,9 +1,7 @@
-Ionic App Base
+Drop App
 =====================
 
-A starting project for Ionic that optionally supports using custom SCSS.
-
-## Using this project
+## To get started
 
 Using the Ionic CLI would help a lot:
 
