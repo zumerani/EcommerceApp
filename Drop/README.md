@@ -17,7 +17,7 @@ After it is installed, just make sure it's in your PATH.
 
 In order to build our project:
 
-First install 'ios' as a platform:
+First install 'ios' as a platform (make sure you are in the 'Drop' directory):
 
 ```bash
 $ ionic platform add ios
