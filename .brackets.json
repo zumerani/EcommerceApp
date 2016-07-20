@@ -1,0 +1,6 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic.bundle.min.js",
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic.js"
+    ]
+}
