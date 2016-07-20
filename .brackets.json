@@ -1,6 +1,12 @@
 {
     "jscodehints.detectedExclusions": [
         "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic.bundle.min.js",
-        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic.js"
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic.js",
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic-angular.js",
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic-angular.min.js",
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic.bundle.js",
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/ionic.min.js",
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/angular-ui/angular-ui-router.min.js",
+        "/Users/Zain/Documents/DropApp/Frontend/www/lib/ionic/js/angular-ui/angular-ui-router.js"
     ]
 }
