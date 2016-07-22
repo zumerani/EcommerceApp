@@ -44,6 +44,12 @@
 		55751D6160F6466DB06EE3E6 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 662F5B9D7E534396BF8001AF /* CDVSplashScreen.m */; };
 		DFA797D0107149BB916749A0 /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BD02ADD87134467DAD745A5A /* CDVViewController+SplashScreen.m */; };
 		033B6D0E756D4FC2A770F440 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD13F8D474B4C1EAD485EB0 /* CDVInAppBrowser.m */; };
+		E39A0D91ADA143B79BA0FCD8 /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C521229D9DD34F8BB8548A32 /* FacebookConnectPlugin.m */; };
+		E28B800F44AE43458C069D20 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75AB4A3028CA4DC993721E9A /* FacebookSDK.framework */; };
+		F26B4C7344B24F37A6683F2C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA973C59E284B48824A5B59 /* libsqlite3.dylib */; };
+		8BA52B80446F4844BF87061E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4929A26099744C52AFB3150A /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0D841EF00EA24FE19FC1B407 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94EAC906C434D319D11B0F7 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		43A08E3EC40D426BBF0C48FB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF2513C8F00439A9E3454C7 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +125,13 @@
 		E1DA5AF952BF49CD9DD93B04 /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		1CD13F8D474B4C1EAD485EB0 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		C2C37284AF8D41F497F7A4B0 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		C521229D9DD34F8BB8548A32 /* FacebookConnectPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "FacebookConnectPlugin.m"; path = "phonegap-facebook-plugin/FacebookConnectPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		0BED85D139B84045A557C93A /* FacebookConnectPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FacebookConnectPlugin.h"; path = "phonegap-facebook-plugin/FacebookConnectPlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		75AB4A3028CA4DC993721E9A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "FacebookSDK.framework"; path = "HelloCordova/Plugins/phonegap-facebook-plugin/FacebookSDK.framework"; sourceTree = "<group>"; };
+		DFA973C59E284B48824A5B59 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsqlite3.dylib"; path = "usr/lib/libsqlite3.dylib"; sourceTree = SDKROOT; fileEncoding = 4; };
+		4929A26099744C52AFB3150A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		C94EAC906C434D319D11B0F7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Accounts.framework"; path = "System/Library/Frameworks/Accounts.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		5CF2513C8F00439A9E3454C7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +143,11 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
+				E28B800F44AE43458C069D20 /* FacebookSDK.framework in Frameworks */,
+				F26B4C7344B24F37A6683F2C /* libsqlite3.dylib in Frameworks */,
+				8BA52B80446F4844BF87061E /* Social.framework in Frameworks */,
+				0D841EF00EA24FE19FC1B407 /* Accounts.framework in Frameworks */,
+				43A08E3EC40D426BBF0C48FB /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +220,11 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
+				75AB4A3028CA4DC993721E9A /* FacebookSDK.framework */,
+				DFA973C59E284B48824A5B59 /* libsqlite3.dylib */,
+				4929A26099744C52AFB3150A /* Social.framework */,
+				C94EAC906C434D319D11B0F7 /* Accounts.framework */,
+				5CF2513C8F00439A9E3454C7 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -227,6 +250,8 @@
 				E1DA5AF952BF49CD9DD93B04 /* CDVViewController+SplashScreen.h */,
 				1CD13F8D474B4C1EAD485EB0 /* CDVInAppBrowser.m */,
 				C2C37284AF8D41F497F7A4B0 /* CDVInAppBrowser.h */,
+				C521229D9DD34F8BB8548A32 /* FacebookConnectPlugin.m */,
+				0BED85D139B84045A557C93A /* FacebookConnectPlugin.h */,
 			);
 			name = Plugins;
 			path = "HelloCordova/Plugins";
@@ -416,6 +441,7 @@
 				55751D6160F6466DB06EE3E6 /* CDVSplashScreen.m in Sources */,
 				DFA797D0107149BB916749A0 /* CDVViewController+SplashScreen.m in Sources */,
 				033B6D0E756D4FC2A770F440 /* CDVInAppBrowser.m in Sources */,
+				E39A0D91ADA143B79BA0FCD8 /* FacebookConnectPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +484,10 @@
 				);
 				PRODUCT_NAME = "HelloCordova";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"HelloCordova/Plugins/phonegap-facebook-plugin\"",
+				);
 			};
 			name = Debug;
 		};
@@ -487,6 +517,10 @@
 				);
 				PRODUCT_NAME = "HelloCordova";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"HelloCordova/Plugins/phonegap-facebook-plugin\"",
+				);
 			};
 			name = Release;
 		};
