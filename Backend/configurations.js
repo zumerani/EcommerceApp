@@ -1,5 +1,5 @@
 exports.database = {
-    url: "mongodb://zumerani:Boeing96@ds023495.mlab.com:23495/schools" , 
+    url: "mongodb://zumerani:Boeing96@ds023495.mlab.com:23495" , 
     //collections: ...
 }
 
