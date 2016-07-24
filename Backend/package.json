@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "An Ionic project",
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
     "cors": "^2.7.1",
     "gulp": "^3.5.6",

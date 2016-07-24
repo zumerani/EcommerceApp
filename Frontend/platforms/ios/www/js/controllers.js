@@ -57,4 +57,7 @@ angular.module('starter.controllers', [])
         });
 
     };
+})
+.controller('SignUpCtrl' , function( $scope ) {
+    console.log('Sign Up!');
 });
