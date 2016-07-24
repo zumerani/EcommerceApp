@@ -1,1 +1,78 @@
-/* Empty. Add your own CSS if you like */
+/* SIGNIN.HTML */
+
+.signin_logo {
+    width: 85px;
+    height: 85px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    display: block;
+}
+
+.signin_title {
+    text-align: center;
+    color: black;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 15px;
+}
+
+.signin_login {
+    border-top: none;
+    width: 92%;
+    margin: auto;
+    border-left: none;
+    border-right: none;
+}
+
+.signin_login input {
+    /*margin-bottom: -20px;*/
+    font-family: 'Varela Round', sans-serif;
+    //font-style: italic;
+    font-weight: lighter;
+    color: grey;
+}
+
+#signin_username_form {
+    margin-top: 40px;
+}
+
+.signin_line {
+    height: 0.5px;
+    border: none;
+    color: black;
+    background-color: #eee;
+}
+
+a {
+    text-decoration: none;
+}
+
+.signin_loginButton {
+    margin: auto;
+    display: block;
+    border: 1px solid #3070AE;
+    width: 180px;
+    height: 38px;
+    border-radius: 3px;
+    color: #3070AE;
+    font-size: 12px;
+    font-family: Raleway;
+    margin-top: 30px;
+}
+
+#signin_facebook {
+    background-color: #3b5998;
+    color: white;
+}
+
+#signin_facebook i {
+    margin-right: 5px;
+}
+
+.signin_or {
+    color: #668095;
+    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+    font-weight: lighter;
+    font-size: 15px;
+}

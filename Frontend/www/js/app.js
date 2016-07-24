@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'ngCordovaOauth'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -31,26 +31,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('signin' , {
+      url: '/signin' ,
+      templateUrl: 'templates/signin.html' ,
+      controller: 'SignInCtrl'
+  })
+
+ /* Set up tabs from here on out. */
+.state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.dash', {
+.state('tab.dash', {
     url: '/dash',
     views: {
-      'tab-dash': {
+        'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
         controller: 'DashCtrl'
       }
     }
-  })
-
-  .state('tab.chats', {
+ })
+.state('tab.chats', {
       url: '/chats',
       views: {
         'tab-chats': {
@@ -58,8 +60,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'ChatsCtrl'
         }
       }
-    })
-    .state('tab.chat-detail', {
+})
+.state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
@@ -67,9 +69,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'ChatDetailCtrl'
         }
       }
-    })
+})
 
-  .state('tab.account', {
+.state('tab.account', {
     url: '/account',
     views: {
       'tab-account': {
@@ -77,9 +79,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AccountCtrl'
       }
     }
-  });
+});
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  /* Default URL path */
+  $urlRouterProvider.otherwise('/signin');
 
 });
