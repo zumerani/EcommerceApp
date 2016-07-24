@@ -25,6 +25,13 @@ function setUp() {
     server.use( dependencies.bodyParser.urlencoded( {extended: true } ) );
     server.use( dependencies.bodyParser.json() );
     server.use( dependencies.cors );
+    /* Set up CORS */
+    server.use(function(req, res, next) {
+        res.header('Access-Control-Allow-Origin', "*");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        next();
+    });
 }
 
 //Set up data managers (dataManagers)
@@ -42,18 +49,17 @@ function initializeAPIS() {
     routes.userSetup();
 }
 
+//Server Start Up
 function bootUp() {
-    console.log("starting up ...");
+    console.log("Starting up server ...");
     setUp();
     console.log("Starting APIs");
     initializeAPIS();
     var port = dependencies.config.port;
     server.listen(port);
-    console.log( 'Listening on port: ' + port );
+    console.log( 'Listening ... ' + dependencies.config.base);
 }
 
 bootUp();
 
-// server.get( '/' , function(req , res) {
-//     res.send('Hello, World!');
-// });
+console.log("Booted Up");
