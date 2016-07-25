@@ -43,23 +43,32 @@ exports.addUser = function( req , res ) {
     //     }
     // });
 
-    db.Users.findOne( {
-        name: 'Zain'
-    } , function( err , dbres ) {
-        if(err)
+    // db.Users.findOne( {
+    //     name: 'Zain'
+    // } , function( err , dbres ) {
+    //     if(err)
+    //         console.log(err);
+    //     else if(dbres) {
+    //         console.log(dbres);
+    //         console.log("it exists man.");
+    //     }
+    // });
+    //
+    // db.Users.find( function(err , docs) {
+    //     if( err )
+    //         console.log(err);
+    //     else {
+    //         console.log(docs);
+    //     }
+    // });
+
+    var Cat = db.model('Cat' , {name:String} );
+    var kitty = new Cat( { name: 'Lol'});
+    kitty.save( function(err) {
+        if( err ) {
             console.log(err);
-        else if(dbres) {
-            console.log(dbres);
-            console.log("it exists man.");
+        } else {
+            console.log('meow');
         }
     });
-
-    db.Users.find( function(err , docs) {
-        if( err )
-            console.log(err);
-        else {
-            console.log(docs);
-        }
-    });
-
 };

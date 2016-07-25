@@ -15,8 +15,8 @@ var dependencies = {
 }
 
 //Instantiate our Database (MongoDB)
-var database = dependencies.mongojs( dependencies.config.database.url , dependencies.config.database.collections , {authMechanism: 'SCRAM-SHA-1'});
-
+var database = dependencies.mongoose.connect( dependencies.config.database.url , dependencies.config.database.collections );
+/* {authMechanism: 'SCRAM-SHA-1'} */
 //manageUsers variable
 //var manageUsers = require('./Authentication/manageUser')( server , database );
 
