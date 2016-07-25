@@ -47,4 +47,18 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+.factory('UserAPI' , function($http) {
+    var base = "http://localhost:8080"
+
+    return {
+        addUser: function() {
+            $http({
+                method: 'POST' ,
+                url: base + '/api/v1/users/addUser'
+            }).then( function success() {
+                console.log("hooray!!");
+            });
+        }
+    }
 });

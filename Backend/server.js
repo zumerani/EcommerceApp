@@ -15,7 +15,7 @@ var dependencies = {
 }
 
 //Instantiate our Database (MongoDB)
-var database = dependencies.mongojs( dependencies.config.database.url , ['Schools'] );
+var database = dependencies.mongojs( dependencies.config.database.url , ['Users'] );
 
 //manageUsers variable
 //var manageUsers = require('./Authentication/manageUser')( server , database );
@@ -24,14 +24,14 @@ var database = dependencies.mongojs( dependencies.config.database.url , ['School
 function setUp() {
     server.use( dependencies.bodyParser.urlencoded( {extended: true } ) );
     server.use( dependencies.bodyParser.json() );
-    server.use( dependencies.cors );
+    //server.use( dependencies.cors );
     /* Set up CORS */
-    server.use(function(req, res, next) {
-        res.header('Access-Control-Allow-Origin', "*");
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header('Access-Control-Allow-Headers', 'Content-Type');
-        next();
-    });
+    // server.use(function(req, res, next) {
+    //     res.header('Access-Control-Allow-Origin', "*");
+    //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    //     res.header('Access-Control-Allow-Headers', 'Content-Type');
+    //     next();
+    // });
 }
 
 //Set up data managers (dataManagers)
@@ -58,6 +58,10 @@ function bootUp() {
     var port = dependencies.config.port;
     server.listen(port);
     console.log( 'Listening ... ' + dependencies.config.base);
+    server.use( express.static( __dirname + '/../FrontEnd/www') );
+    server.get('/' , function( req , res ) {
+        return res.sendFile( dependencies.path.resolve('../FrontEnd/www/index.html') );
+    });
 }
 
 bootUp();

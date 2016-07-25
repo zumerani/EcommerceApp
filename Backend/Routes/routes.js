@@ -1,16 +1,18 @@
 init = false;
 
-var server;
+var _server;
 var dataManager;
 var objectId;
 
-exports.init = function( app , dataManagers ) {
-    server = app;
+exports.init = function( server , dataManagers ) {
+    _server = server;
     dataManager = dataManagers;
     init = true;
 }
 
 exports.userSetup = function userSetup() {
-    //server.post('/api/v1/addUser' , dataManager.addUser);
+    _server.post('/api/v1/users/addUser' , function success() {
+        console.log("we did it.");
+    });
     console.log("Setting up users.");
 }
