@@ -11,8 +11,6 @@ exports.init = function( server , dataManagers ) {
 }
 
 exports.userSetup = function userSetup() {
-    _server.post('/api/v1/users/addUser' , function success() {
-        console.log("we did it.");
-    });
     console.log("Setting up users.");
+    _server.post('/api/v1/users/addUser' , dataManager.users.addUser );
 }

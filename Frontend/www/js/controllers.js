@@ -47,18 +47,18 @@ angular.module('starter.controllers', [])
 })
 .controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI) {
 
-    $scope.login = function() {
-
-        // $cordovaOauth.facebook("877800308993381", ["email", "user_website"]).then(function(result) {
-        //     $localStorage.accessToken = result.access_token;
-        // }, function(error) {
-        //     alert("There was a problem signing in!  See the console for logs");
-        //     console.log(error);
-        // });
-        console.log("adding user ... ");
-        UserAPI.addUser();
-
-    };
+    // $scope.login = function() {
+    //     console.log("adding user ... ");
+    //     UserAPI.addUser();
+    //     $cordovaOauth.facebook("877800308993381", ["email", "user_website"]).then(function(result) {
+    //         $localStorage.accessToken = result.access_token;
+    //
+    //     }, function(error) {
+    //         alert("There was a problem signing in!  See the console for logs");
+    //         console.log(error);
+    //     });
+    //
+    // };
 
 
 })

@@ -35,4 +35,31 @@ exports.addUser = function( req , res ) {
     //
     // });
 
+    // db.Users.find( function(err , docs) {
+    //     if( err )
+    //         console.log(err);
+    //     else {
+    //         console.log(docs);
+    //     }
+    // });
+
+    db.Users.findOne( {
+        name: 'Zain'
+    } , function( err , dbres ) {
+        if(err)
+            console.log(err);
+        else if(dbres) {
+            console.log(dbres);
+            console.log("it exists man.");
+        }
+    });
+
+    db.Users.find( function(err , docs) {
+        if( err )
+            console.log(err);
+        else {
+            console.log(docs);
+        }
+    });
+
 };
