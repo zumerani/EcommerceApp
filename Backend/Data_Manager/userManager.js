@@ -136,4 +136,22 @@ exports.addUser = function( req , res ) {
 
     });
 
+    var user = new Model.User( { first : 'Zain' , last: 'Umerani' } );
+    user.save( function(err) {
+        if(err)
+            console.log(err);
+        else {
+            console.log('saved new user!');
+        }
+    });
+
+    var userTwo = new Model.User( { first : 'Sid' , last: 'Nikam' } );
+    userTwo.save( function(err) {
+        if(err)
+            console.log(err);
+        else {
+            console.log('saved new user (sid)!');
+        }
+    });
+
 };
