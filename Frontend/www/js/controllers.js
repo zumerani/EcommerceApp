@@ -63,5 +63,18 @@ angular.module('starter.controllers', [])
 
 })
 .controller('SignUpCtrl' , function( $scope ) {
-    console.log('Sign Up!');
+
+    $scope.user = {
+        first: "" ,
+        last: "" ,
+        school: "" ,
+        email: "" ,
+        password: ""
+    }
+
+    $scope.done = function() {
+        console.log($scope.user);
+    }
+
+
 });

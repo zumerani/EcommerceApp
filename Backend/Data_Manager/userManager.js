@@ -1,11 +1,17 @@
 var db;
 //var dbData = require('../Models/models');
 var objectId;
+var _mongoose;
 
-exports.init = function( database , ObjectID ) {
+exports.init = function( database , ObjectID) {
     db = database;
     objectId = ObjectID;
+    // _mongoose = mongoose;
 }
+
+// var model = require('../Models/models');
+var Model = require('../Models/models');
+console.log('model is ' + Model );
 
 /* Add user */
 exports.addUser = function( req , res ) {
@@ -62,13 +68,72 @@ exports.addUser = function( req , res ) {
     //     }
     // });
 
-    var Cat = db.model('Cat' , {name:String} );
-    var kitty = new Cat( { name: 'Lol'});
-    kitty.save( function(err) {
-        if( err ) {
+    // var Cat = db.model('Cat' , {name:String} );
+    // var kitty = new Cat( { name: 'Lol'});
+    // kitty.save( function(err) {
+    //     if( err ) {
+    //         console.log(err);
+    //     } else {
+    //         console.log('meow');
+    //     }
+    // });
+
+
+    // var item = model.createModels.Item( { name : 'haha' } );
+    // var item = model.createModels().Item( {name : 'haha' } );
+    // console.log( "Item is: " + item );
+    //
+    // item.save( function(err) {
+    //     if(err)
+    //         console.log(err);
+    //     else {
+    //         console.log('saved item!');
+    //     }
+    // });
+    //
+    // var itemTwo = model.createModels().Item( {name : 'omg!' } );
+    // itemTwo.save( function(err) {
+    //     if(err)
+    //         console.log(err);
+    //     else {
+    //         console.log('saved item!');
+    //     }
+    // });
+
+    // model.Item.find({} , {} , function(err , res) {
+    //     if(err)
+    //         console.log('error');
+    //     else {
+    //         console.log(res);
+    //     }
+    // });
+
+    // var itemOne = new Item( { itemName : 'Brown' } );
+    // console.log(itemOne);
+    // itemOne.save( function(err) {
+    //     if(err)
+    //         console.log(err);
+    //     else {
+    //         console.log('saved itemOne!');
+    //     }
+    // });
+
+    // var itemTwo = Item( { name : 'heehee' } );
+    // itemTwo.save( function(err) {
+    //     if(err)
+    //         console.log(err);
+    //     else {
+    //         console.log('saved itemTwo!');
+    //     }
+    // });
+
+    var hello_world = new Model.School( { name : 'Harvard' } );
+    hello_world.save( function(err) {
+        if(err)
             console.log(err);
-        } else {
-            console.log('meow');
-        }
+        else
+            console.log('saved hello_world!');
+
     });
+
 };
