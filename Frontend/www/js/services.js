@@ -48,17 +48,42 @@ angular.module('starter.services', [])
     }
   };
 })
-.factory('UserAPI' , function($http) {
+.factory('UserAPI' , function($http , $ionicPopup) {
     var base = "http://localhost:8080"
 
     return {
-        addUser: function() {
+        addUser: function(user) {
             $http({
                 method: 'POST' ,
-                url: base + '/api/v1/users/addUser'
-            }).then( function success() {
-                console.log("hooray!!");
-            });
+                url: base + '/api/v1/users/addUser' ,
+                data: user
+            }).success( function success(res) {
+                console.log("User Added and sent to server!");
+                var myPopUp = $ionicPopup.show( {
+                    title: 'Welcome to Drop!' ,
+                    buttons: [ {
+                        text: "Let's begin" ,
+                        type: 'button-positive'
+                    } ] ,
+                    onTap: function(e) {
+                        e.preventDefault();
+                    }
+                });
+                return res;
+            }).error( function error(err) {
+                console.log("Could not grab the user ... " );
+                var myPopUp = $ionicPopup.show( {
+                    title: 'User exists' ,
+                    buttons: [ {
+                        text: 'OK' ,
+                        type: 'button-positive'
+                    } ] ,
+                    onTap: function(e) {
+                        e.preventDefault();
+                    }
+                });
+                return err;
+            })
         }
     }
 });

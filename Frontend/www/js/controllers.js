@@ -62,7 +62,7 @@ angular.module('starter.controllers', [])
 
 
 })
-.controller('SignUpCtrl' , function( $scope ) {
+.controller('SignUpCtrl' , function( $scope , UserAPI) {
 
     $scope.user = {
         first: "" ,
@@ -73,7 +73,9 @@ angular.module('starter.controllers', [])
     }
 
     $scope.done = function() {
+        $scope.user.school = $scope.user.school.toUpperCase();
         console.log($scope.user);
+        UserAPI.addUser($scope.user);
     }
 
 

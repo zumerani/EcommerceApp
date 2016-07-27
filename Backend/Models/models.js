@@ -8,6 +8,7 @@ var itemSchema = new Schema( {
     itemName: String ,
     days_old: Number ,
     sellerName: String ,
+    sellerEmail: String ,
     picture_link: String
 });
 
@@ -38,10 +39,8 @@ if( mongoose.models.Item ) {
 }
 
 if( mongoose.models.User ) {
-    console.log('exists');
     User = mongoose.model('User');
 } else {
-    console.log('does not exist (yet ... )');
     User = mongoose.model('User' , userSchema );
 }
 

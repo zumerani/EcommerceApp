@@ -11,12 +11,41 @@ exports.init = function( database , ObjectID) {
 
 // var model = require('../Models/models');
 var Model = require('../Models/models');
+var pwdManager = require('../Authentication/managePasswords');
+var express = require('express');
 console.log('model is ' + Model );
 
 /* Add user */
 exports.addUser = function( req , res ) {
 
     console.log("HTTP Post: '/api/v1/users/addUser'");
+    console.log('res is: ' + res );
+    var user = req.body;
+    pwdManager.cryptPassword( user.password , function(err , hash) {
+
+        user.password = hash;
+        console.log(hash);
+
+        Model.User.findOne( { email: user.email } , function( err , res ) {
+            if( !res ) {
+                var param = req.body;
+                var user = new Model.User( param );
+                user.save( function(err) {
+                    if(err) {
+                        // res.status(404).send('error adding');
+                        console.log(err);
+                    }else {
+                        console.log("houston, we're good");
+                    }
+                });
+                //if(res) res.send( 'user added'); /* res.status(201).end( { comment: "Success!" } )*/
+            } else {
+                // res.status(500).send('oops');
+                console.log("Exists.")
+            }
+        });
+
+    });
     // db.users.findOne({
     //     email: req.body.email
     // } , function( err , dbResult) {
@@ -60,7 +89,7 @@ exports.addUser = function( req , res ) {
     //     }
     // });
     //
-    // db.Users.find( function(err , docs) {
+    // db.User.find( function(err , docs) {
     //     if( err )
     //         console.log(err);
     //     else {
@@ -127,31 +156,89 @@ exports.addUser = function( req , res ) {
     //     }
     // });
 
-    var hello_world = new Model.School( { name : 'Harvard' } );
-    hello_world.save( function(err) {
-        if(err)
-            console.log(err);
-        else
-            console.log('saved hello_world!');
+    // var hello_world = new Model.School( { name : 'Harvard' } );
+    // hello_world.save( function(err) {
+    //     if(err)
+    //         console.log(err);
+    //     else
+    //         console.log('saved hello_world!');
+    //
+    // });
+    //
+    // var user = new Model.User( { first : 'Sid' } );
+    // user.save( function(err) {
+    //     if(err)
+    //         console.log(err);
+    //     else {
+    //         console.log('saved new user!');
+    //     }
+    // });
 
-    });
+    // var temp = Model.User.findOne( {first:'Sid' } , function(err , res){
+    //     if(!res) {
+    //         console.log('cant find sid');
+    //     }else {
+    //         console.log('found');
+    //         res.email = 'sid.nikam@gmail.com';
+    //         console.log('added email');
+    //         res.save( function(err) {
+    //             if(err)
+    //                 console.log(err);
+    //             else {
+    //                 console.log('Just saved: ' + res + '!!');
+    //             }
+    //         });
+    //     }
+    // });
+    // Model.User.findOne( { email:'sid.nikam@gmail.com' } , function(err , res) {
+    //
+    //     if(!res) {
+    //         console.log('I cant find him through email!!');
+    //     }else {
+    //         console.log('I found him through email!');
+    //         var params = {
+    //             itemName: 'Fix Tires' ,
+    //             days_old: '5' ,
+    //             sellerEmail: res.email
+    //         };
+    //         Model.School.findOne( { name : 'Harvard' } , function(err , res) {
+    //             if(!res)
+    //                 console.log('not found');
+    //             else { //found
+    //                 var item = new Model.Item( params );
+    //                 console.log('item is:  ' + item);
+    //                 res.feed.push( item );
+    //                 console.log('Done!!');
+    //                 res.save( function(err) {
+    //                     if(err)
+    //                         console.log('Hard time saving.');
+    //                     else
+    //                         console.log('Just saved the feed in: ' + res.name + '!!');
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
 
-    var user = new Model.User( { first : 'Zain' , last: 'Umerani' } );
-    user.save( function(err) {
-        if(err)
-            console.log(err);
-        else {
-            console.log('saved new user!');
-        }
-    });
+    // console.log('userTwo email is: ' + userTwo.first );
 
-    var userTwo = new Model.User( { first : 'Sid' , last: 'Nikam' } );
-    userTwo.save( function(err) {
-        if(err)
-            console.log(err);
-        else {
-            console.log('saved new user (sid)!');
-        }
-    });
+    // var params = {
+    //     itemName: 'Fix Tires' ,
+    //     days_old: '5' ,
+    //     sellerEmail: userTwo.email
+    // };
+    //
+    // Model.School.findOne( { name : 'Harvard' } , function(err , res) {
+    //     if(!res)
+    //         console.log('not found');
+    //     else { //found
+    //         var item = new Model.Item( params );
+    //         console.log('item is:  ' + item);
+    //         res.feed.push( item );
+    //         console.log('Done!!');
+    //     }
+    // });
+
+
 
 };
