@@ -6,69 +6,43 @@ var _mongoose;
 exports.init = function( database , ObjectID) {
     db = database;
     objectId = ObjectID;
-    // _mongoose = mongoose;
 }
 
 // var model = require('../Models/models');
 var Model = require('../Models/models');
 var pwdManager = require('../Authentication/managePasswords');
 var express = require('express');
-console.log('model is ' + Model );
 
 /* Add user */
 exports.addUser = function( req , res ) {
-
     console.log("HTTP Post: '/api/v1/users/addUser'");
-    console.log('res is: ' + res );
+
     var user = req.body;
     pwdManager.cryptPassword( user.password , function(err , hash) {
 
         user.password = hash;
         console.log(hash);
 
-        Model.User.findOne( { email: user.email } , function( err , res ) {
-            if( !res ) {
+        Model.User.findOne( { email: user.email } , function( err , dbres ) {
+            if( !dbres ) {
                 var param = req.body;
                 var user = new Model.User( param );
                 user.save( function(err) {
                     if(err) {
-                        // res.status(404).send('error adding');
+                        res.status(404).send('error adding');
                         console.log(err);
                     }else {
-                        console.log("houston, we're good");
+                        res.status(200).send('added!');
+                        console.log("User added");
                     }
                 });
-                //if(res) res.send( 'user added'); /* res.status(201).end( { comment: "Success!" } )*/
             } else {
-                // res.status(500).send('oops');
+                res.status(503).send('oops');
                 console.log("Exists.")
             }
         });
 
     });
-    // db.users.findOne({
-    //     email: req.body.email
-    // } , function( err , dbResult) {
-    //     if(err)
-    //         if(res) res.status(503).end(JSON.stringify(err));
-    //     if(dbResult){
-    //         if(res) res.status(200).end("User Already there.");
-    //     } else {
-    //         var promise = dbData.createUser(req.body);
-    //         promise.then(function(user) {
-    //
-    //             db.users.save( user , function(err , user) {
-    //                 if(err) {
-    //                     console.log(err);
-    //                     if(res) res.status(503).end(JSON.stringify(err));
-    //                 } else
-    //                     if( res ) res.status(201).end(JSON.stringify(user));
-    //             });
-    //
-    //         });
-    //     }
-    //
-    // });
 
     // db.Users.find( function(err , docs) {
     //     if( err )

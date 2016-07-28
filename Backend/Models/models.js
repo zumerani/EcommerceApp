@@ -50,5 +50,6 @@ if( mongoose.models.School ) {
     School = mongoose.model('School' , schoolSchema );
 }
 
+
 /* export it */
-module.exports = { Item , User , School };
+module.exports = { Item , User , School};
