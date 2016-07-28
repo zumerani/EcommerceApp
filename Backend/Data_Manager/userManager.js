@@ -1,5 +1,4 @@
 var db;
-//var dbData = require('../Models/models');
 var objectId;
 var _mongoose;
 
@@ -8,7 +7,6 @@ exports.init = function( database , ObjectID) {
     objectId = ObjectID;
 }
 
-// var model = require('../Models/models');
 var Model = require('../Models/models');
 var pwdManager = require('../Authentication/managePasswords');
 var express = require('express');
@@ -31,11 +29,31 @@ exports.addUser = function( req , res ) {
                     if(err) {
                         res.status(404).send('error adding');
                         console.log(err);
-                    }else {
+                    } else {
+                        //dbres.password = ""; //look at this line again .... just incase
                         res.status(200).send('added!');
                         console.log("User added");
                     }
                 });
+
+                Model.School.findOne( { name: user.school } , function( err , dbres ) {
+
+                    if( !dbres ) {
+                        console.log("School doesn't exist ... let's add it");
+                        var newSchool = new Model.School( { name: user.school } );
+                        newSchool.save( function(err) {
+                            if( err ) {
+                                console.log("error!!");
+                            } else {
+                                console.log("school added!!");
+                            }
+                        })
+                    } else {
+                        console.log("School exists ... ");
+                    }
+
+                });
+
             } else {
                 res.status(503).send('oops');
                 console.log("Exists.")
@@ -44,175 +62,65 @@ exports.addUser = function( req , res ) {
 
     });
 
-    // db.Users.find( function(err , docs) {
-    //     if( err )
-    //         console.log(err);
-    //     else {
-    //         console.log(docs);
-    //     }
-    // });
+};
 
-    // db.Users.findOne( {
-    //     name: 'Zain'
-    // } , function( err , dbres ) {
-    //     if(err)
-    //         console.log(err);
-    //     else if(dbres) {
-    //         console.log(dbres);
-    //         console.log("it exists man.");
-    //     }
-    // });
-    //
-    // db.User.find( function(err , docs) {
-    //     if( err )
-    //         console.log(err);
-    //     else {
-    //         console.log(docs);
-    //     }
-    // });
+exports.loginUser = function( req , res ) {
 
-    // var Cat = db.model('Cat' , {name:String} );
-    // var kitty = new Cat( { name: 'Lol'});
-    // kitty.save( function(err) {
-    //     if( err ) {
-    //         console.log(err);
-    //     } else {
-    //         console.log('meow');
-    //     }
-    // });
+    console.log("HTTP POST: '/api/v1/users/loginUser' " );
 
+    console.log( req.body.email +' and ' + req.body.password );
 
-    // var item = model.createModels.Item( { name : 'haha' } );
-    // var item = model.createModels().Item( {name : 'haha' } );
-    // console.log( "Item is: " + item );
-    //
-    // item.save( function(err) {
-    //     if(err)
-    //         console.log(err);
-    //     else {
-    //         console.log('saved item!');
-    //     }
-    // });
-    //
-    // var itemTwo = model.createModels().Item( {name : 'omg!' } );
-    // itemTwo.save( function(err) {
-    //     if(err)
-    //         console.log(err);
-    //     else {
-    //         console.log('saved item!');
-    //     }
-    // });
+    var user = req.body;
 
-    // model.Item.find({} , {} , function(err , res) {
-    //     if(err)
-    //         console.log('error');
-    //     else {
-    //         console.log(res);
-    //     }
-    // });
+    if( user.email.trim().length == 0 || user.password.trim().length == 0 ) {
+        console.log('Invalid Credentials');
+        res.writeHead(401, {
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+        res.end(JSON.stringify({
+            error: "Invalid Credentials" ,
+            status: '401'
+        }));
+        return;
+    }
+    console.log('we made it');
+    Model.User.findOne( { email : req.body.email } , function(err , dbres ) {
 
-    // var itemOne = new Item( { itemName : 'Brown' } );
-    // console.log(itemOne);
-    // itemOne.save( function(err) {
-    //     if(err)
-    //         console.log(err);
-    //     else {
-    //         console.log('saved itemOne!');
-    //     }
-    // });
+        if( !dbres ) {
+            res.writeHead(404 , {
+                'Content-Type': 'application/json; charset=utf-8'
+            });
+            res.end(JSON.stringify( {
+                error: "User does not exist ... you need to sign up first!" ,
+                status: '404'
+            }));
+            console.log("we have an error ... no user!: ");
+            return;
+        }
 
-    // var itemTwo = Item( { name : 'heehee' } );
-    // itemTwo.save( function(err) {
-    //     if(err)
-    //         console.log(err);
-    //     else {
-    //         console.log('saved itemTwo!');
-    //     }
-    // });
+        pwdManager.comparePassword( user.password , dbres.password , function( err , isPasswordMatch ) {
 
-    // var hello_world = new Model.School( { name : 'Harvard' } );
-    // hello_world.save( function(err) {
-    //     if(err)
-    //         console.log(err);
-    //     else
-    //         console.log('saved hello_world!');
-    //
-    // });
-    //
-    // var user = new Model.User( { first : 'Sid' } );
-    // user.save( function(err) {
-    //     if(err)
-    //         console.log(err);
-    //     else {
-    //         console.log('saved new user!');
-    //     }
-    // });
+            if( isPasswordMatch ) {
+                console.log('we have a winner');
+                res.writeHead(200, {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    });
+                    // remove passowrd hash before sending to the client
+                dbres.password = "";
+                res.end(JSON.stringify(dbres));
+            } else {
+                console.log('sorry, but wrong guy ... Invalid User');
+                res.writeHead(403, {
+                        'Content-Type': 'application/json; charset=utf-8'
+                });
+                res.end(JSON.stringify ({
+                        error: "Invalid User" ,
+                        status: '403'
+                }));
+            }
 
-    // var temp = Model.User.findOne( {first:'Sid' } , function(err , res){
-    //     if(!res) {
-    //         console.log('cant find sid');
-    //     }else {
-    //         console.log('found');
-    //         res.email = 'sid.nikam@gmail.com';
-    //         console.log('added email');
-    //         res.save( function(err) {
-    //             if(err)
-    //                 console.log(err);
-    //             else {
-    //                 console.log('Just saved: ' + res + '!!');
-    //             }
-    //         });
-    //     }
-    // });
-    // Model.User.findOne( { email:'sid.nikam@gmail.com' } , function(err , res) {
-    //
-    //     if(!res) {
-    //         console.log('I cant find him through email!!');
-    //     }else {
-    //         console.log('I found him through email!');
-    //         var params = {
-    //             itemName: 'Fix Tires' ,
-    //             days_old: '5' ,
-    //             sellerEmail: res.email
-    //         };
-    //         Model.School.findOne( { name : 'Harvard' } , function(err , res) {
-    //             if(!res)
-    //                 console.log('not found');
-    //             else { //found
-    //                 var item = new Model.Item( params );
-    //                 console.log('item is:  ' + item);
-    //                 res.feed.push( item );
-    //                 console.log('Done!!');
-    //                 res.save( function(err) {
-    //                     if(err)
-    //                         console.log('Hard time saving.');
-    //                     else
-    //                         console.log('Just saved the feed in: ' + res.name + '!!');
-    //                 });
-    //             }
-    //         });
-    //     }
-    // });
+        });
 
-    // console.log('userTwo email is: ' + userTwo.first );
-
-    // var params = {
-    //     itemName: 'Fix Tires' ,
-    //     days_old: '5' ,
-    //     sellerEmail: userTwo.email
-    // };
-    //
-    // Model.School.findOne( { name : 'Harvard' } , function(err , res) {
-    //     if(!res)
-    //         console.log('not found');
-    //     else { //found
-    //         var item = new Model.Item( params );
-    //         console.log('item is:  ' + item);
-    //         res.feed.push( item );
-    //         console.log('Done!!');
-    //     }
-    // });
-
-
+    });
 
 };
