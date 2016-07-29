@@ -1,0 +1,39 @@
+<ion-view>
+    <ion-content>
+
+        <img class="signin_logo" src="img/Drop_Logo.jpg"></img>
+
+        <h3 class="signin_title">Start selling today.</h3>
+
+        <ion-item id="signin_username_form" class="signin_login">
+            <input ng-model="userInfo.email" placeholder="Username"type="text"></input>
+        </ion-item>
+
+        <ion-item class="signin_login">
+            <input ng-model="userInfo.password" placeholder="Password" type="password"></input>
+        </ion-item>
+
+        <div class="signin_buttonHolder">
+            <a href="#">
+                <button ng-click="login()" id="signin_loginAndSignin" class="signin_loginButton">Login</button>
+            </a>
+
+            <a href="#/signup">
+                <button id="signin_loginAndSignin" class="signin_loginButton">Sign Up</button>
+            </a>
+        </div>
+
+        <!-- <hr class="signin_line" size="1"> -->
+
+        <h3 class="signin_or">or</h3>
+
+        <a href="#">
+            <button id="signin_facebook" class="signin_loginButton"> <i class="fa fa-facebook-square"></i>Login with Facebook</button>
+        </a>
+
+      <!-- <a href="#/tab/dash">
+
+          <button>hi</button>
+      </a> -->
+  </ion-content>
+</ion-view>

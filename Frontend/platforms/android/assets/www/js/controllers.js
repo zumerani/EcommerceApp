@@ -1,6 +1,25 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', function($scope , $cordovaOauth , $location , $http , $window ) {
+
+    // $scope.login = function() {
+    //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
+    //         $localStorage.accessToken = result.access_token;
+    //     }, function(error) {
+    //         alert("There was a problem signing in!  See the console for logs");
+    //         console.log(error);
+    //     });
+    //
+    //     $location.url('/profile');
+    //
+    // };
+
+    $scope.changeView = function( view ) {
+        $window.location.assign( '#/profile' );
+    }
+
+
+}])
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -25,4 +44,47 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   };
+})
+.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI) {
+
+    // $scope.login = function() {
+    //     console.log("adding user ... ");
+    //     UserAPI.addUser();
+    //     $cordovaOauth.facebook("877800308993381", ["email", "user_website"]).then(function(result) {
+    //         $localStorage.accessToken = result.access_token;
+    //
+    //     }, function(error) {
+    //         alert("There was a problem signing in!  See the console for logs");
+    //         console.log(error);
+    //     });
+    //
+    // };
+    $scope.userInfo = {
+        email: "",
+        password: ""
+    }
+    $scope.login = function() {
+        console.log($scope.userInfo);
+        UserAPI.loginUser($scope.userInfo);
+    }
+
+
+})
+.controller('SignUpCtrl' , function( $scope , UserAPI) {
+
+    $scope.user = {
+        first: "" ,
+        last: "" ,
+        school: "" ,
+        email: "" ,
+        password: ""
+    }
+
+    $scope.done = function() {
+        $scope.user.school = $scope.user.school.toUpperCase();
+        console.log($scope.user);
+        UserAPI.addUser($scope.user);
+    }
+
+
 });
