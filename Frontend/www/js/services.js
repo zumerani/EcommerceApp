@@ -55,7 +55,7 @@ angular.module('starter.services', [])
         addUser: function(user) {
             $http({
                 method: 'POST' ,
-                url: base + '/api/v1/users/addUser' ,
+                url: '/api/v1/users/addUser' ,
                 data: user
             }).success( function success(res) {
                 console.log("User Added and sent to server!");
@@ -88,7 +88,7 @@ angular.module('starter.services', [])
         loginUser: function(user) {
             $http({
                 method: 'POST' ,
-                url: base + '/api/v1/users/loginUser',
+                url: '/api/v1/users/loginUser',
                 data: user
             }).success( function success(res) {
                 console.log('success: ' + res.email);

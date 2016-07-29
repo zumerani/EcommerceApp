@@ -4,4 +4,4 @@ exports.database = {
 }
 
 exports.port = 8080;
-exports.base = "http://localhost:" + exports.port;
+exports.base = exports.port;

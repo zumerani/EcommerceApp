@@ -45,19 +45,46 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 })
-.controller('SignInCtrl' , function($scope , $cordovaOauth) {
+.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI) {
 
+    // $scope.login = function() {
+    //     console.log("adding user ... ");
+    //     UserAPI.addUser();
+    //     $cordovaOauth.facebook("877800308993381", ["email", "user_website"]).then(function(result) {
+    //         $localStorage.accessToken = result.access_token;
+    //
+    //     }, function(error) {
+    //         alert("There was a problem signing in!  See the console for logs");
+    //         console.log(error);
+    //     });
+    //
+    // };
+    $scope.userInfo = {
+        email: "",
+        password: ""
+    }
     $scope.login = function() {
+        console.log($scope.userInfo);
+        UserAPI.loginUser($scope.userInfo);
+    }
 
-        $cordovaOauth.facebook("877800308993381", ["email", "user_website"]).then(function(result) {
-            $localStorage.accessToken = result.access_token;
-        }, function(error) {
-            alert("There was a problem signing in!  See the console for logs");
-            console.log(error);
-        });
 
-    };
 })
-.controller('SignUpCtrl' , function( $scope ) {
-    console.log('Sign Up!');
+.controller('SignUpCtrl' , function( $scope , UserAPI) {
+
+    $scope.user = {
+        first: "" ,
+        last: "" ,
+        school: "" ,
+        email: "" ,
+        password: ""
+    }
+
+    $scope.done = function() {
+        $scope.user.school = $scope.user.school.toUpperCase();
+        console.log($scope.user);
+        UserAPI.addUser($scope.user);
+    }
+
+
 });

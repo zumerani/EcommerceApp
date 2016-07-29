@@ -83,7 +83,6 @@ exports.loginUser = function( req , res ) {
         }));
         return;
     }
-    console.log('we made it');
     Model.User.findOne( { email : req.body.email } , function(err , dbres ) {
 
         if( !dbres ) {

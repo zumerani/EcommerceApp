@@ -32,6 +32,12 @@ function setUp() {
     //     res.header('Access-Control-Allow-Headers', 'Content-Type');
     //     next();
     // });
+    // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
+    server.all('*', function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        next();
+    });
 }
 
 //Set up data managers (dataManagers)
