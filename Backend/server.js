@@ -62,8 +62,8 @@ function bootUp() {
     console.log("Starting APIs");
     initializeAPIS();
     var port = dependencies.config.port;
-    server.listen(port);
-    console.log( 'Listening ... ' + dependencies.config.base);
+    server.listen( process.env.PORT || dependencies.config.port );
+    //console.log( 'Listening ... ' + dependencies.config.base);
     server.use( express.static( __dirname + '/../FrontEnd/www') );
     server.get('/' , function( req , res ) {
         return res.sendFile( dependencies.path.resolve('../FrontEnd/www/index.html') );
