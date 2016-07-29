@@ -66,7 +66,7 @@ function bootUp() {
     //console.log( 'Listening ... ' + dependencies.config.base);
     server.use( express.static( __dirname + '/../FrontEnd/www') );
     server.get('/' , function( req , res ) {
-        return res.sendFile( dependencies.path.resolve('./FrontEnd/www/index.html') );
+        return res.sendFile( dependencies.path.resolve('/../FrontEnd/www/index.html') );
     });
 }
 
