@@ -49,13 +49,13 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = "http://localhost:8080"
+    var base = "https://shielded-coast-33207.herokuapp.com"
 
     return {
         addUser: function(user) {
             $http({
                 method: 'POST' ,
-                url: '/api/v1/users/addUser' ,
+                url: base + '/api/v1/users/addUser' ,
                 data: user
             }).success( function success(res) {
                 console.log("User Added and sent to server!");
@@ -88,7 +88,7 @@ angular.module('starter.services', [])
         loginUser: function(user) {
             $http({
                 method: 'POST' ,
-                url: '/api/v1/users/loginUser',
+                url: base + '/api/v1/users/loginUser',
                 data: user
             }).success( function success(res) {
                 console.log('success: ' + res.email);
