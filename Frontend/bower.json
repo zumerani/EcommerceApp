@@ -6,5 +6,8 @@
   },
   "dependencies": {
     "ng-cordova-oauth": "~0.2.10"
+  },
+  "resolutions": {
+    "angular-ui-router": "0.2.13"
   }
 }

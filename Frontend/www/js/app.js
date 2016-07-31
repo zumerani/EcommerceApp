@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'ngCordovaOauth'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'ngCordovaOauth' , 'ui.router'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -45,7 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
  /* Set up tabs from here on out. */
 .state('tab', {
     url: '/tab',
-    abstract: true,
+    //abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 .state('tab.dash', {
