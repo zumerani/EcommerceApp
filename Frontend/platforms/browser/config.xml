@@ -3,10 +3,6 @@
     <feature name="Device">
         <param name="browser-package" value="Device" />
     </feature>
-    <feature name="FacebookConnectPlugin">
-        <param name="browser-package" value="FacebookConnectPlugin" />
-        <param name="onload" value="true" />
-    </feature>
     <name>HelloCordova</name>
     <description>
         An Ionic Framework and Cordova project.
