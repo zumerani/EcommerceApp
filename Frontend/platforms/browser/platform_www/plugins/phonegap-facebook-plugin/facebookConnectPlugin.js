@@ -1,5 +1,4 @@
-cordova.define("phonegap-facebook-plugin.FacebookConnectPlugin", function(require, exports, module) {
-"use strict";
+cordova.define("phonegap-facebook-plugin.FacebookConnectPlugin", function(require, exports, module) { "use strict";
 
 /*
  * @author Ally Ogilvie

@@ -1,7 +1,4 @@
 {
-    "ImageIO.framework": 2,
-    "CoreLocation.framework": 2,
-    "AVFoundation.framework": 2,
     "libsqlite3.dylib": 1,
     "Social.framework": 1,
     "Accounts.framework": 1,

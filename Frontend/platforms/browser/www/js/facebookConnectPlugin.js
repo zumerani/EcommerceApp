@@ -149,10 +149,10 @@ if (!window.cordova) { /* cordova.platformId == "browser" */
                 version = "v2.0";
             }
             FB.init({
-                appId      : 877800308993381,
+                appId      : '877800308993381',
                 cookie     : true,
                 xfbml      : true,
-                version    : 2.0
+                version    : 'v2.0'
             });
         }
     };
@@ -174,7 +174,7 @@ if (!window.cordova) { /* cordova.platformId == "browser" */
         }
     }());
 
-    module.exports = facebookConnectPlugin;
+    //module.exports = facebookConnectPlugin;
 
 } else {
 
