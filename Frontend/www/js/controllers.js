@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 })
-.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI , $location , $window) {
+.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI) {
 
     // $scope.login = function() {
     //     console.log("adding user ... ");
@@ -59,12 +59,6 @@ angular.module('starter.controllers', [])
     //     });
     //
     // };
-
-    // $scope.lol = function() {
-    //     console.log('lol');
-    //     $window.location.href = '#/dash'
-    // }
-
     $scope.userInfo = {
         email: "",
         password: ""
