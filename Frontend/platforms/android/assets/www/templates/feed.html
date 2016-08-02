@@ -1,0 +1,77 @@
+<ion-view view-title="Items">
+    <ion-content class="feed_ionView">
+
+        <!-- <h1>Drop Feed</h1> -->
+
+        <!-- <div id="feed_card" class="list card">
+
+            <div class="item item-image">
+                <img id="feed_image" src="img/jersey.jpg">
+            </div>
+
+            <div class="item item-avatar">
+                <h2 id="feed_userInfo">Green's Jersey</h2>
+                <p id="feed_userInfo">Zain Umerani</p>
+                <p id="feed_userInfo" class="feed_userPrice">$9.00</p>
+            </div>
+
+        </div> -->
+
+        <div class="row">
+            <div id="feed_columnOne" class="col col-50">
+                <ul>
+                    <li ng-repeat="user in listOne">
+                        <div id="feed_card" class="list card">
+
+                            <div class="item item-image">
+                                <img id="feed_image" src="img/jersey.jpg">
+                            </div>
+
+                            <div class="item item-avatar">
+                                <h2 id="feed_userInfo">{{user.itemName}}</h2>
+                                <p id="feed_userInfo">{{user.name}}</p>
+                                <p id="feed_userInfo" class="feed_userPrice">${{user.price}}</p>
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="feed_columnTwo" class="col col-50">
+                <ul>
+                    <li ng-repeat="user in listTwo">
+                        <div id="feed_card" class="list card">
+
+                            <div class="item item-image">
+                                <img id="feed_image" src="img/jersey.jpg">
+                            </div>
+
+                            <div class="item item-avatar">
+                                <h2 id="feed_userInfo">{{user.itemName}}</h2>
+                                <p id="feed_userInfo">{{user.name}}</p>
+                                <p id="feed_userInfo" class="feed_userPrice">${{user.price}}</p>
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+                <!-- <div id="feed_card" class="list card">
+
+                    <div class="item item-image">
+                        <img id="feed_image" src="img/jersey.jpg">
+                    </div>
+
+                    <div class="item item-avatar">
+                        <h2 id="feed_userInfo">Green's Jersey</h2>
+                        <p id="feed_userInfo">Zain Umerani</p>
+                        <p id="feed_userInfo" class="feed_userPrice">$9.00</p>
+                    </div>
+
+                </div> -->
+            </div>
+        </div>
+
+
+
+    </ion-content>
+</ion-view>
