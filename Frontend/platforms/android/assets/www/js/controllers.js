@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', function($scope , $cordovaOauth , $location , $http , $window ) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', function($scope , $cordovaOauth , $location , $http , $window ) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -14,9 +14,7 @@ angular.module('starter.controllers', [])
     //
     // };
 
-    $scope.changeView = function( view ) {
-        $window.location.assign( '#/profile' );
-    }
+    console.log('Lol Im in FeedCtrl');
 
 
 }])
@@ -40,12 +38,58 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('AccountCtrl', function($scope , $ionicPopup) {
+
+    var myPopUp = $ionicPopup.show( {
+        title: 'Welcome to AccountCtrl!' ,
+        buttons: [ {
+            text: "Let's begin" ,
+            type: 'button-positive'
+        } ] ,
+        onTap: function(e) {
+            e.preventDefault();
+        }
+    });
+
+    function onDeviceReady() {
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+    }
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onPhotoFileSuccess(imageData) {
+  // Get image handle
+        console.log(JSON.stringify(imageData));
+
+   	  // Get image handle
+      //
+        var srcImage = document.getElementById('srcImage');
+      // Unhide image elements
+      //
+        srcImage.style.display = 'block';
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+        srcImage.src = imageData;
+    }
+
+    function onFail(message) {
+        alert('Failed because: ' + message);
+    }
+
+    $scope.capturePhotoWithFile = function() {
+        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI });
+    }
+
+
+
+
+
+
+
 })
-.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI) {
+.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI , $state) {
 
     // $scope.login = function() {
     //     console.log("adding user ... ");
@@ -59,6 +103,12 @@ angular.module('starter.controllers', [])
     //     });
     //
     // };
+
+    $scope.lol = function() {
+        console.log("Lol");
+        $state.go('tab.account');
+    }
+
     $scope.userInfo = {
         email: "",
         password: ""

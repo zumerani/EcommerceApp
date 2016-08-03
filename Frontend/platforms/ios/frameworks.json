@@ -2,5 +2,8 @@
     "libsqlite3.dylib": 1,
     "Social.framework": 1,
     "Accounts.framework": 1,
-    "Security.framework": 1
+    "Security.framework": 1,
+    "ImageIO.framework": 1,
+    "CoreLocation.framework": 1,
+    "AVFoundation.framework": 1
 }

@@ -38,10 +38,56 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('AccountCtrl', function($scope , $ionicPopup) {
+
+    var myPopUp = $ionicPopup.show( {
+        title: 'Welcome to AccountCtrl!' ,
+        buttons: [ {
+            text: "Let's begin" ,
+            type: 'button-positive'
+        } ] ,
+        onTap: function(e) {
+            e.preventDefault();
+        }
+    });
+
+    function onDeviceReady() {
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+    }
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onPhotoFileSuccess(imageData) {
+  // Get image handle
+        console.log(JSON.stringify(imageData));
+
+   	  // Get image handle
+      //
+        var srcImage = document.getElementById('srcImage');
+      // Unhide image elements
+      //
+        srcImage.style.display = 'block';
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+        srcImage.src = imageData;
+    }
+
+    function onFail(message) {
+        alert('Failed because: ' + message);
+    }
+
+    $scope.capturePhotoWithFile = function() {
+        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI });
+    }
+
+
+
+
+
+
+
 })
 .controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI , $state) {
 
@@ -60,7 +106,7 @@ angular.module('starter.controllers', [])
 
     $scope.lol = function() {
         console.log("Lol");
-        $state.go('tab.feed');
+        $state.go('tab.account');
     }
 
     $scope.userInfo = {
