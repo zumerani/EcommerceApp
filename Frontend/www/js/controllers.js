@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', function($scope , $cordovaOauth , $location , $http , $window ) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', function($scope , $cordovaOauth , $location , $http , $window ) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -14,9 +14,7 @@ angular.module('starter.controllers', [])
     //
     // };
 
-    $scope.changeView = function( view ) {
-        $window.location.assign( '#/profile' );
-    }
+    console.log('Lol Im in FeedCtrl');
 
 
 }])
@@ -45,7 +43,7 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 })
-.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI) {
+.controller('SignInCtrl' , function($scope , $cordovaOauth , UserAPI , $state) {
 
     // $scope.login = function() {
     //     console.log("adding user ... ");
@@ -59,6 +57,12 @@ angular.module('starter.controllers', [])
     //     });
     //
     // };
+
+    $scope.lol = function() {
+        console.log("Lol");
+        $state.go('tab.feed');
+    }
+
     $scope.userInfo = {
         email: "",
         password: ""

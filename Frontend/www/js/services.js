@@ -49,7 +49,7 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = "https://shielded-coast-33207.herokuapp.com"
+    var base = /*"http://localhost:8080"*/ "https://shielded-coast-33207.herokuapp.com"
 
     return {
         addUser: function(user) {
@@ -69,6 +69,7 @@ angular.module('starter.services', [])
                         e.preventDefault();
                     }
                 });
+                $state.go('tab.feed');
                 return res;
             }).error( function error(err) {
                 console.log("Could not grab the user ... " );
