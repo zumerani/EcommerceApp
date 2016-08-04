@@ -40,17 +40,6 @@ angular.module('starter.controllers', [])
 
 .controller('AccountCtrl', function($scope , $ionicPopup) {
 
-    var myPopUp = $ionicPopup.show( {
-        title: 'Welcome to AccountCtrl!' ,
-        buttons: [ {
-            text: "Let's begin" ,
-            type: 'button-positive'
-        } ] ,
-        onTap: function(e) {
-            e.preventDefault();
-        }
-    });
-
     function onDeviceReady() {
         pictureSource = navigator.camera.PictureSourceType;
         destinationType = navigator.camera.DestinationType;

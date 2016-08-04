@@ -86,6 +86,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
 });
 
   /* Default URL path */
-  $urlRouterProvider.otherwise('tab/account');
+  $urlRouterProvider.otherwise('/signin');
 
 });
