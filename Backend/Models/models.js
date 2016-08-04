@@ -9,7 +9,7 @@ var itemSchema = new Schema( {
     days_old: Number ,
     sellerName: String ,
     sellerEmail: String ,
-    picture_link: String
+    picture: Buffer
 });
 
 var userSchema = new Schema( {
@@ -27,9 +27,16 @@ var schoolSchema = new Schema({
         feed: [ itemSchema ]
 });
 
+var imageSchema = new Schema({
+    data: Buffer ,
+    contentType: String ,
+    name: String
+});
+
 var Item;
 var User;
 var School;
+var image;
 
 /* checks to see if schemas have been 'instantiated' or not */
 if( mongoose.models.Item ) {
@@ -50,6 +57,11 @@ if( mongoose.models.School ) {
     School = mongoose.model('School' , schoolSchema );
 }
 
+if( mongoose.models.image ) {
+    image = mongoose.model('image');
+} else {
+    image = mongoose.model('image' , imageSchema );
+}
 
 /* export it */
-module.exports = { Item , User , School};
+module.exports = { Item , User , School , image};

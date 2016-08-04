@@ -10,6 +10,7 @@ exports.init = function( database , ObjectID) {
 var Model = require('../Models/models');
 var pwdManager = require('../Authentication/managePasswords');
 var express = require('express');
+var fs = require('fs');
 
 /* Add user */
 exports.addUser = function( req , res ) {
@@ -120,6 +121,46 @@ exports.loginUser = function( req , res ) {
 
         });
 
+    });
+
+};
+
+exports.addItem = function( req , res ) {
+
+    // var imgPath = "../Frontend/www/img/ben.png";
+
+    var data = req.body.data;
+
+    var im = new Model.image;
+    im.data = data;
+    im.contentType = 'image/png';
+    im.name = req.body.name;
+
+    console.log('im is: ' + im );
+
+    im.save( function(err) {
+        if( err ) {
+            console.log("error!!");
+        } else {
+            console.log("image added!!");
+        }
+    });
+
+};
+
+exports.getImage = function( req , res ) {
+    console.log('hi');
+
+    Model.image.findOne( { name: 'blabla' } , function( err , dbres ) {
+        if( dbres ) {
+            console.log('I found ' + dbres.name );
+            res.writeHead(200, {
+                    'Content-Type': 'application/json; charset=utf-8'
+            });
+            res.end(JSON.stringify(dbres));
+        } else {
+            console.log('Couldnt find it');
+        }
     });
 
 };

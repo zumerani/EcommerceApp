@@ -1,6 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', function($scope , $cordovaOauth , $location , $http , $window ) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$base64' ,  function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI , $base64) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -16,6 +17,16 @@ angular.module('starter.controllers', [])
 
     console.log('Lol Im in FeedCtrl');
 
+    UserAPI.getImage().then( function(result) {
+        if( result ) {
+            console.log(result.data.data.data);
+            console.log($base64.decode(result.data.data.data));
+        } else {
+            console.log('err');
+        }
+    });
+
+    //console.log('imageHolder is: ' + $scope.imageHolder.name );
 
 }])
 
@@ -38,38 +49,54 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup) {
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $base64) {
 
-    function onDeviceReady() {
-        pictureSource = navigator.camera.PictureSourceType;
-        destinationType = navigator.camera.DestinationType;
-    }
+  //   function onDeviceReady() {
+  //       pictureSource = navigator.camera.PictureSourceType;
+  //       destinationType = navigator.camera.DestinationType;
+  //   }
+  //
+  //   document.addEventListener("deviceready", onDeviceReady, false);
+  //
+  //   function onPhotoFileSuccess(imageData) {
+  // // Get image handle
+  //       console.log(JSON.stringify(imageData));
+  //
+  //  	  // Get image handle
+  //     //
+  //       var srcImage = document.getElementById('srcImage');
+  //     // Unhide image elements
+  //     //
+  //       srcImage.style.display = 'block';
+  //     // Show the captured photo
+  //     // The inline CSS rules are used to resize the image
+  //     //
+  //       srcImage.src = imageData;
+  //
+  //
+  //   }
+  //
+  //   function onFail(message) {
+  //       alert('Failed because: ' + message);
+  //   }
+  //
+  //   $scope.capturePhotoWithFile = function() {
+  //       navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI });
+  //   }
 
-    document.addEventListener("deviceready", onDeviceReady, false);
+  var imageDetails = $base64.encode(document.getElementById('srcImage'));
 
-    function onPhotoFileSuccess(imageData) {
-  // Get image handle
-        console.log(JSON.stringify(imageData));
+  console.log('imageDetails: ' + imageDetails );
 
-   	  // Get image handle
-      //
-        var srcImage = document.getElementById('srcImage');
-      // Unhide image elements
-      //
-        srcImage.style.display = 'block';
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-        srcImage.src = imageData;
-    }
+  $scope.item = {
+      data: imageDetails ,
+      contentType: 'image/png' ,
+      name: 'blabla'
+  }
 
-    function onFail(message) {
-        alert('Failed because: ' + message);
-    }
+  console.log($scope.item);
 
-    $scope.capturePhotoWithFile = function() {
-        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI });
-    }
+  UserAPI.addItem($scope.item);
 
 
 
@@ -102,9 +129,17 @@ angular.module('starter.controllers', [])
         email: "",
         password: ""
     }
+
     $scope.login = function() {
         console.log($scope.userInfo);
-        UserAPI.loginUser($scope.userInfo);
+        var dang = {};
+        UserAPI.loginUser($scope.userInfo).success( function(result) {
+            if( result ) {
+                console.log('result is: ' + result.email );
+            } else {
+                console.log('Could not grab user ... ' );
+            }
+        });
     }
 
 
