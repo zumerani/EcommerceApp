@@ -139,10 +139,10 @@ angular.module('starter.services', [])
                 method: 'POST' ,
                 url: base + '/api/v1/users/addItem' ,
                 data: item
-            }).success( function success() {
+            }).success( function success(result) {
                 console.log('Item added!!');
                 var myPopUp = $ionicPopup.show( {
-                    title: 'SUCCESS' ,
+                    title: 'SUCCESS ' + result.name ,
                     buttons: [ {
                         text: "GOOD",
                         type: 'button-positive'
@@ -155,7 +155,7 @@ angular.module('starter.services', [])
             }).error( function error(err) {
                 console.log('Error: Item added');
                 var myPopUp = $ionicPopup.show( {
-                    title: 'FAILED' ,
+                    title: 'FAILED: ' + err.mes ,
                     buttons: [ {
                         text: "NOO",
                         type: 'button-positive'
