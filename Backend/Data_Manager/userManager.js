@@ -11,6 +11,8 @@ var Model = require('../Models/models');
 var pwdManager = require('../Authentication/managePasswords');
 var express = require('express');
 var fs = require('fs');
+var multer = require('multer');
+var upload = multer( { dest: '../imageUploads'} );
 
 /* Add user */
 exports.addUser = function( req , res ) {
@@ -127,25 +129,33 @@ exports.loginUser = function( req , res ) {
 
 exports.addItem = function( req , res ) {
 
-    // var imgPath = "../Frontend/www/img/ben.png";
+    console.log('someone pinged me');
 
-    var data = req.body.data;
+    /* Statement below prints: url, method, AND name ... Does not print then
+        'file' parameter -- working on that now. Could be a multer issue -- we need
+        to add enctype="multipart/form-data" ... that could be a potential problem. */
 
-    var im = new Model.image;
-    im.data = data;
-    im.contentType = 'image/png';
-    im.name = req.body.name;
+    // console.log('req.files: ' + JSON.stringify(req.file) );
+    //
+    // console.log('im.name is: ' + im.data );
 
-    console.log('im is: ' + im );
+    // im.save( function(err) {
+    //     if( err ) {
+    //         console.log("error!!");
+    //     } else {
+    //         console.log("image added!!");
+    //     }
+    // });
 
+    var im = new Model.image( req.body );
     im.save( function(err) {
         if( err ) {
-            console.log("error!!");
+            console.log('error');
         } else {
-            console.log("image added!!");
+            console.log('image added!');
         }
     });
-
+    
 };
 
 exports.getImage = function( req , res ) {

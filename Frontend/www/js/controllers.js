@@ -19,6 +19,7 @@ angular.module('starter.controllers', [])
 
     UserAPI.getImage().then( function(result) {
         if( result ) {
+            console.log(result);
             console.log(result.data.data.data);
             console.log($base64.decode(result.data.data.data));
         } else {
@@ -49,57 +50,121 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $base64) {
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $base64 , Upload , $http) {
 
-  //   function onDeviceReady() {
-  //       pictureSource = navigator.camera.PictureSourceType;
-  //       destinationType = navigator.camera.DestinationType;
-  //   }
+    function onDeviceReady() {
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+    }
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onPhotoFileSuccess(imageData) {
+
+        //pop up
+        var myPopUp = $ionicPopup.show( {
+            title: 'Image: ' + imageData ,
+            buttons: [ {
+                text: "Got it" ,
+                type: 'button-positive'
+            } ] ,
+            onTap: function(e) {
+                e.preventDefault();
+            }
+        });
+
+  // Get image handle
+        console.log(JSON.stringify(imageData));
+
+   	  // Get image handle
+      //
+        var srcImage = document.getElementById('srcImage');
+      // Unhide image elements
+      //
+        srcImage.style.display = 'block';
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+        srcImage.src = imageData;
+
+        var doIt = {
+            data: imageData ,
+            contentType: 'base64' ,
+            name: 'zain'
+        }
+
+        UserAPI.addItem(doIt);
+
+    }
+
+    function onFail(message) {
+        alert('Failed because: ' + message);
+    }
+
+    $scope.capturePhotoWithFile = function() {
+        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.DATA_URL });
+    }
+
+  // console.log('srcImage: ' + document.getElementById('srcImage').src);
+  // var imageData = document.getElementById('srcImage');
+  // var fd = new FormData();
+  // fd.append('file' , document.getElementById('srcImage'));
+  // console.log('fd is + ' + JSON.stringify( fd ) );
+  // var uploadUrl = '/api/v1/users/addItem';
   //
-  //   document.addEventListener("deviceready", onDeviceReady, false);
+  // $http.post(uploadUrl,fd, {
+  //           transformRequest: angular.identity,
+  //           headers: {'Content-Type': undefined} ,
+  //           params: {
+  //               fd
+  //           }
+  //       })
+  //       .success(function(){
+  //         console.log("success!!");
+  //       })
+  //       .error(function(){
+  //         console.log("error!!");
+  //       });
+
+  // var imageDetails = $base64.encode(document.getElementById('srcImage'));
   //
-  //   function onPhotoFileSuccess(imageData) {
-  // // Get image handle
-  //       console.log(JSON.stringify(imageData));
+  // console.log('imageDetails: ' + imageDetails );
   //
-  //  	  // Get image handle
-  //     //
-  //       var srcImage = document.getElementById('srcImage');
-  //     // Unhide image elements
-  //     //
-  //       srcImage.style.display = 'block';
-  //     // Show the captured photo
-  //     // The inline CSS rules are used to resize the image
-  //     //
-  //       srcImage.src = imageData;
+  // $scope.item = {
+  //     data: imageDetails ,
+  //     contentType: 'image/png' ,
+  //     name: 'blabla'
+  // }
   //
+  // console.log($scope.item);
   //
-  //   }
-  //
-  //   function onFail(message) {
-  //       alert('Failed because: ' + message);
-  //   }
-  //
-  //   $scope.capturePhotoWithFile = function() {
-  //       navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI });
-  //   }
+  // UserAPI.addItem($scope.item);
 
-  var imageDetails = $base64.encode(document.getElementById('srcImage'));
+  /* USING ng-file-upload */
 
-  console.log('imageDetails: ' + imageDetails );
+  // $scope.uploadPhoto = function () {
+  //     var imageDetail = document.getElementById('srcImage');
+  //       Upload.upload({
+  //           url: '/api/v1/users/addItem',
+  //           method: 'POST' ,
+  //           data: { name: 'zain' } ,
+  //           file: imageDetail //we might need to change this ...
+  //       }).then(function (resp) {
+  //           console.log('Success ');
+  //       }, function (resp) {
+  //           console.log('Erro');
+  //       });
+  //   };
 
-  $scope.item = {
-      data: imageDetails ,
-      contentType: 'image/png' ,
-      name: 'blabla'
-  }
-
-  console.log($scope.item);
-
-  UserAPI.addItem($scope.item);
-
-
-
+    // var item = {
+    //     data: document.getElementById('srcImage') ,
+    //     contentType: 'image/png' ,
+    //     name: 'Zain'
+    // }
+    // $scope.upload = function () {
+    //     console.log('Adding image ... ');
+    //     UserAPI.addItem(item);
+    // };
 
 
 

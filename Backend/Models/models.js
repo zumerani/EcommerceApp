@@ -28,7 +28,7 @@ var schoolSchema = new Schema({
 });
 
 var imageSchema = new Schema({
-    data: Buffer ,
+    data: String ,
     contentType: String ,
     name: String
 });
