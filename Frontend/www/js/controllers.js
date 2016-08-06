@@ -78,7 +78,7 @@ angular.module('starter.controllers', [])
 
         var doIt = {
             data: imageData ,
-            contentType: 'base64' ,
+            contentType: 'image/png' ,
             name: 'zain'
         }
 
