@@ -151,11 +151,22 @@ exports.addItem = function( req , res ) {
     im.save( function(err) {
         if( err ) {
             console.log('error');
+            res.writeHead(200, {
+                    'Content-Type': 'application/json; charset=utf-8'
+            });
+            res.end(JSON.stringify(dbres));
         } else {
             console.log('image added!');
+            res.writeHead(404 , {
+                'Content-Type': 'application/json; charset=utf-8'
+            });
+            res.end(JSON.stringify( {
+                error: "User does not exist ... you need to sign up first!" ,
+                status: '404'
+            }));
         }
     });
-    
+
 };
 
 exports.getImage = function( req , res ) {

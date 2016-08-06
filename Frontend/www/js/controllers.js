@@ -62,19 +62,27 @@ angular.module('starter.controllers', [])
     function onPhotoFileSuccess(imageData) {
 
         //pop up
-        var myPopUp = $ionicPopup.show( {
-            title: 'Image: ' + imageData ,
-            buttons: [ {
-                text: "Got it" ,
-                type: 'button-positive'
-            } ] ,
-            onTap: function(e) {
-                e.preventDefault();
-            }
-        });
+        // var myPopUp = $ionicPopup.show( {
+        //     title: 'Image: ' + imageData ,
+        //     buttons: [ {
+        //         text: "Got it" ,
+        //         type: 'button-positive'
+        //     } ] ,
+        //     onTap: function(e) {
+        //         e.preventDefault();
+        //     }
+        // });
 
   // Get image handle
         console.log(JSON.stringify(imageData));
+
+        var doIt = {
+            data: imageData ,
+            contentType: 'base64' ,
+            name: 'zain'
+        }
+
+        UserAPI.addItem(doIt);
 
    	  // Get image handle
       //

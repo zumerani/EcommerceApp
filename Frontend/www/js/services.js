@@ -141,8 +141,30 @@ angular.module('starter.services', [])
                 data: item
             }).success( function success() {
                 console.log('Item added!!');
+                var myPopUp = $ionicPopup.show( {
+                    title: 'SUCCESS' ,
+                    buttons: [ {
+                        text: "GOOD",
+                        type: 'button-positive'
+                    } ] ,
+                    onTap: function(e) {
+                        e.preventDefault();
+                        $state.go('signup');
+                    }
+                });
             }).error( function error(err) {
                 console.log('Error: Item added');
+                var myPopUp = $ionicPopup.show( {
+                    title: 'FAILED' ,
+                    buttons: [ {
+                        text: "NOO",
+                        type: 'button-positive'
+                    } ] ,
+                    onTap: function(e) {
+                        e.preventDefault();
+                        $state.go('signup');
+                    }
+                });
             });
         } ,
         // getImage: function() {
