@@ -147,25 +147,40 @@ exports.addItem = function( req , res ) {
     //     }
     // });
 
+    if( req.body.data ) {
+        res.writeHead(200, {
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+        res.end(JSON.stringify(req.body));
+    } else if( !req.body.data ) {
+        res.writeHead(404 , {
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+        res.end(JSON.stringify( {
+            mes: "error" ,
+            status: '404'
+        }));
+    }
+
     var im = new Model.image( req.body );
-    im.save( function(err) {
-        if( err ) {
-            console.log('error');
-            res.writeHead(404 , {
-                'Content-Type': 'application/json; charset=utf-8'
-            });
-            res.end(JSON.stringify( {
-                mes: "error: " + err ,
-                status: '404'
-            }));
-        } else {
-            console.log('image added!');
-            res.writeHead(200, {
-                'Content-Type': 'application/json; charset=utf-8'
-            });
-            res.end(JSON.stringify(dbres));
-        }
-    });
+    // im.save( function(err) {
+    //     if( err ) {
+    //         console.log('error');
+            // res.writeHead(404 , {
+            //     'Content-Type': 'application/json; charset=utf-8'
+            // });
+            // res.end(JSON.stringify( {
+            //     mes: "error: " + err ,
+            //     status: '404'
+            // }));
+    //     } else {
+    //         console.log('image added!');
+            // res.writeHead(200, {
+            //     'Content-Type': 'application/json; charset=utf-8'
+            // });
+            // res.end(JSON.stringify(dbres));
+    //     }
+    // });
 
 };
 
