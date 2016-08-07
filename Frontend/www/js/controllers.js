@@ -79,21 +79,27 @@ angular.module('starter.controllers', [])
         console.log(JSON.stringify(imageData));
 
         var win = function (r) {
+            alert("WE DID IT!! " + r.responseCode + " and " + r.response );
             console.log("Code = " + r.responseCode);
             console.log("Response = " + r.response);
             console.log("Sent = " + r.bytesSent);
         }
 
         var fail = function (error) {
-            alert("An error has occurred: Code = " + error.code);
+            alert("An error has occurred: Code = " + error.code + " and " + error.source + " and " +
+        error.target );
             console.log("upload error source " + error.source);
             console.log("upload error target " + error.target);
         }
 
         var options = new FileUploadOptions();
-        options.fileKey = "file";
+        options.fileKey = "myPhoto";
         options.fileName = imageData.substr(imageData.lastIndexOf('/') + 1);
         options.mimeType = "image/jpeg";
+        options.chunkedMode = false;
+        options.headers = {
+            Connection: "close"
+        };
 
         var params = {};
         params.value1 = "test";

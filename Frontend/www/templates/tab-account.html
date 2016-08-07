@@ -13,7 +13,11 @@
       <input value="lolsubmit" type="image"  ng-click="capturePhotoWithFile()" name="userPhoto" />
       <input type="submit" ng-click="capturePhotoWithFile()" value="Upload Image" name="submit">
       </form> -->
-      <button ng-click="capturePhotoWithFile()" class="button button-full button-positive ">Take Image</button><br/>
+      <!-- <button ng-click="capturePhotoWithFile()" class="button button-full button-positive ">Take Image</button><br/> -->
+
+      <form>
+          <input type="file" name="myPhoto">
+      </form>
 
       <img id="srcImage">
 
