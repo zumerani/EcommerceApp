@@ -1,6 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', function($scope , $cordovaOauth , $location , $http , $window ) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$base64' ,  function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI , $base64) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -16,6 +17,17 @@ angular.module('starter.controllers', [])
 
     console.log('Lol Im in FeedCtrl');
 
+    UserAPI.getImage().then( function(result) {
+        if( result ) {
+            console.log(result);
+            console.log(result.data.data.data);
+            console.log($base64.decode(result.data.data.data));
+        } else {
+            console.log('err');
+        }
+    });
+
+    //console.log('imageHolder is: ' + $scope.imageHolder.name );
 
 }])
 
@@ -38,18 +50,7 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup) {
-
-    var myPopUp = $ionicPopup.show( {
-        title: 'Welcome to AccountCtrl!' ,
-        buttons: [ {
-            text: "Let's begin" ,
-            type: 'button-positive'
-        } ] ,
-        onTap: function(e) {
-            e.preventDefault();
-        }
-    });
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $base64 , Upload , $http) {
 
     function onDeviceReady() {
         pictureSource = navigator.camera.PictureSourceType;
@@ -59,8 +60,57 @@ angular.module('starter.controllers', [])
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onPhotoFileSuccess(imageData) {
+
+        alert("uri: " + imageData );
+
+        //pop up
+        // var myPopUp = $ionicPopup.show( {
+        //     title: 'Image: ' + imageData ,
+        //     buttons: [ {
+        //         text: "Got it" ,
+        //         type: 'button-positive'
+        //     } ] ,
+        //     onTap: function(e) {
+        //         e.preventDefault();
+        //     }
+        // });
+
   // Get image handle
         console.log(JSON.stringify(imageData));
+
+        var win = function (r) {
+            console.log("Code = " + r.responseCode);
+            console.log("Response = " + r.response);
+            console.log("Sent = " + r.bytesSent);
+        }
+
+        var fail = function (error) {
+            alert("An error has occurred: Code = " + error.code);
+            console.log("upload error source " + error.source);
+            console.log("upload error target " + error.target);
+        }
+
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = imageData.substr(imageData.lastIndexOf('/') + 1);
+        options.mimeType = "image/jpeg";
+
+        var params = {};
+        params.value1 = "test";
+        params.value2 = "param";
+
+        options.params = params;
+
+        var ft = new FileTransfer();
+        ft.upload(imageData, "/api/v1/users/addItem", win, fail, options);
+
+        var doIt = {
+            data: imageData ,
+            contentType: 'image/png' ,
+            name: 'zain'
+        }
+
+        UserAPI.addItem(doIt);
 
    	  // Get image handle
       //
@@ -72,6 +122,7 @@ angular.module('starter.controllers', [])
       // The inline CSS rules are used to resize the image
       //
         srcImage.src = imageData;
+
     }
 
     function onFail(message) {
@@ -79,11 +130,73 @@ angular.module('starter.controllers', [])
     }
 
     $scope.capturePhotoWithFile = function() {
-        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI });
+        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI , sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY});
     }
 
+  // console.log('srcImage: ' + document.getElementById('srcImage').src);
+  // var imageData = document.getElementById('srcImage');
+  // var fd = new FormData();
+  // fd.append('file' , document.getElementById('srcImage'));
+  // console.log('fd is + ' + JSON.stringify( fd ) );
+  // var uploadUrl = '/api/v1/users/addItem';
+  //
+  // $http.post(uploadUrl,fd, {
+  //           transformRequest: angular.identity,
+  //           headers: {'Content-Type': undefined} ,
+  //           params: {
+  //               fd
+  //           }
+  //       })
+  //       .success(function(){
+  //         console.log("success!!");
+  //       })
+  //       .error(function(){
+  //         console.log("error!!");
+  //       });
 
+  // var imageDetails = $base64.encode(document.getElementById('srcImage'));
+  //
+  // console.log('imageDetails: ' + imageDetails );
+  //
+  // $scope.item = {
+  //     data: imageDetails ,
+  //     contentType: 'image/png' ,
+  //     name: 'blabla'
+  // }
+  //
+  // console.log($scope.item);
+  //
+  // UserAPI.addItem($scope.item);
 
+  /* USING ng-file-upload */
+
+  // $scope.saysomething = function() {
+  //     console.log('fine, i said something!!');
+  // }
+  //
+  // $scope.uploadPhoto = function () {
+  //     var imageDetail = document.getElementById('srcImage');
+  //       Upload.upload({
+  //           url: '/api/v1/users/addItem',
+  //           method: 'POST' ,
+  //           data: { name: 'zain' } ,
+  //           file: imageDetail //we might need to change this ...
+  //       }).then(function (resp) {
+  //           console.log('Success ');
+  //       }, function (resp) {
+  //           console.log('Erro');
+  //       });
+  //   };
+
+    // var item = {
+    //     data: document.getElementById('srcImage') ,
+    //     contentType: 'image/png' ,
+    //     name: 'Zain'
+    // }
+    // $scope.upload = function () {
+    //     console.log('Adding image ... ');
+    //     UserAPI.addItem(item);
+    // };
 
 
 
@@ -113,9 +226,17 @@ angular.module('starter.controllers', [])
         email: "",
         password: ""
     }
+
     $scope.login = function() {
         console.log($scope.userInfo);
-        UserAPI.loginUser($scope.userInfo);
+        var dang = {};
+        UserAPI.loginUser($scope.userInfo).success( function(result) {
+            if( result ) {
+                console.log('result is: ' + result.email );
+            } else {
+                console.log('Could not grab user ... ' );
+            }
+        });
     }
 
 

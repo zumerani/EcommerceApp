@@ -61,6 +61,8 @@ angular.module('starter.controllers', [])
 
     function onPhotoFileSuccess(imageData) {
 
+        alert("uri: " + imageData );
+
         //pop up
         // var myPopUp = $ionicPopup.show( {
         //     title: 'Image: ' + imageData ,
@@ -76,13 +78,40 @@ angular.module('starter.controllers', [])
   // Get image handle
         console.log(JSON.stringify(imageData));
 
-        var doIt = {
-            data: imageData ,
-            contentType: 'image/png' ,
-            name: 'zain'
+        var win = function (r) {
+            console.log("Code = " + r.responseCode);
+            console.log("Response = " + r.response);
+            console.log("Sent = " + r.bytesSent);
         }
 
-        UserAPI.addItem(doIt);
+        var fail = function (error) {
+            alert("An error has occurred: Code = " + error.code);
+            console.log("upload error source " + error.source);
+            console.log("upload error target " + error.target);
+        }
+
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = imageData.substr(imageData.lastIndexOf('/') + 1);
+        options.mimeType = "image/jpeg";
+
+        var params = {};
+        params.value1 = "test";
+        params.value2 = "param";
+        params.name = "ZAIN UMERANI ROCKS"
+
+        options.params = params;
+
+        var ft = new FileTransfer();
+        ft.upload(imageData, "/api/v1/users/addItem", win, fail, options);
+
+        // var doIt = {
+        //     data: imageData ,
+        //     contentType: 'image/png' ,
+        //     name: 'zain'
+        // }
+        //
+        // UserAPI.addItem(doIt);
 
    	  // Get image handle
       //
@@ -95,14 +124,6 @@ angular.module('starter.controllers', [])
       //
         srcImage.src = imageData;
 
-        var doIt = {
-            data: imageData ,
-            contentType: 'base64' ,
-            name: 'zain'
-        }
-
-        UserAPI.addItem(doIt);
-
     }
 
     function onFail(message) {
@@ -110,7 +131,7 @@ angular.module('starter.controllers', [])
     }
 
     $scope.capturePhotoWithFile = function() {
-        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.DATA_URL });
+        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI , sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY});
     }
 
   // console.log('srcImage: ' + document.getElementById('srcImage').src);
@@ -150,6 +171,10 @@ angular.module('starter.controllers', [])
 
   /* USING ng-file-upload */
 
+  // $scope.saysomething = function() {
+  //     console.log('fine, i said something!!');
+  // }
+  //
   // $scope.uploadPhoto = function () {
   //     var imageDetail = document.getElementById('srcImage');
   //       Upload.upload({

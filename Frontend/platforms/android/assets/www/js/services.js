@@ -49,7 +49,7 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = "http://localhost:8080" /*"https://stormy-taiga-50511.herokuapp.com"*/
+    var base = /*"http://localhost:8080"*/ "https://stormy-taiga-50511.herokuapp.com"
 
     return {
         addUser: function(user) {
@@ -87,12 +87,13 @@ angular.module('starter.services', [])
             });
         } ,
         loginUser: function(user) {
-            $http({
+             return $http({
                 method: 'POST' ,
                 url: base + '/api/v1/users/loginUser',
                 data: user
             }).success( function success(res) {
                 console.log('success: ' + res.email);
+                return res;
             }).error( function error(err) {
                 if( err.status == '404' ) {
                     var myPopUp = $ionicPopup.show( {
@@ -132,7 +133,61 @@ angular.module('starter.services', [])
                     });
                 }
             });
-        }
+        } ,
+        addItem: function(item) {
+            $http({
+                method: 'POST' ,
+                url: base + '/api/v1/users/addItem' ,
+                data: item
+            }).success( function success(result) {
+                console.log('Item added!!');
+                var myPopUp = $ionicPopup.show( {
+                    title: 'SUCCESS ' + result.name ,
+                    buttons: [ {
+                        text: "GOOD",
+                        type: 'button-positive'
+                    } ] ,
+                    onTap: function(e) {
+                        e.preventDefault();
+                        $state.go('signup');
+                    }
+                });
+            }).error( function error(err) {
+                console.log('Error: Item added');
+                var myPopUp = $ionicPopup.show( {
+                    title: 'FAILED: ' + err.mes ,
+                    buttons: [ {
+                        text: "NOO",
+                        type: 'button-positive'
+                    } ] ,
+                    onTap: function(e) {
+                        e.preventDefault();
+                        $state.go('signup');
+                    }
+                });
+            });
+        } ,
+        // getImage: function() {
+        //     $http({
+        //         method: 'GET' ,
+        //         url: base + '/api/v1/users/getImage'
+        //     }).success( function success(result) {
+        //         console.log('Got image!');
+        //         console.log('result.data:' + result.data);
+        //         return result;
+        //     }).error( function error(err) {
+        //         console.log('error in getting image');
+        //     });
+        // }
 
+        getImage: function() {
+            return $http.get(base + '/api/v1/users/getImage')
+            .success(function(response) {
+                console.log('Got Image: ' + response.name );
+                return response;
+            }).error( function(err) {
+                console.log('error in getting image: ' + err);
+            });
+        }
     }
 });

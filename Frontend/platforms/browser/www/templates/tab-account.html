@@ -1,9 +1,21 @@
 <ion-view view-title="Account">
   <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+
+      <h1>Hi</h1>
+
+      <!-- <img type="file" enctype="multipart/form-data" src="../img/ben.png" id="srcImage" name="lol" width="250 " height="250" style="display: block; margin: 0 auto;"/><br/> -->
+      <form id       =  "uploadForm"
+           enctype   =  "multipart/form-data"
+           action    =  "/api/v1/users/addItem"
+           method    =  "post"
+           name = "lol"
+      >
+      <input value="lolsubmit" type="image"  ng-click="capturePhotoWithFile()" src="../img/ben.png" name="userPhoto" />
+      <input type="submit" ng-click="capturePhotoWithFile()" value="Upload Image" name="submit">
+      </form>
+      <button class="button button-full button-positive ">Take Image</button><br/>
+
+      <img id="srcImage">
+
   </ion-content>
 </ion-view>

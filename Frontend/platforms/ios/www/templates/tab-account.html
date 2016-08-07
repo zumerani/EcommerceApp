@@ -3,8 +3,19 @@
 
       <h1>Hi</h1>
 
-      <img ng-src="{{srcImage}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"/><br/>
-      <button class="button button-full button-positive " ng-click="capturePhotoWithFile()">Take Image</button><br/>
+      <!-- <img type="file" enctype="multipart/form-data" src="../img/ben.png" id="srcImage" name="lol" width="250 " height="250" style="display: block; margin: 0 auto;"/><br/> -->
+      <!-- <form id       =  "uploadForm"
+           enctype   =  "multipart/form-data"
+           action    =  "/api/v1/users/addItem"
+           method    =  "post"
+           name = "lol"
+      >
+      <input value="lolsubmit" type="image"  ng-click="capturePhotoWithFile()" name="userPhoto" />
+      <input type="submit" ng-click="capturePhotoWithFile()" value="Upload Image" name="submit">
+      </form> -->
+      <button ng-click="capturePhotoWithFile()" class="button button-full button-positive ">Take Image</button><br/>
+
+      <img id="srcImage">
 
   </ion-content>
 </ion-view>

@@ -147,40 +147,32 @@ exports.addItem = function( req , res ) {
     //     }
     // });
 
-    if( req.body) {
-        res.writeHead(200, {
-            'Content-Type': 'application/json; charset=utf-8'
-        });
-        res.end(JSON.stringify(req.body));
-    } else if( !req.body ) {
-        res.writeHead(404 , {
-            'Content-Type': 'application/json; charset=utf-8'
-        });
-        res.end(JSON.stringify( {
-            mes: "error" ,
-            status: '404'
-        }));
-    }
-
-    var im = new Model.image( req.body );
+    // console.log('req.file ' + JSON.stringify(req.file));
+    //
+    // var im = new Model.image( req.file );
     // im.save( function(err) {
     //     if( err ) {
     //         console.log('error');
-            // res.writeHead(404 , {
-            //     'Content-Type': 'application/json; charset=utf-8'
-            // });
-            // res.end(JSON.stringify( {
-            //     mes: "error: " + err ,
-            //     status: '404'
-            // }));
     //     } else {
     //         console.log('image added!');
-            // res.writeHead(200, {
-            //     'Content-Type': 'application/json; charset=utf-8'
-            // });
-            // res.end(JSON.stringify(dbres));
     //     }
     // });
+
+    if( req.files ) {
+        res.writeHead(200, {
+                'Content-Type': 'application/json; charset=utf-8'
+            });
+            // remove passowrd hash before sending to the client
+        res.end(JSON.stringify(req.body));
+    } else {
+        res.writeHead(404, {
+                'Content-Type': 'application/json; charset=utf-8'
+        });
+        res.end(JSON.stringify ({
+                error: "nothing" ,
+                status: '403'
+        }));
+    }
 
 };
 

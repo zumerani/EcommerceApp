@@ -24,10 +24,16 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         }
     }
