@@ -57,8 +57,6 @@ angular.module('starter.controllers', [])
         destinationType = navigator.camera.DestinationType;
     }
 
-    document.addEventListener("deviceready", onDeviceReady, false);
-
     function onPhotoFileSuccess(imageData) {
 
         alert("uri: " + imageData );
@@ -79,7 +77,7 @@ angular.module('starter.controllers', [])
         console.log(JSON.stringify(imageData));
 
         var win = function (r) {
-            alert("WE DID IT!! " + r.responseCode + " and " + r.response );
+            alert("WE DID IT!! " + r.responseCode  );
             console.log("Code = " + r.responseCode);
             console.log("Response = " + r.response);
             console.log("Sent = " + r.bytesSent);
@@ -109,7 +107,7 @@ angular.module('starter.controllers', [])
         options.params = params;
 
         var ft = new FileTransfer();
-        ft.upload(imageData, "/api/v1/users/addItem", win, fail, options);
+        ft.upload(imageData, encodeURI("https://stormy-taiga-50511.herokuapp.com/api/v1/users/addItem"), win, fail, options);
 
         // var doIt = {
         //     data: imageData ,
@@ -136,9 +134,19 @@ angular.module('starter.controllers', [])
         alert('Failed because: ' + message);
     }
 
-    $scope.capturePhotoWithFile = function() {
-        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI , sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY});
+    $scope.capturePhotoWithFile = function () {
+        //alert('I did it !');
+        navigator.camera.getPicture(onPhotoFileSuccess, onFail,
+            { quality: 50 ,
+                destinationType: Camera.DestinationType.FILE_URI ,
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY ,
+                encodingType: Camera.EncodingType.JPEG ,
+                mediaType: Camera.MediaType.PICTURE
+            }
+        );
     }
+
+    document.addEventListener("deviceready", onDeviceReady , false);
 
   // console.log('srcImage: ' + document.getElementById('srcImage').src);
   // var imageData = document.getElementById('srcImage');

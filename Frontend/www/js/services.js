@@ -142,7 +142,7 @@ angular.module('starter.services', [])
             }).success( function success(result) {
                 console.log('Item added!!');
                 var myPopUp = $ionicPopup.show( {
-                    title: 'SUCCESS ' + result ,
+                    title: 'SUCCESS ' + result.name ,
                     buttons: [ {
                         text: "GOOD",
                         type: 'button-positive'
