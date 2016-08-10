@@ -42,6 +42,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
       templateUrl: 'templates/signup.html' ,
       controller: 'SignUpCtrl'
   })
+  .state('seller' , {
+      url: '/seller' ,
+      templateUrl: 'templates/seller.html' ,
+      controller: 'SellerCtrl'
+  })
 
  /* Set up tabs from here on out. */
 .state('tab', {

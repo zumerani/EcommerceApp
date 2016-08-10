@@ -203,3 +203,145 @@ a {
     margin-top: 25px;
     border: none;
 }
+
+/* SELLER.HTML */
+
+.seller_navbar {
+    background: #1376AF !important;
+}
+
+.seller_viewTitle {
+    color: white;
+    font-family: 'Open Sans', sans-serif; !important;
+}
+
+.seller_background {
+    background-color: #ECECEC;
+    text-align: center;
+}
+
+.seller_itemHolder {
+    width: 90%;
+    height: 500px;
+    display: block;
+    background-color: white;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 8px;
+}
+
+.seller_itemName {
+    padding-top: 200px;
+    //background-color: red;
+    width: 100%;
+    display: block;
+    border: 1px solid black;
+}
+
+.seller_block {
+    width: 100%;
+    height: 40px;
+    //background-color: green;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+#seller_descriptionBlock {
+    height: 100px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+#seller_descriptionBlock textarea {
+    height: 100%;
+    width: 100%;
+    padding-left: 8px;
+    padding-top: 10px;
+    font-family: 'Varela Round', sans-serif;
+    color: #767676;
+    resize: none;
+}
+
+#seller_categoryBlock {
+    height: 120px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+#seller_categoryBlock textarea {
+    height: 100%;
+    width: 100%;
+    padding-left: 8px;
+    padding-top: 10px;
+    font-family: 'Varela Round', sans-serif;
+    color: #767676;
+    resize: none;
+}
+
+#seller_cameraBlock {
+    height: 100px;
+    text-align: center;
+}
+
+.seller_block input {
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    width: 100%;
+    padding-left: 10px;
+    font-family: 'Varela Round', sans-serif;
+    color: #767676;
+}
+
+#blockOne {
+    //background-color: #eee;
+    height: 90px;
+    border-radius: 10px;
+}
+
+#blockOne i {
+    color: black;
+}
+
+#blockOne h3 {
+    font-family: 'Varela Round', sans-serif;
+    color: #767676;
+    font-size: 12px;
+    padding-top: -10px;
+}
+
+#blockTwo {
+    //background-color: #eee;
+    height: 90px;
+    border-radius: 10px;
+}
+
+#blockTwo h3 {
+    font-family: 'Varela Round', sans-serif;
+    color: #767676;
+    font-size: 12px;
+    padding-top: -10px;
+}
+
+#blockTwo i {
+    color: black;
+}
+
+.seller_row {
+    width: 90%;
+    //background-color: red;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seller_postButton {
+    width: 230px;
+    height: 40px;
+    background-color: #1376AF;
+    border: none;
+    margin-top: 40px;
+    border-radius: 7px;
+    color: white;
+    font-family: 'Varela Round', sans-serif;
+}

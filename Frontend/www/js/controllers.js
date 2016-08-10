@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$base64' ,  function($scope , $cordovaOauth , $location , $http , $window ,
-    UserAPI , $base64) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' ,  function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -14,18 +14,6 @@ angular.module('starter.controllers', [])
     //     $location.url('/profile');
     //
     // };
-
-    console.log('Lol Im in FeedCtrl');
-
-    UserAPI.getImage().then( function(result) {
-        if( result ) {
-            console.log(result);
-            console.log(result.data.data.data);
-            console.log($base64.decode(result.data.data.data));
-        } else {
-            console.log('err');
-        }
-    });
 
     //console.log('imageHolder is: ' + $scope.imageHolder.name );
 
@@ -50,7 +38,7 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray , $cordovaCamera) {
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray , $cordovaCamera , $ionicLoading) {
 
     var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
@@ -58,11 +46,11 @@ angular.module('starter.controllers', [])
         var options = {
           quality: 100,
           destinationType: Camera.DestinationType.DATA_URL,
-          sourceType: Camera.PictureSourceType.CAMERA,
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
           allowEdit: true,
-          encodingType: Camera.EncodingType.JPEG,
-          targetWidth: 40,
-          targetHeight: 40,
+          encodingType: Camera.EncodingType.PNG,
+          targetWidth: 65,
+          targetHeight: 65,
           popoverOptions: CameraPopoverOptions,
           saveToPhotoAlbum: false,
     	  correctOrientation:true
@@ -70,7 +58,11 @@ angular.module('starter.controllers', [])
         //success function
         $cordovaCamera.getPicture(options).then(function(imageData) {
 
-            alert("Got it!!");
+            $ionicLoading.show({
+              template: 'Uploading...',
+              duration: 1000
+            });
+
 
             var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
@@ -83,7 +75,6 @@ angular.module('starter.controllers', [])
                 $scope.id = "";
 
                 $scope.id = ref.key();
-                alert('added record with id ' + $scope.id );
                 var list = $firebaseArray(itemsRef);
                 list.$loaded().then( function( arr) {
                     // alert('hold is:  ' + $scope.hold );
@@ -154,6 +145,12 @@ angular.module('starter.controllers', [])
         console.log($scope.user);
         UserAPI.addUser($scope.user);
     }
+
+
+})
+.controller('SellerCtrl' , function( $scope ) {
+    
+    console.log('In Seller');
 
 
 });

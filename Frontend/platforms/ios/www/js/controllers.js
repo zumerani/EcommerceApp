@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$base64' ,  function($scope , $cordovaOauth , $location , $http , $window ,
-    UserAPI , $base64) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' ,  function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -14,18 +14,6 @@ angular.module('starter.controllers', [])
     //     $location.url('/profile');
     //
     // };
-
-    console.log('Lol Im in FeedCtrl');
-
-    UserAPI.getImage().then( function(result) {
-        if( result ) {
-            console.log(result);
-            console.log(result.data.data.data);
-            console.log($base64.decode(result.data.data.data));
-        } else {
-            console.log('err');
-        }
-    });
 
     //console.log('imageHolder is: ' + $scope.imageHolder.name );
 
@@ -50,30 +38,53 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray) {
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray , $cordovaCamera , $ionicLoading) {
 
     var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
-    $scope.items = $firebaseArray(itemsRef);
-
-    console.log($scope.items);
-
     $scope.upload = function() {
+        var options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.PNG,
+          targetWidth: 65,
+          targetHeight: 65,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false,
+    	  correctOrientation:true
+        };
+        //success function
+        $cordovaCamera.getPicture(options).then(function(imageData) {
 
-        $scope.items.$add({
-            name: 'Ben' ,
-            data: 'ahhahahahah'
-        }).then( function(ref) {
-            $scope.id = "";
-
-            $scope.id = ref.key();
-            alert('added record with id ' + $scope.id );
-            var list = $firebaseArray(itemsRef);
-            list.$loaded().then( function( arr) {
-                alert('hold is:  ' + $scope.hold );
-                $scope.hold = arr.$getRecord($scope.id).data;
-                alert('hold is:  ' + $scope.hold );
+            $ionicLoading.show({
+              template: 'Uploading...',
+              duration: 1000
             });
+
+
+            var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+
+            $scope.items = $firebaseArray(itemsRef);
+            /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
+            $scope.items.$add({
+                name: 'Ben' ,
+                data: imageData
+            }).then( function(ref) {
+                $scope.id = "";
+
+                $scope.id = ref.key();
+                var list = $firebaseArray(itemsRef);
+                list.$loaded().then( function( arr) {
+                    // alert('hold is:  ' + $scope.hold );
+                    $scope.hold = arr.$getRecord($scope.id).data;
+                    // alert('hold is:  ' + $scope.hold );
+                });
+            });
+        //failure function
+        }, function(err) {
+            alert("We have an error: " + error );
         });
 
     }
