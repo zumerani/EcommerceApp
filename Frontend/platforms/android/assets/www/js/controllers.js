@@ -50,135 +50,33 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $base64 , Upload , $http) {
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray) {
 
-    function onDeviceReady() {
-        pictureSource = navigator.camera.PictureSourceType;
-        destinationType = navigator.camera.DestinationType;
-    }
+    var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
-    document.addEventListener("deviceready", onDeviceReady, false);
+    $scope.items = $firebaseArray(itemsRef);
 
-    function onPhotoFileSuccess(imageData) {
+    console.log($scope.items);
 
-        //pop up
-        // var myPopUp = $ionicPopup.show( {
-        //     title: 'Image: ' + imageData ,
-        //     buttons: [ {
-        //         text: "Got it" ,
-        //         type: 'button-positive'
-        //     } ] ,
-        //     onTap: function(e) {
-        //         e.preventDefault();
-        //     }
-        // });
+    $scope.upload = function() {
 
-  // Get image handle
-        console.log(JSON.stringify(imageData));
+        $scope.items.$add({
+            name: 'Ben' ,
+            data: 'ahhahahahah'
+        }).then( function(ref) {
+            $scope.id = "";
 
-        var doIt = {
-            data: imageData ,
-            contentType: 'image/png' ,
-            name: 'zain'
-        }
-
-        UserAPI.addItem(doIt);
-
-   	  // Get image handle
-      //
-        var srcImage = document.getElementById('srcImage');
-      // Unhide image elements
-      //
-        srcImage.style.display = 'block';
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-        srcImage.src = imageData;
-
-        var doIt = {
-            data: imageData ,
-            contentType: 'base64' ,
-            name: 'zain'
-        }
-
-        UserAPI.addItem(doIt);
-
-    }
-
-    function onFail(message) {
-        alert('Failed because: ' + message);
-    }
-
-    $scope.capturePhotoWithFile = function() {
-        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50 , destinationType: Camera.DestinationType.FILE_URI });
-    }
-
-  // console.log('srcImage: ' + document.getElementById('srcImage').src);
-  // var imageData = document.getElementById('srcImage');
-  // var fd = new FormData();
-  // fd.append('file' , document.getElementById('srcImage'));
-  // console.log('fd is + ' + JSON.stringify( fd ) );
-  // var uploadUrl = '/api/v1/users/addItem';
-  //
-  // $http.post(uploadUrl,fd, {
-  //           transformRequest: angular.identity,
-  //           headers: {'Content-Type': undefined} ,
-  //           params: {
-  //               fd
-  //           }
-  //       })
-  //       .success(function(){
-  //         console.log("success!!");
-  //       })
-  //       .error(function(){
-  //         console.log("error!!");
-  //       });
-
-  // var imageDetails = $base64.encode(document.getElementById('srcImage'));
-  //
-  // console.log('imageDetails: ' + imageDetails );
-  //
-  // $scope.item = {
-  //     data: imageDetails ,
-  //     contentType: 'image/png' ,
-  //     name: 'blabla'
-  // }
-  //
-  // console.log($scope.item);
-  //
-  // UserAPI.addItem($scope.item);
-
-  /* USING ng-file-upload */
-
-  $scope.saysomething = function() {
-      console.log('fine, i said something!!');
-  }
-
-  $scope.uploadPhoto = function () {
-      var imageDetail = document.getElementById('srcImage');
-        Upload.upload({
-            url: '/api/v1/users/addItem',
-            method: 'POST' ,
-            data: { name: 'zain' } ,
-            file: imageDetail //we might need to change this ...
-        }).then(function (resp) {
-            console.log('Success ');
-        }, function (resp) {
-            console.log('Erro');
+            $scope.id = ref.key();
+            alert('added record with id ' + $scope.id );
+            var list = $firebaseArray(itemsRef);
+            list.$loaded().then( function( arr) {
+                alert('hold is:  ' + $scope.hold );
+                $scope.hold = arr.$getRecord($scope.id).data;
+                alert('hold is:  ' + $scope.hold );
+            });
         });
-    };
 
-    // var item = {
-    //     data: document.getElementById('srcImage') ,
-    //     contentType: 'image/png' ,
-    //     name: 'Zain'
-    // }
-    // $scope.upload = function () {
-    //     console.log('Adding image ... ');
-    //     UserAPI.addItem(item);
-    // };
-
-
+    }
 
 
 })

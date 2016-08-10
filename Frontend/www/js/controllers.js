@@ -50,170 +50,33 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $base64 , Upload , $http) {
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray) {
 
-    function onDeviceReady() {
-        pictureSource = navigator.camera.PictureSourceType;
-        destinationType = navigator.camera.DestinationType;
-    }
+    var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
-    function onPhotoFileSuccess(imageData) {
+    $scope.items = $firebaseArray(itemsRef);
 
-        alert("uri: " + imageData );
+    console.log($scope.items);
 
-        //pop up
-        // var myPopUp = $ionicPopup.show( {
-        //     title: 'Image: ' + imageData ,
-        //     buttons: [ {
-        //         text: "Got it" ,
-        //         type: 'button-positive'
-        //     } ] ,
-        //     onTap: function(e) {
-        //         e.preventDefault();
-        //     }
-        // });
+    $scope.upload = function() {
 
-  // Get image handle
-        console.log(JSON.stringify(imageData));
+        $scope.items.$add({
+            name: 'Ben' ,
+            data: 'ahhahahahah'
+        }).then( function(ref) {
+            $scope.id = "";
 
-        var win = function (r) {
-            alert("WE DID IT!! " + r.responseCode  );
-            console.log("Code = " + r.responseCode);
-            console.log("Response = " + r.response);
-            console.log("Sent = " + r.bytesSent);
-        }
-
-        var fail = function (error) {
-            alert("An error has occurred: Code = " + error.code + " and " + error.source + " and " +
-        error.target );
-            console.log("upload error source " + error.source);
-            console.log("upload error target " + error.target);
-        }
-
-        var options = new FileUploadOptions();
-        options.fileKey = "myPhoto";
-        options.fileName = imageData.substr(imageData.lastIndexOf('/') + 1);
-        options.mimeType = "image/jpeg";
-        options.chunkedMode = false;
-        options.headers = {
-            Connection: "close"
-        };
-
-        var params = {};
-        params.value1 = "test";
-        params.value2 = "param";
-        params.name = "ZAIN UMERANI ROCKS"
-
-        options.params = params;
-
-        var ft = new FileTransfer();
-        ft.upload(imageData, encodeURI("https://stormy-taiga-50511.herokuapp.com/api/v1/users/addItem"), win, fail, options);
-
-        // var doIt = {
-        //     data: imageData ,
-        //     contentType: 'image/png' ,
-        //     name: 'zain'
-        // }
-        //
-        // UserAPI.addItem(doIt);
-
-   	  // Get image handle
-      //
-        var srcImage = document.getElementById('srcImage');
-      // Unhide image elements
-      //
-        srcImage.style.display = 'block';
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-        srcImage.src = imageData;
+            $scope.id = ref.key();
+            alert('added record with id ' + $scope.id );
+            var list = $firebaseArray(itemsRef);
+            list.$loaded().then( function( arr) {
+                alert('hold is:  ' + $scope.hold );
+                $scope.hold = arr.$getRecord($scope.id).data;
+                alert('hold is:  ' + $scope.hold );
+            });
+        });
 
     }
-
-    function onFail(message) {
-        alert('Failed because: ' + message);
-    }
-
-    $scope.capturePhotoWithFile = function () {
-        //alert('I did it !');
-        navigator.camera.getPicture(onPhotoFileSuccess, onFail,
-            { quality: 50 ,
-                destinationType: Camera.DestinationType.FILE_URI ,
-                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY ,
-                encodingType: Camera.EncodingType.JPEG ,
-                mediaType: Camera.MediaType.PICTURE
-            }
-        );
-    }
-
-    document.addEventListener("deviceready", onDeviceReady , false);
-
-  // console.log('srcImage: ' + document.getElementById('srcImage').src);
-  // var imageData = document.getElementById('srcImage');
-  // var fd = new FormData();
-  // fd.append('file' , document.getElementById('srcImage'));
-  // console.log('fd is + ' + JSON.stringify( fd ) );
-  // var uploadUrl = '/api/v1/users/addItem';
-  //
-  // $http.post(uploadUrl,fd, {
-  //           transformRequest: angular.identity,
-  //           headers: {'Content-Type': undefined} ,
-  //           params: {
-  //               fd
-  //           }
-  //       })
-  //       .success(function(){
-  //         console.log("success!!");
-  //       })
-  //       .error(function(){
-  //         console.log("error!!");
-  //       });
-
-  // var imageDetails = $base64.encode(document.getElementById('srcImage'));
-  //
-  // console.log('imageDetails: ' + imageDetails );
-  //
-  // $scope.item = {
-  //     data: imageDetails ,
-  //     contentType: 'image/png' ,
-  //     name: 'blabla'
-  // }
-  //
-  // console.log($scope.item);
-  //
-  // UserAPI.addItem($scope.item);
-
-  /* USING ng-file-upload */
-
-  // $scope.saysomething = function() {
-  //     console.log('fine, i said something!!');
-  // }
-  //
-  // $scope.uploadPhoto = function () {
-  //     var imageDetail = document.getElementById('srcImage');
-  //       Upload.upload({
-  //           url: '/api/v1/users/addItem',
-  //           method: 'POST' ,
-  //           data: { name: 'zain' } ,
-  //           file: imageDetail //we might need to change this ...
-  //       }).then(function (resp) {
-  //           console.log('Success ');
-  //       }, function (resp) {
-  //           console.log('Erro');
-  //       });
-  //   };
-
-    // var item = {
-    //     data: document.getElementById('srcImage') ,
-    //     contentType: 'image/png' ,
-    //     name: 'Zain'
-    // }
-    // $scope.upload = function () {
-    //     console.log('Adding image ... ');
-    //     UserAPI.addItem(item);
-    // };
-
-
 
 
 })

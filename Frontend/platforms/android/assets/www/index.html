@@ -13,7 +13,6 @@
     -->
 
     <!-- Google Fonts -->
-    <!-- Google Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato%3A300&amp%3Bsubset=latin%2Clatin-ext" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Josefin%20Sans%3A300&amp%3Bsubset=latin%2Clatin-ext" rel="stylesheet" type="text/css">
@@ -22,26 +21,28 @@
     <link href="https://fonts.googleapis.com/css?family=Indie%20Flower" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
-    <!-- Fonts -->
+    <!-- Font Awesome!! -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="js/ng-file-upload-shim.min.js"></script>
-    <script src="js/ng-file-upload.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="js/ng-cordova.js"></script>
     <script src="cordova.js"></script>
     <script src="js/ng-cordova-oauth.js"></script>
 
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
     <!-- your app's js -->
-    <script src="js/angular-base64.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" class="platform-android platform-cordova platform-webview">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
