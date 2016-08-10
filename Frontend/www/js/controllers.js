@@ -50,30 +50,50 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray) {
+.controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray , $cordovaCamera) {
 
     var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
-    $scope.items = $firebaseArray(itemsRef);
-
-    console.log($scope.items);
-
     $scope.upload = function() {
+        var options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 40,
+          targetHeight: 40,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false,
+    	  correctOrientation:true
+        };
+        //success function
+        $cordovaCamera.getPicture(options).then(function(imageData) {
 
-        $scope.items.$add({
-            name: 'Ben' ,
-            data: 'ahhahahahah'
-        }).then( function(ref) {
-            $scope.id = "";
+            alert("Got it!!");
 
-            $scope.id = ref.key();
-            alert('added record with id ' + $scope.id );
-            var list = $firebaseArray(itemsRef);
-            list.$loaded().then( function( arr) {
-                alert('hold is:  ' + $scope.hold );
-                $scope.hold = arr.$getRecord($scope.id).data;
-                alert('hold is:  ' + $scope.hold );
+            var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+
+            $scope.items = $firebaseArray(itemsRef);
+            /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
+            $scope.items.$add({
+                name: 'Ben' ,
+                data: imageData
+            }).then( function(ref) {
+                $scope.id = "";
+
+                $scope.id = ref.key();
+                alert('added record with id ' + $scope.id );
+                var list = $firebaseArray(itemsRef);
+                list.$loaded().then( function( arr) {
+                    // alert('hold is:  ' + $scope.hold );
+                    $scope.hold = arr.$getRecord($scope.id).data;
+                    // alert('hold is:  ' + $scope.hold );
+                });
             });
+        //failure function
+        }, function(err) {
+            alert("We have an error: " + error );
         });
 
     }
