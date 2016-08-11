@@ -247,6 +247,13 @@ a {
     border-bottom: 1px solid #eee;
 }
 
+.seller_block p {
+    color: #A4A4A4;
+    text-align: left;
+    padding-left: 8px;
+    padding-top: 10px;
+}
+
 #seller_descriptionBlock {
     height: 100px;
     width: 100%;
