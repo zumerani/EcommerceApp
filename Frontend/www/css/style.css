@@ -226,7 +226,7 @@ a {
     display: block;
     background-color: white;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 15px;
     border-radius: 8px;
 }
 
@@ -271,23 +271,52 @@ a {
 }
 
 #seller_categoryBlock {
-    height: 120px;
+    height: 210px;
     width: 100%;
     border-bottom: 1px solid #eee;
 }
 
-#seller_categoryBlock textarea {
-    height: 100%;
-    width: 100%;
-    padding-left: 8px;
-    padding-top: 10px;
-    font-family: 'Varela Round', sans-serif;
-    color: #767676;
-    resize: none;
+.seller_categoryBlockOne {
+    /*background-color: red;*/
+    text-align: center;
+}
+
+.seller_categoryBlockOne ul li {
+    padding: 4px;
+}
+
+.seller_categoryBlockOne ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.seller_categoryBlockTwo {
+    /*background-color: blue;*/
+    text-align: center;
+}
+
+.seller_categoryBlockTwo ul li {
+    padding: 4px;
+}
+
+.seller_categoryBlockTwo ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.seller_category {
+    width: 82px;
+    height: 22px;
+    display: block;
+    border-radius: 8px;
+    background-color: #808080;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #seller_cameraBlock {
-    height: 100px;
+    height: 110px;
     text-align: center;
 }
 
@@ -347,8 +376,12 @@ a {
     height: 40px;
     background-color: #1376AF;
     border: none;
-    margin-top: 40px;
+    margin-top: 20px;
     border-radius: 7px;
     color: white;
     font-family: 'Varela Round', sans-serif;
+}
+
+.blue {
+    background-color: #1376AF;
 }

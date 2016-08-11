@@ -149,8 +149,27 @@ angular.module('starter.controllers', [])
 
 })
 .controller('SellerCtrl' , function( $scope ) {
-    
+
     console.log('In Seller');
 
+    $scope.categoryOne = [ {id:'1' , name:'Sports' , selected:'false'} , {id:'2' , name:'Electronics' , selected:'false'} , { id: '3' , name:'Movies' , selected:'false'} ,
+    { id:'4' , name:'Music' , selected:'false'} , { id: '5' , name:'Leisure' , selected:'false'} ];
+
+    $scope.categoryTwo = [ 'Textbooks' , 'Fashion' , 'Clothes' , 'Other'];
+
+    $scope.selectCategoryOne = function(selectedItem) {
+        for(var i = 0; i < $scope.categoryOne.length; i++) {
+            var item = $scope.categoryOne[i];
+            if(item.id == selectedItem.id){
+                item.selected = !item.selected;
+            }else {
+                item.selected = true;
+            }
+        }
+    }
+
+    $scope.selectCategoryTwo = function(selectedItem) {
+        console.log('You just chose: ' + selectedItem );
+    }
 
 });

@@ -12,16 +12,42 @@
                     <textarea type="text" placeholder="Description"></textarea>
             </div>
 
+            <div class="seller_block">
+                    <input type="tel" placeholder="Price">
+            </div>
+
             <div id="seller_categoryBlock" class="seller_block">
                     <!-- <textarea type="text" placeholder="Select Category"></textarea> -->
-                    <p>Select Something</p>
+                    <p>Select a category (only one)</p>
+
+                    <div class="row">
+                        <div class="col col-50 seller_categoryBlockOne">
+                            <ul>
+                                <li ng-repeat="category in categoryOne">
+                                    <a ng-click="selectCategoryOne(category)" href="">
+                                        <div ng-class="{blue : !category.selected}" class="seller_category">{{category.name}}</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col col-50 seller_categoryBlockTwo">
+                            <ul>
+                                <li ng-repeat="category in categoryTwo">
+                                    <a ng-click="selectCategoryTwo(category)" href="">
+                                        <div class="seller_category">{{category}}</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
             </div>
 
             <div id="seller_cameraBlock" class="seller_block">
                 <div class="seller_row row">
                     <div id="blockOne" class="col col-50">
                         <a>
-                            <i class="fa fa-camera-retro fa-3x" aria-hidden="true"></i>
+                            <i class="fa fa-upload fa-3x" aria-hidden="true"></i>
                         </a>
 
                         <h3>Upload</h3>
