@@ -18,3 +18,8 @@ exports.userSetup = function userSetup() {
     _server.post('/api/v1/users/addUser' , dataManager.users.addUser );
     _server.post('/api/v1/users/loginUser' , dataManager.users.loginUser );
 }
+
+exports.transactionsSetup = function() {
+    console.log("Setting up transactions.");
+    _server.post('/api/v1/transactions/addItem' , dataManager.transactions.addItem );
+}

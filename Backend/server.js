@@ -14,25 +14,14 @@ var dependencies = {
     mongoose: require('mongoose')
 }
 
-//Instantiate our Database (MongoDB)
+/* Instantiate our Database (MongoDB) */
 var database = dependencies.mongoose.connect( dependencies.config.database.url , dependencies.config.database.collections );
-/* {authMechanism: 'SCRAM-SHA-1'} */
-//manageUsers variable
-//var manageUsers = require('./Authentication/manageUser')( server , database );
 
-//Set up our backend
+/* Set up our backend -- bodyParser & CORS */
 function setUp() {
     server.use( dependencies.bodyParser.urlencoded( {extended: true } ) );
     server.use( dependencies.bodyParser.json() );
-    //server.use( dependencies.cors );
-    /* Set up CORS */
-    // server.use(function(req, res, next) {
-    //     res.header('Access-Control-Allow-Origin', "*");
-    //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    //     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    //     next();
-    // });
-    // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
+    //CORS
     server.all('*', function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -40,22 +29,25 @@ function setUp() {
     });
 }
 
-//Set up data managers (dataManagers)
+/* Set up data managers (dataManagers) */
 var dataManagers = {
-    users: require('./Data_Manager/userManager')
+    users: require('./Data_Manager/userManager') ,
+    transactions: require('./Data_Manager/transactionsManager')
 }
 
-//Set up routes as we go
+/* Set up routes as we go */
 var routes = require('./Routes/routes');
 
-//Initialize APIs
+/* Initialize APIs */
 function initializeAPIS() {
     routes.init(server , dataManagers);
     dataManagers.users.init( database , dependencies.mongodb.ObjectID);
+    dataManagers.transactions.init( database , dependencies.mongodb.ObjectID);
     routes.userSetup();
+    routes.transactionsSetup();
 }
 
-//Server Start Up
+/* Server Start Up */
 function bootUp() {
     console.log("Starting up server ...");
     setUp();
@@ -68,11 +60,6 @@ function bootUp() {
     server.get('/' , function( req , res ) {
         return res.sendFile( dependencies.path.resolve('/../Frontend/www/index.html') );
     });
-
-    // server.get('/' , function( req , res ) {
-    //     return res.sendFile( 'index.html' , { root: '../FrontEnd/www' } );
-    // });
-
 }
 
 bootUp();

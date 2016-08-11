@@ -49,7 +49,7 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = /*"http://localhost:8080"*/ "https://stormy-taiga-50511.herokuapp.com"
+    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com"*/
 
     return {
         addUser: function(user) {
@@ -135,4 +135,38 @@ angular.module('starter.services', [])
             });
         }
     }
+})
+
+.factory( 'TransactionsAPI' , function( $http , $ionicPopup , $state ) {
+    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com"*/
+
+    return {
+
+        // addTransaction: function(item) {
+        //     return $http.post({
+        //         method: 'POST' ,
+        //         url: base + '/api/v1/transactions/addTransaction' ,
+        //         data: item
+        //     }).success( function success(result) {
+        //         console.log("Success in adding item!!");
+        //     }).error( function error(error) {
+        //         console.log("Error!!");
+        //     });
+        // }
+
+        addTransaction: function(item) {
+            return $http({
+                method: 'POST' ,
+                url: base + '/api/v1/transactions/addItem' ,
+                data: item
+            }).success( function success(result) {
+                console.log("Success in adding transaction!!");
+            }).error( function error(err) {
+                console.log("We got an error when adding transaction");
+            });
+        }
+
+
+    }
+
 });

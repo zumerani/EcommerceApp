@@ -10,9 +10,7 @@ exports.init = function( database , ObjectID) {
 var Model = require('../Models/models');
 var pwdManager = require('../Authentication/managePasswords');
 var express = require('express');
-var fs = require('fs');
-var multer = require('multer');
-var upload = multer( { dest: '../imageUploads'} );
+
 
 /* Add user */
 exports.addUser = function( req , res ) {

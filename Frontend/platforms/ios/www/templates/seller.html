@@ -1,9 +1,68 @@
-<ion-view view-title="Account">
-  <ion-content>
+<ion-view class="seller_viewTitle" view-title="Sell something!">
+    <ion-nav-bar class="seller_navbar"></ion-nav-bar>
 
-      <h1>Seller</h1>
+    <ion-content class="seller_background">
+        <div class="seller_itemHolder">
 
+            <div class="seller_block">
+                    <input type="text" ng-model="obj.itemName" placeholder="Item Name">
+            </div>
 
+            <div id="seller_descriptionBlock">
+                    <textarea type="text" ng-model="obj.description" placeholder="Description"></textarea>
+            </div>
 
-  </ion-content>
+            <div class="seller_block">
+                    <input type="tel" ng-model="obj.price" placeholder="Price">
+            </div>
+
+            <div id="seller_categoryBlock" class="seller_block">
+                    <!-- <textarea type="text" placeholder="Select Category"></textarea> -->
+                    <p>Select a category (only one)</p>
+
+                    <div class="row">
+                        <div class="col col-50 seller_categoryBlockOne">
+                            <ul>
+                                <li ng-repeat="category in categoryOne">
+                                    <a ng-click="selectCategoryOne(category)" href="">
+                                        <div ng-class="{blue : !category.selected}" class="seller_category">{{category.name}}</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col col-50 seller_categoryBlockTwo">
+                            <ul>
+                                <li ng-repeat="category in categoryTwo">
+                                    <a ng-click="selectCategoryTwo(category)" href="">
+                                        <div class="seller_category">{{category}}</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+
+            <div id="seller_cameraBlock" class="seller_block">
+                <div class="seller_row row">
+                    <div id="blockOne" class="col col-50">
+                        <a ng-click="uploadFromDevice()">
+                            <i class="fa fa-upload fa-3x" aria-hidden="true"></i>
+                        </a>
+
+                        <h3>Upload</h3>
+                    </div>
+                    <div id="blockTwo" class="col col-50">
+                        <a ng-click="takeAPicture()">
+                            <i class="fa fa-camera-retro fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <h3>Take a Picture</h3>
+                    </div>
+                </div>
+            </div>
+
+            <button ng-click="post()" class="seller_postButton">Post Item</button>
+
+        </div>
+    </ion-content>
 </ion-view>

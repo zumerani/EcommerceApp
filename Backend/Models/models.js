@@ -6,10 +6,12 @@ var Schema = mongoose.Schema;
 /* Schemas */
 var itemSchema = new Schema( {
     itemName: String ,
-    days_old: Number ,
     sellerName: String ,
     sellerEmail: String ,
-    picture: Buffer
+    description: String ,
+    price: Number ,
+    category: String ,
+    lookUpID: String
 });
 
 var userSchema = new Schema( {
