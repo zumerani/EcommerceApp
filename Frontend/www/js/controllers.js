@@ -350,7 +350,7 @@ angular.module('starter.controllers', [])
         }
         var sendObj = $scope.obj;
         TransactionsAPI.addTransaction( sendObj );
-        
+
     }
 
 });

@@ -217,7 +217,6 @@ angular.module('starter.controllers', [])
 
                 id = ref.key();
                 $scope.obj.lookUpID = ref.key();
-                alert('data is: ' + $scope.obj.lookUpID + ' and' + $scope.obj.itemName );
                 var list = $firebaseArray(itemsRef);
                 list.$loaded().then( function( arr) {
                     // alert('hold is:  ' + $scope.hold );
@@ -336,23 +335,22 @@ angular.module('starter.controllers', [])
                 }
             });
         }
-        // if( $scope.obj.lookUpID == '' ) {
-        //     var myPopUp = $ionicPopup.show( {
-        //         title: "Taking a picture will help you sell more!" ,
-        //         buttons: [ {
-        //             text: "Ok",
-        //             type: 'button-positive'
-        //         } ] ,
-        //         onTap: function(e) {
-        //             e.preventDefault();
-        //             $state.go('signup');
-        //         }
-        //     });
-        // }
+        if( $scope.obj.lookUpID == '' ) {
+            var myPopUp = $ionicPopup.show( {
+                title: "Taking a picture will help you sell more!" ,
+                buttons: [ {
+                    text: "Ok",
+                    type: 'button-positive'
+                } ] ,
+                onTap: function(e) {
+                    e.preventDefault();
+                    $state.go('signup');
+                }
+            });
+        }
         var sendObj = $scope.obj;
         TransactionsAPI.addTransaction( sendObj );
-
-
+        
     }
 
 });

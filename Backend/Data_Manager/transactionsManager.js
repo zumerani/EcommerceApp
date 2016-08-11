@@ -21,7 +21,7 @@ exports.addItem = function( req , res ) {
         } else {
             //dbres.password = ""; //look at this line again .... just incase
             res.status(200).send('added!');
-            console.log("User added");
+            console.log("Item added");
         }
     });
 };

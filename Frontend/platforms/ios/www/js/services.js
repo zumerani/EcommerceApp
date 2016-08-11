@@ -138,7 +138,7 @@ angular.module('starter.services', [])
 })
 
 .factory( 'TransactionsAPI' , function( $http , $ionicPopup , $state ) {
-    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com"*/
+    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com";
 
     return {
 
@@ -161,6 +161,17 @@ angular.module('starter.services', [])
                 data: item
             }).success( function success(result) {
                 console.log("Success in adding transaction!!");
+                var myPopUp = $ionicPopup.show( {
+                    title: 'Success!!!!' ,
+                    buttons: [ {
+                        text: "Great!",
+                        type: 'button-positive'
+                    } ] ,
+                    onTap: function(e) {
+                        e.preventDefault();
+                        $state.go('signup');
+                    }
+                });
             }).error( function error(err) {
                 console.log("We got an error when adding transaction");
             });
