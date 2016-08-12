@@ -1,3 +1,14 @@
+/* INDEX.HTML */
+
+.index_navbar {
+    background: #1376AF !important;
+}
+
+.index_viewTitle {
+    color: white;
+    font-family: 'Open Sans', sans-serif; !important;
+}
+
 /* SIGNIN.HTML */
 
 .signin_logo {
@@ -384,4 +395,11 @@ a {
 
 .blue {
     background-color: #1376AF;
+}
+
+/* FEED.HTML */
+
+.feed_viewTitle {
+    color: white;
+    font-family: 'Open Sans', sans-serif; !important;
 }
