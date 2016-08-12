@@ -161,7 +161,7 @@ angular.module('starter.services', [])
                 data: item
             }).success( function success(result) {
                 console.log("Success in adding transaction!!");
-                alert('Our result is: ' + result );
+                alert('Our result is: ' + result.school );
                 // var myPopUp = $ionicPopup.show( {
                 //     title: 'School name I found is: ' + result ,
                 //     buttons: [ {

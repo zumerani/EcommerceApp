@@ -25,18 +25,30 @@ exports.addItem = function( req , res ) {
                     'Content-Type': 'application/json; charset=utf-8'
             });
             res.end(JSON.stringify ({
-                    error: "Cannot find user" ,
-                    status: '403'
+                error: "Cannot find user" ,
+                status: '403'
             }));
         } else {
             /* Grab the found user's school */
             var school = dbres.school;
-            res.writeHead(200, {
-                    'Content-Type': 'application/json; charset=utf-8'
+            Model.School.findOne( { name: dbres.school } , function( err , dbSchool ) {
+                if( !dbSchool ) {
+                    res.writeHead(403, {
+                            'Content-Type': 'application/json; charset=utf-8'
+                    });
+                    res.end(JSON.stringify ({
+                        error: "User does not have a school" ,
+                        status: '403'
+                    }));
+                } else {
+                    dbSchool.feed.push( req.body ); //adds item sent to feed in respective school
+                    res.writeHead(200, {
+                            'Content-Type': 'application/json; charset=utf-8'
+                    });
+                        // remove passowrd hash before sending to the client
+                    res.end(JSON.stringify(dbSchool));
+                }
             });
-                // remove passowrd hash before sending to the client
-            res.end(JSON.stringify(dbres));
-            console.log('School that I found is: ' + school );
         }
 
     });
