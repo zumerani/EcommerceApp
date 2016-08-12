@@ -31,23 +31,25 @@ exports.addItem = function( req , res ) {
         } else {
             /* Grab the found user's school */
             var school = dbres.school;
-            Model.School.findOne( { name: dbres.school } , function( err , dbSchool ) {
+            /*Now find and update the school */
+            Model.School.findOneAndUpdate( { name: dbres.school } , {$push: { feed: req.body } } ,
+                {new: true} , function(err , dbSchool ) {
+
                 if( !dbSchool ) {
                     res.writeHead(403, {
                             'Content-Type': 'application/json; charset=utf-8'
                     });
                     res.end(JSON.stringify ({
-                        error: "User does not have a school" ,
+                        message: "Cannot find school" ,
                         status: '403'
                     }));
                 } else {
-                    dbSchool.feed.push( req.body ); //adds item sent to feed in respective school
                     res.writeHead(200, {
-                            'Content-Type': 'application/json; charset=utf-8'
+                        'Content-Type': 'application/json; charset=utf-8'
                     });
-                        // remove passowrd hash before sending to the client
                     res.end(JSON.stringify(dbSchool));
                 }
+
             });
         }
 

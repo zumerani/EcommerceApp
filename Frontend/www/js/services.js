@@ -175,6 +175,7 @@ angular.module('starter.services', [])
                 // });
             }).error( function error(err) {
                 console.log("We got an error when adding transaction");
+                alert('We have a problem: ' + error.message)
             });
         }
 
