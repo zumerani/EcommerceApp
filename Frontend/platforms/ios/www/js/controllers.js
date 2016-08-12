@@ -350,6 +350,7 @@ angular.module('starter.controllers', [])
                 }
             });
         }
+        $scope.obj.sellerEmail = window.localStorage.getItem("username");
         var sendObj = $scope.obj;
         TransactionsAPI.addTransaction( sendObj );
 

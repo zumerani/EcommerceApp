@@ -161,17 +161,18 @@ angular.module('starter.services', [])
                 data: item
             }).success( function success(result) {
                 console.log("Success in adding transaction!!");
-                var myPopUp = $ionicPopup.show( {
-                    title: 'Success!!!!' ,
-                    buttons: [ {
-                        text: "Great!",
-                        type: 'button-positive'
-                    } ] ,
-                    onTap: function(e) {
-                        e.preventDefault();
-                        $state.go('signup');
-                    }
-                });
+                alert('Our result is: ' + result.school );
+                // var myPopUp = $ionicPopup.show( {
+                //     title: 'School name I found is: ' + result ,
+                //     buttons: [ {
+                //         text: "Great!",
+                //         type: 'button-positive'
+                //     } ] ,
+                //     onTap: function(e) {
+                //         e.preventDefault();
+                //         $state.go('signup');
+                //     }
+                // });
             }).error( function error(err) {
                 console.log("We got an error when adding transaction");
             });
