@@ -122,6 +122,8 @@ angular.module('starter.controllers', [])
         UserAPI.loginUser($scope.userInfo).success( function(result) {
             if( result ) {
                 console.log('result is: ' + result.email );
+                window.localStorage.setItem("username" , result.email);
+                alert("Welcome: " + window.localStorage.getItem("username") );
             } else {
                 console.log('Could not grab user ... ' );
             }
@@ -348,6 +350,7 @@ angular.module('starter.controllers', [])
                 }
             });
         }
+        $scope.obj.sellerEmail = window.localStorage.getItem("username");
         var sendObj = $scope.obj;
         TransactionsAPI.addTransaction( sendObj );
 

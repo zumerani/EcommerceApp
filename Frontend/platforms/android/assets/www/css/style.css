@@ -1,3 +1,14 @@
+/* INDEX.HTML */
+
+.index_navbar {
+    background: #1376AF !important;
+}
+
+.index_viewTitle {
+    color: white;
+    font-family: 'Open Sans', sans-serif; !important;
+}
+
 /* SIGNIN.HTML */
 
 .signin_logo {
@@ -93,13 +104,13 @@ a {
 /* SIGNUP.HTML */
 
 .signup_ionView {
-    background-color: #006A91;
+    background-color: white;
 }
 
 .signup_title {
     text-align: center;
     font-family: 'Raleway' , sans-serif;
-    color: white;
+    color: #006A91;
     font-size: 20px;
     padding-top: 50px;
     display: block;
@@ -118,7 +129,7 @@ a {
     width: 145px;
     height: 38px;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid #006A91;
     display: inline-block;
     margin-top: 10px;
     margin-left: 15px;
@@ -139,7 +150,7 @@ a {
     width: 92%;
     height: 38px;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid #006A91;
     display: inline-block;
     margin-top: 10px;
     margin-left: 15px;
@@ -160,7 +171,7 @@ a {
     width: 92%;
     height: 38px;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid #006A91;
     display: inline-block;
     margin-top: 10px;
     margin-left: 15px;
@@ -181,7 +192,7 @@ a {
     width: 92%;
     height: 38px;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid #006A91;
     display: inline-block;
     margin-top: 10px;
     margin-left: 15px;
@@ -194,7 +205,7 @@ a {
 .signup_signUpButton {
     width: 180px;
     height: 38px;
-    background-color: #1A8C75;
+    background-color: #006A91;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -384,4 +395,11 @@ a {
 
 .blue {
     background-color: #1376AF;
+}
+
+/* FEED.HTML */
+
+.feed_viewTitle {
+    color: white;
+    font-family: 'Open Sans', sans-serif; !important;
 }

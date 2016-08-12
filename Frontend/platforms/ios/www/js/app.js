@@ -71,7 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
  /*  Set up tabs from here on out. */
 .state('tab', {
     url: '/tab',
-    //abstract: true ,
+    abstract: true ,
     templateUrl: 'templates/tabs.html'
   })
 .state('tab.feed', {

@@ -8,10 +8,34 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'ngCordovaOauth' , 'ui.router' ,
 'ngCordova' , 'firebase'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform , $state , $ionicPopup) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+
+    /* Remember me feature */
+    // document.addEventListener("deviceready", function() {
+    //     if( window.localStorage.getItem("username") !== null ) {
+    //         var myPopUp = $ionicPopup.show( {
+    //             title: 'Welcome back!' ,
+    //             buttons: [ {
+    //                 text: "Let's sell!",
+    //                 type: 'button-positive'
+    //             } ] ,
+    //             onTap: function(e) {
+    //                 e.preventDefault();
+    //                 $state.go('signup');
+    //             }
+    //         });
+    //         $state.go("tab.feed");
+    //     }
+    //     else {
+    //         $state.go("signin");
+    //         alert("who the hell are you??");
+    //     }
+    //     //alert("Hello! " + window.localStorage.getItem("username") );
+    // }, false);
+
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -42,15 +66,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
       templateUrl: 'templates/signup.html' ,
       controller: 'SignUpCtrl'
   })
-  .state('seller' , {
-      url: '/seller' ,
-      templateUrl: 'templates/seller.html' ,
-      controller: 'SellerCtrl'
-  })
 
- /* Set up tabs from here on out. */
+
+ /*  Set up tabs from here on out. */
 .state('tab', {
     url: '/tab',
+    //abstract: true ,
     templateUrl: 'templates/tabs.html'
   })
 .state('tab.feed', {
@@ -62,6 +83,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
       }
     }
  })
+ .state('tab.seller' , {
+     url: '/seller' ,
+     views: {
+         'tab-feed': {
+             templateUrl: 'templates/seller.html' ,
+             controller: 'SellerCtrl'
+         }
+     }
+ })
+
 .state('tab.chats', {
       url: '/chats',
       views: {

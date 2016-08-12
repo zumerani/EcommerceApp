@@ -69,7 +69,7 @@ angular.module('starter.services', [])
                         e.preventDefault();
                     }
                 });
-                $state.go('tab.feed');
+                //$state.go('tab.feed');
                 return res;
             }).error( function error(err) {
                 console.log("Could not grab the user ... " );
@@ -169,7 +169,6 @@ angular.module('starter.services', [])
                     } ] ,
                     onTap: function(e) {
                         e.preventDefault();
-                        $state.go('tab.feed');
                     }
                 });
             }).error( function error(err) {

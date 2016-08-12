@@ -49,7 +49,7 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com"*/
+    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com"
 
     return {
         addUser: function(user) {
@@ -162,18 +162,19 @@ angular.module('starter.services', [])
             }).success( function success(result) {
                 console.log("Success in adding transaction!!");
                 var myPopUp = $ionicPopup.show( {
-                    title: 'Success!!!!' ,
+                    title: 'Successfully posted!',
                     buttons: [ {
-                        text: "Great!",
+                        text: "Ok",
                         type: 'button-positive'
                     } ] ,
                     onTap: function(e) {
                         e.preventDefault();
-                        $state.go('signup');
+                        $state.go('tab.feed');
                     }
                 });
             }).error( function error(err) {
                 console.log("We got an error when adding transaction");
+                alert('We have a problem: ' + error.message)
             });
         }
 

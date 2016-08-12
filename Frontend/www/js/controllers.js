@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
 
 
 })
-.controller('SignUpCtrl' , function( $scope , UserAPI) {
+.controller('SignUpCtrl' , function( $scope , UserAPI , $state) {
 
     $scope.user = {
         first: "" ,
@@ -146,11 +146,11 @@ angular.module('starter.controllers', [])
         $scope.user.school = $scope.user.school.toUpperCase();
         console.log($scope.user);
         UserAPI.addUser($scope.user);
+        $state.go('tab.feed');
     }
 
-
 })
-.controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI) {
+.controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state) {
 
     console.log('In Seller');
 
@@ -353,7 +353,7 @@ angular.module('starter.controllers', [])
         $scope.obj.sellerEmail = window.localStorage.getItem("username");
         var sendObj = $scope.obj;
         TransactionsAPI.addTransaction( sendObj );
-
+        $state.go('tab.feed');
     }
 
 });
