@@ -149,12 +149,6 @@ angular.module('starter.controllers', [])
         $state.go('tab.feed');
     }
 
-    // $scope.done = function() {
-    //     alert('hi');
-    //     $state.go('tab.feed');
-    // }
-
-
 })
 .controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state) {
 

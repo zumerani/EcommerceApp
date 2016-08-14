@@ -128,7 +128,6 @@ angular.module('starter.services', [])
                         } ] ,
                         onTap: function(e) {
                             e.preventDefault();
-                            $state.go('signup');
                         }
                     });
                 }
@@ -141,18 +140,6 @@ angular.module('starter.services', [])
     var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com";
 
     return {
-
-        // addTransaction: function(item) {
-        //     return $http.post({
-        //         method: 'POST' ,
-        //         url: base + '/api/v1/transactions/addTransaction' ,
-        //         data: item
-        //     }).success( function success(result) {
-        //         console.log("Success in adding item!!");
-        //     }).error( function error(error) {
-        //         console.log("Error!!");
-        //     });
-        // }
 
         addTransaction: function(item) {
             return $http({

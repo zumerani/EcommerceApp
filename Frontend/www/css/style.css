@@ -403,3 +403,33 @@ a {
     color: white;
     font-family: 'Open Sans', sans-serif; !important;
 }
+
+.feed_itemCard {
+    border-radius: 10px;
+}
+
+.feed_image {
+    height: 200px;
+}
+
+#feed_itemInfo {
+    margin-left: -67px;
+    display: block;
+    max-width: 100px;
+    margin-top: -10px;
+    color: #5D5D5D;
+}
+
+.feed_itemPrice {
+    float: right;
+    margin-top: -20px;
+    font-size: 14px !important;
+    color: #00557C !important;
+    font-weight: bold !important;
+}
+
+.feed_item {
+    //background-color: blue;
+    min-height: 0px !important;
+    height: 5px !important;
+}
