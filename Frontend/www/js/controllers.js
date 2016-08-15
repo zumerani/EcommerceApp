@@ -17,6 +17,45 @@ angular.module('starter.controllers', [])
 
     //console.log('imageHolder is: ' + $scope.imageHolder.name );
 
+    $scope.number = 9.00;
+
+    function randomHeight(min , max){
+           var height = Math.floor((Math.random()*(max-min))+min);
+           return height;
+    };
+
+    // $scope.item_card = function() {
+    //     //borderRadius: '10px' ,
+    //     return {
+    //         height: $scope.randomHeight(190 , 280) + 'px !important'
+    //     };
+    //
+    // }
+
+    $scope.lists = [
+        {
+            name: "Larry's Jersey" ,
+            price: '9.00'
+        } ,
+        {
+            name: "Robert's Jersey" ,
+            price: '5.00'
+        } ,
+        {
+            name: "Jerry's Jersey" ,
+            price: '14.00'
+        } ,
+        {
+            name: "Ben's Jersey" ,
+            price: '10.00'
+        } ,
+        {
+            name: "Kyle's Jersey" ,
+            price: '11.00'
+        }
+
+    ];
+
 }])
 
 .controller('ChatsCtrl', function($scope, Chats) {

@@ -10,33 +10,43 @@
         <div class="row">
 
             <div class="col col-50">
-                <div class="list card feed_itemCard">
+                <ul>
+                    <li ng-repeat="list in lists">
 
-                    <div class="item item-image">
-                        <img class="feed_image" src="img/jersey.jpg">
-                    </div>
+                        <div class="list card feed_itemCard">
 
-                    <div class="item item-avatar feed_item">
-                        <h2 id="feed_itemInfo">Mike's Jersey</h2>
-                        <p class="feed_itemPrice">9.00</p>
-                    </div>
+                            <div class="item item-image">
+                                <img class="feed_image" src="img/jersey.jpg">
+                            </div>
 
-                </div>
+                            <div class="item item-avatar feed_item">
+                                <h2 id="feed_itemInfo">{{list.name}}</h2>
+                                <p class="feed_itemPrice">{{list.price | currency}}</p>
+                            </div>
+
+                        </div>
+
+                    </li>
+                </ul>
             </div>
 
-            <div class="col col-50">
-                <div class="list card feed_itemCard">
+            <div id="feed_secondColumn" class="col col-50">
+                <ul>
+                    <li ng-repeat="list in lists">
+                        <div class="list card feed_itemCard">
 
-                    <div class="item item-image">
-                        <img class="feed_image" src="img/jersey.jpg">
-                    </div>
+                            <div class="item item-image">
+                                <img class="feed_image" src="img/jersey.jpg">
+                            </div>
 
-                    <div class="item item-avatar feed_item">
-                        <h2 id="feed_itemInfo">Larry's Jersey</h2>
-                        <p class="feed_itemPrice">9.00</p>
-                    </div>
+                            <div class="item item-avatar feed_item">
+                                <h2 id="feed_itemInfo">{{list.name}}</h2>
+                                <p class="feed_itemPrice">{{list.price | currency}}</p>
+                            </div>
 
-                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
         </div>

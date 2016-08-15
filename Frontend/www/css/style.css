@@ -406,6 +406,7 @@ a {
 
 .feed_itemCard {
     border-radius: 10px;
+    margin-top: -10px;
 }
 
 .feed_image {
@@ -430,6 +431,17 @@ a {
 
 .feed_item {
     //background-color: blue;
-    min-height: 0px !important;
+    min-height: 5px !important;
     height: 5px !important;
+}
+
+#feed_secondColumn {
+    margin-top: 50px;
+}
+
+/* ignore */
+.test {
+    width: 100px;
+    background-color: red;
+    margin: 10px;
 }
