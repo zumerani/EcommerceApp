@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'ngCordovaOauth' , 'ui.router' ,
-'ngCordova' , 'firebase'])
+'ngCordova' , 'firebase' , 'ion-floating-menu'])
 
 .run(function($ionicPlatform , $state , $ionicPopup) {
   $ionicPlatform.ready(function() {
