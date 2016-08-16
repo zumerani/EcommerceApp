@@ -402,11 +402,14 @@ a {
 .feed_viewTitle {
     color: white;
     font-family: 'Open Sans', sans-serif; !important;
+    text-align: center;
 }
 
 .feed_itemCard {
-    border-radius: 10px;
-    margin-top: -10px;
+    border-radius: 5px;
+    width: 96%;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .feed_image {

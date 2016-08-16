@@ -1,7 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' ,  function($scope , $cordovaOauth , $location , $http , $window ,
-    UserAPI) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$cordovaCamera' , '$firebaseArray' ,
+'TransactionsAPI' ,  function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -15,7 +16,110 @@ angular.module('starter.controllers', [])
     //
     // };
 
-    //console.log('imageHolder is: ' + $scope.imageHolder.name );
+    $scope.obj = {
+        itemName: '' ,
+        sellerName: '' ,
+        sellerEmail: '' ,
+        description: '' ,
+        price: '' ,
+        category: '' ,
+        lookUpID: ''
+    };
+
+    $scope.obj.sellerEmail = window.localStorage.getItem("username");
+
+    $scope.lists = [
+        {
+            name: "Larry's Jersey" ,
+            price: '9.00'
+        } ,
+        {
+            name: "Robert's Jersey" ,
+            price: '5.00'
+        } ,
+        {
+            name: "Jerry's Jersey" ,
+            price: '14.00'
+        } ,
+        {
+            name: "Ben's Jersey" ,
+            price: '10.00'
+        } ,
+        {
+            name: "Kyle's Jersey" ,
+            price: '11.00'
+        }
+
+    ];
+
+    $scope.display = function() {
+        swal.withForm({
+            title: 'Fill out the fields.',
+            text: 'We recommend taking a horizontal photo.',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Post!',
+            closeOnConfirm: true,
+            formFields: [
+
+              { id: 'itemName', placeholder: 'Item name' },
+              { id: 'description', placeholder: 'Short description' },
+              { id: 'price', placeholder: 'Price ($)' }
+
+            ]
+        }, function (isConfirm) {
+            // do whatever you want with the form data
+            if( this.swalForm.itemName) {
+                $scope.obj.itemName = this.swalForm.itemName;
+                $scope.obj.price = this.swalForm.price;
+                $scope.obj.description = this.swalForm.description;
+                var options = {
+                  quality: 100,
+                  destinationType: Camera.DestinationType.DATA_URL,
+                  sourceType: Camera.PictureSourceType.CAMERA,
+                  allowEdit: true,
+                  encodingType: Camera.EncodingType.PNG,
+                  targetWidth: 65,
+                  targetHeight: 65,
+                  popoverOptions: CameraPopoverOptions,
+                  saveToPhotoAlbum: false,
+                  correctOrientation:true
+                };
+                //success function
+                $cordovaCamera.getPicture(options).then(function(imageData) {
+
+                    var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+
+                    $scope.items = $firebaseArray(itemsRef);
+                    /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
+                    $scope.items.$add({
+                        data: imageData
+                    }).then( function(ref) {
+                        var id = "";
+                        id = ref.key();
+                        $scope.obj.lookUpID = id;
+                        //$scope.obj.lookUpID = ref.key();
+                        //alert('id is + ' + id );
+                        var sendObj = $scope.obj;
+                        TransactionsAPI.addTransaction( sendObj );
+
+                        var list = $firebaseArray(itemsRef);
+                        list.$loaded().then( function( arr) {
+                            // alert('hold is:  ' + $scope.hold );
+                            //$scope.hold = arr.$getRecord($scope.id).data;
+                            // alert('hold is:  ' + $scope.hold );
+                        });
+                    });
+                //failure function
+                }, function(err) {
+                    alert("We have an error: " + error );
+                });
+            }
+
+            console.log('Item name is: ' + this.swalForm.itemName) // { name: 'user name', nickname: 'what the user sends' }
+        })
+
+    }
 
 }])
 

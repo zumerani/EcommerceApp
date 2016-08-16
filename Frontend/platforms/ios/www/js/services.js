@@ -59,16 +59,7 @@ angular.module('starter.services', [])
                 data: user
             }).success( function success(res) {
                 console.log("User Added and sent to server!");
-                var myPopUp = $ionicPopup.show( {
-                    title: 'Welcome to Drop!' ,
-                    buttons: [ {
-                        text: "Let's begin" ,
-                        type: 'button-positive'
-                    } ] ,
-                    onTap: function(e) {
-                        e.preventDefault();
-                    }
-                });
+                swal("Welcome to Drop!", "Enjoy!" ,  "success");
                 //$state.go('tab.feed');
                 return res;
             }).error( function error(err) {
@@ -148,16 +139,17 @@ angular.module('starter.services', [])
                 data: item
             }).success( function success(result) {
                 console.log("Success in adding transaction!!");
-                var myPopUp = $ionicPopup.show( {
-                    title: 'Successfully posted!',
-                    buttons: [ {
-                        text: "Ok",
-                        type: 'button-positive'
-                    } ] ,
-                    onTap: function(e) {
-                        e.preventDefault();
-                    }
-                });
+                // var myPopUp = $ionicPopup.show( {
+                //     title: 'Successfully posted!',
+                //     buttons: [ {
+                //         text: "Ok",
+                //         type: 'button-positive'
+                //     } ] ,
+                //     onTap: function(e) {
+                //         e.preventDefault();
+                //     }
+                // });
+                swal("Uploaded!", "Item has been sent to the feed." , "success");
             }).error( function error(err) {
                 console.log("We got an error when adding transaction");
                 alert('We have a problem: ' + error.message)

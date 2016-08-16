@@ -1,7 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' ,  function($scope , $cordovaOauth , $location , $http , $window ,
-    UserAPI) {
+.controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$cordovaCamera' , '$firebaseArray' ,
+'TransactionsAPI' ,  function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -15,22 +16,17 @@ angular.module('starter.controllers', [])
     //
     // };
 
-    //console.log('imageHolder is: ' + $scope.imageHolder.name );
-
-    $scope.number = 9.00;
-
-    function randomHeight(min , max){
-           var height = Math.floor((Math.random()*(max-min))+min);
-           return height;
+    $scope.obj = {
+        itemName: '' ,
+        sellerName: '' ,
+        sellerEmail: '' ,
+        description: '' ,
+        price: '' ,
+        category: '' ,
+        lookUpID: ''
     };
 
-    // $scope.item_card = function() {
-    //     //borderRadius: '10px' ,
-    //     return {
-    //         height: $scope.randomHeight(190 , 280) + 'px !important'
-    //     };
-    //
-    // }
+    $scope.obj.sellerEmail = window.localStorage.getItem("username");
 
     $scope.lists = [
         {
@@ -58,25 +54,73 @@ angular.module('starter.controllers', [])
 
     $scope.display = function() {
         swal.withForm({
-    title: 'Fill out the fields.',
-    text: 'We recommend taking a horizontal photo.',
-    showCancelButton: true,
-    confirmButtonColor: '#DD6B55',
-    confirmButtonText: 'Post!',
-    closeOnConfirm: true,
-    formFields: [
-      { id: 'itemName', placeholder: 'Item name' },
-      { id: 'description', placeholder: 'Short description' },
-    //   { id: 'password', type: 'password' } ,
-    //   { id: 'name', placeholder: 'Name Field' },
-    //   { id: 'nickname', placeholder: 'Add a cool nickname' },
-    //   { id: 'password', type: 'password' }
-    ]
-  }, function (isConfirm) {
-    // do whatever you want with the form data
-    console.log('items: ' + $scope.items );
-    console.log('Item name is: ' + this.swalForm.itemName) // { name: 'user name', nickname: 'what the user sends' }
-  })
+            title: 'Fill out the fields.',
+            text: 'We recommend taking a horizontal photo.',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Post!',
+            closeOnConfirm: true,
+            formFields: [
+
+              { id: 'itemName', placeholder: 'Item name' },
+              { id: 'description', placeholder: 'Short description' },
+              { id: 'price', placeholder: 'Price ($)' }
+
+            ]
+        }, function (isConfirm) {
+            // do whatever you want with the form data
+            if( this.swalForm.itemName) {
+                $scope.obj.itemName = this.swalForm.itemName;
+                $scope.obj.price = this.swalForm.price;
+                $scope.obj.description = this.swalForm.description;
+                var options = {
+                  quality: 100,
+                  destinationType: Camera.DestinationType.DATA_URL,
+                  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                  allowEdit: true,
+                  encodingType: Camera.EncodingType.PNG,
+                  targetWidth: 65,
+                  targetHeight: 65,
+                  popoverOptions: CameraPopoverOptions,
+                  saveToPhotoAlbum: false,
+                  correctOrientation:true
+                };
+                //success function
+                $cordovaCamera.getPicture(options).then(function(imageData) {
+
+                    var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+
+                    $scope.items = $firebaseArray(itemsRef);
+                    /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
+                    $scope.items.$add({
+                        data: imageData
+                    }).then( function(ref) {
+                        var id = "";
+                        id = ref.key();
+                        $scope.obj.lookUpID = id;
+                        /* remove this line  -- only included for testing purposes on ionicView*/
+                        // $scope.obj.sellerEmail = 'zumerani@scu.edu';
+                        //$scope.obj.lookUpID = ref.key();
+                        alert('id is + ' + id );
+                        var sendObj = $scope.obj;
+                        TransactionsAPI.addTransaction( sendObj );
+
+                        var list = $firebaseArray(itemsRef);
+                        list.$loaded().then( function( arr) {
+                            // alert('hold is:  ' + $scope.hold );
+                            //$scope.hold = arr.$getRecord($scope.id).data;
+                            // alert('hold is:  ' + $scope.hold );
+                        });
+                    });
+                //failure function
+                }, function(err) {
+                    alert("We have an error: " + error );
+                });
+            }
+
+            console.log('Item name is: ' + this.swalForm.itemName) // { name: 'user name', nickname: 'what the user sends' }
+        })
+
     }
 
 }])
