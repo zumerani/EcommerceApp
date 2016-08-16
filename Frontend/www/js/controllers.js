@@ -56,6 +56,29 @@ angular.module('starter.controllers', [])
 
     ];
 
+    $scope.display = function() {
+        swal.withForm({
+    title: 'Fill out the fields.',
+    text: 'We recommend taking a horizontal photo.',
+    showCancelButton: true,
+    confirmButtonColor: '#DD6B55',
+    confirmButtonText: 'Post!',
+    closeOnConfirm: true,
+    formFields: [
+      { id: 'itemName', placeholder: 'Item name' },
+      { id: 'description', placeholder: 'Short description' },
+    //   { id: 'password', type: 'password' } ,
+    //   { id: 'name', placeholder: 'Name Field' },
+    //   { id: 'nickname', placeholder: 'Add a cool nickname' },
+    //   { id: 'password', type: 'password' }
+    ]
+  }, function (isConfirm) {
+    // do whatever you want with the form data
+    console.log('items: ' + $scope.items );
+    console.log('Item name is: ' + this.swalForm.itemName) // { name: 'user name', nickname: 'what the user sends' }
+  })
+    }
+
 }])
 
 .controller('ChatsCtrl', function($scope, Chats) {
