@@ -55,15 +55,28 @@ exports.addItem = function( req , res ) {
 
     });
 
+};
 
-    // item.save( function(err) {
-    //     if(err) {
-    //         res.status(404).send('error adding');
-    //         console.log(err);
-    //     } else {
-    //         //dbres.password = ""; //look at this line again .... just incase
-    //         res.status(200).send('added!');
-    //         console.log("Item added");
-    //     }
-    // });
+exports.getItems = function( req , res ) {
+    console.log('Someone just pinged me for some items ... ' + req.body.user );
+
+    Model.User.findOne( { email: req.body.user } , function(err , dbres ) {
+        if( !dbres ) {
+            console.log('Cannot find user');
+        } else {
+            console.log('This user goes to: ' + dbres.school );
+            Model.School.findOne( { name: dbres.school } , function( err , dbSchool ) {
+                if( !dbSchool ) {
+                    console.log('Cannot find school.');
+                } else {
+                    console.log('I found it: ' + JSON.stringify(dbSchool.feed));
+                    res.writeHead(200, {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    });
+                    res.end(JSON.stringify(dbSchool.feed));
+                }
+            });
+        }
+    });
+
 };

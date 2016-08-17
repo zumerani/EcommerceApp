@@ -22,4 +22,5 @@ exports.userSetup = function userSetup() {
 exports.transactionsSetup = function() {
     console.log("Setting up transactions.");
     _server.post('/api/v1/transactions/addItem' , dataManager.transactions.addItem );
+    _server.post('/api/v1/transactions/getItems' , dataManager.transactions.getItems );
 }

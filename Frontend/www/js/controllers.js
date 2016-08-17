@@ -26,31 +26,16 @@ angular.module('starter.controllers', [])
         lookUpID: ''
     };
 
+    /* The following line is only for emulator */
     $scope.obj.sellerEmail = window.localStorage.getItem("username");
 
-    $scope.lists = [
-        {
-            name: "Larry's Jersey" ,
-            price: '9.00'
-        } ,
-        {
-            name: "Robert's Jersey" ,
-            price: '5.00'
-        } ,
-        {
-            name: "Jerry's Jersey" ,
-            price: '14.00'
-        } ,
-        {
-            name: "Ben's Jersey" ,
-            price: '10.00'
-        } ,
-        {
-            name: "Kyle's Jersey" ,
-            price: '11.00'
-        }
-
-    ];
+    /* We will use 'username' for browser and ionicView testing purposes */
+    var username;
+    var username = { user: 'zumerani@scu.edu' };
+    // TransactionsAPI.getTransactions(username).success( function(res) {
+    //     console.log('I got the feed: ' + JSON.stringify(res) );
+    //     $scope.lists = res;
+    // });
 
     $scope.display = function() {
         swal.withForm({
@@ -120,6 +105,7 @@ angular.module('starter.controllers', [])
 
             console.log('Item name is: ' + this.swalForm.itemName) // { name: 'user name', nickname: 'what the user sends' }
         })
+
 
     }
 

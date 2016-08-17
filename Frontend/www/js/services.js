@@ -154,6 +154,18 @@ angular.module('starter.services', [])
                 console.log("We got an error when adding transaction");
                 alert('We have a problem: ' + error.message)
             });
+        } ,
+
+        getTransactions: function(item) {
+            return $http({
+                method: 'POST' ,
+                url: base + '/api/v1/transactions/getItems' ,
+                data: item
+            }).success( function success(result) {
+                swal("Got it!", "I got it!!" , "success");
+            }).error( function error(err) {
+                swal("I didn't get it :(", "Don't have anything" , "error");
+            });
         }
 
 
