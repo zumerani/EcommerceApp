@@ -162,7 +162,7 @@ angular.module('starter.services', [])
                 url: base + '/api/v1/transactions/getItems' ,
                 data: item
             }).success( function success(result) {
-                swal("Got it!", "I got it!!" , "success");
+                //swal("Got it!", "I got it!!" , "success");
             }).error( function error(err) {
                 swal("I didn't get it :(", "Don't have anything" , "error");
             });

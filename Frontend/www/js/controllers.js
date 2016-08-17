@@ -32,10 +32,35 @@ angular.module('starter.controllers', [])
     /* We will use 'username' for browser and ionicView testing purposes */
     var username;
     var username = { user: 'zumerani@scu.edu' };
-    // TransactionsAPI.getTransactions(username).success( function(res) {
-    //     console.log('I got the feed: ' + JSON.stringify(res) );
-    //     $scope.lists = res;
-    // });
+    var results = [];
+    $scope.lists = [];
+    TransactionsAPI.getTransactions(username).success( function(res) {
+        //console.log('I got the feed: ' + JSON.stringify(res) );
+        results = JSON.stringify(res);
+        console.log('I got the feed: ' + results);
+        var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+        var pictureIDList = $firebaseArray(itemsRef);
+        pictureIDList.$loaded().then( function( arr ) {
+            //console.log('And our picture IDs are ' + JSON.stringify(arr) );
+            // console.log('first id in results: ' + JSON.stringify(res[0]) );
+            // console.log( 'first image data: ' + arr.$getRecord(res[0].lookUpID).data );
+            var finalArray = [];
+            for( var i = 0 ; i < arr.length ; i++ ) {
+                var item = {
+                    itemName: '' ,
+                    price: '' ,
+                    data: ''
+                }
+                item.itemName = res[i].itemName;
+                item.price = res[i].price;
+                item.data = arr.$getRecord(res[i].lookUpID).data;
+                finalArray.push(item);
+            }
+            console.log('final array is: ' + JSON.stringify(finalArray) );
+            $scope.lists = finalArray;
+        });
+
+    });
 
     $scope.display = function() {
         swal.withForm({
@@ -75,9 +100,9 @@ angular.module('starter.controllers', [])
 
                     var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
-                    $scope.items = $firebaseArray(itemsRef);
+                    var items = $firebaseArray(itemsRef);
                     /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
-                    $scope.items.$add({
+                    items.$add({
                         data: imageData
                     }).then( function(ref) {
                         var id = "";
@@ -89,6 +114,7 @@ angular.module('starter.controllers', [])
                         alert('id is + ' + id );
                         var sendObj = $scope.obj;
                         TransactionsAPI.addTransaction( sendObj );
+
 
                         var list = $firebaseArray(itemsRef);
                         list.$loaded().then( function( arr) {
@@ -108,6 +134,40 @@ angular.module('starter.controllers', [])
 
 
     }
+
+    $scope.doRefresh = function() {
+        TransactionsAPI.getTransactions(username).success( function(res) {
+            //console.log('I got the feed: ' + JSON.stringify(res) );
+            results = JSON.stringify(res);
+            console.log('I got the feed: ' + results);
+            var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+            var pictureIDList = $firebaseArray(itemsRef);
+            pictureIDList.$loaded().then( function( arr ) {
+                //console.log('And our picture IDs are ' + JSON.stringify(arr) );
+                // console.log('first id in results: ' + JSON.stringify(res[0]) );
+                // console.log( 'first image data: ' + arr.$getRecord(res[0].lookUpID).data );
+                var finalArray = [];
+                for( var i = 0 ; i < arr.length ; i++ ) {
+                    var item = {
+                        itemName: '' ,
+                        price: '' ,
+                        data: ''
+                    }
+                    item.itemName = res[i].itemName;
+                    item.price = res[i].price;
+                    item.data = arr.$getRecord(res[i].lookUpID).data;
+                    finalArray.push(item);
+                }
+                console.log('final array is: ' + JSON.stringify(finalArray) );
+                $scope.lists = finalArray;
+            });
+
+        })
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  };
 
 }])
 

@@ -3,57 +3,36 @@
     <ion-floating-button ng-click="display()" class="plusButton" click="myEvent()" has-footer="false" button-color="#276FBF" icon="ion-camera" iconColor="#fff">
 
     </ion-floating-button>
-
     <ion-content class="padding">
+
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+      </ion-refresher>
         <!-- <h1>Feed screen lol!</h1>
 
         <a href="#/tab/seller">
             <button>Go to Seller</button>
         </a> -->
 
-        <div class="row">
 
-            <div class="col col-50">
-                <ul>
-                    <li ng-repeat="list in lists">
 
-                        <div class="list card feed_itemCard">
-
-                            <div class="item item-image">
-                                <img class="feed_image" src="img/jersey.jpg">
-                            </div>
-
-                            <div class="item item-avatar feed_item">
-                                <h2 id="feed_itemInfo">{{list.name}}</h2>
-                                <p class="feed_itemPrice">{{list.price | currency}}</p>
-                            </div>
-
-                        </div>
-
-                    </li>
-                </ul>
-            </div>
-
-            <div id="feed_secondColumn" class="col col-50">
                 <ul>
                     <li ng-repeat="list in lists">
                         <div class="list card feed_itemCard">
 
                             <div class="item item-image">
-                                <img class="feed_image" src="img/jersey.jpg">
+                                <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
                             </div>
 
                             <div class="item item-avatar feed_item">
-                                <h2 id="feed_itemInfo">{{list.name}}</h2>
+                                <h2 id="feed_itemInfo">{{list.itemName}}</h2>
                                 <p class="feed_itemPrice">{{list.price | currency}}</p>
                             </div>
 
                         </div>
                     </li>
                 </ul>
-            </div>
-
-        </div>
 
     </ion-content>
 </ion-view>

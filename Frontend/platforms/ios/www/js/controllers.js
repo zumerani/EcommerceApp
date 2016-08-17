@@ -26,31 +26,41 @@ angular.module('starter.controllers', [])
         lookUpID: ''
     };
 
+    /* The following line is only for emulator */
     $scope.obj.sellerEmail = window.localStorage.getItem("username");
 
-    $scope.lists = [
-        {
-            name: "Larry's Jersey" ,
-            price: '9.00'
-        } ,
-        {
-            name: "Robert's Jersey" ,
-            price: '5.00'
-        } ,
-        {
-            name: "Jerry's Jersey" ,
-            price: '14.00'
-        } ,
-        {
-            name: "Ben's Jersey" ,
-            price: '10.00'
-        } ,
-        {
-            name: "Kyle's Jersey" ,
-            price: '11.00'
-        }
+    /* We will use 'username' for browser and ionicView testing purposes */
+    var username;
+    var username = { user: 'zumerani@scu.edu' };
+    var results = [];
+    $scope.lists = [];
+    TransactionsAPI.getTransactions(username).success( function(res) {
+        //console.log('I got the feed: ' + JSON.stringify(res) );
+        results = JSON.stringify(res);
+        console.log('I got the feed: ' + results);
+        var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+        var pictureIDList = $firebaseArray(itemsRef);
+        pictureIDList.$loaded().then( function( arr ) {
+            //console.log('And our picture IDs are ' + JSON.stringify(arr) );
+            // console.log('first id in results: ' + JSON.stringify(res[0]) );
+            // console.log( 'first image data: ' + arr.$getRecord(res[0].lookUpID).data );
+            var finalArray = [];
+            for( var i = 0 ; i < arr.length ; i++ ) {
+                var item = {
+                    itemName: '' ,
+                    price: '' ,
+                    data: ''
+                }
+                item.itemName = res[i].itemName;
+                item.price = res[i].price;
+                item.data = arr.$getRecord(res[i].lookUpID).data;
+                finalArray.push(item);
+            }
+            console.log('final array is: ' + JSON.stringify(finalArray) );
+            $scope.lists = finalArray;
+        });
 
-    ];
+    });
 
     $scope.display = function() {
         swal.withForm({
@@ -76,7 +86,7 @@ angular.module('starter.controllers', [])
                 var options = {
                   quality: 100,
                   destinationType: Camera.DestinationType.DATA_URL,
-                  sourceType: Camera.PictureSourceType.CAMERA,
+                  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                   allowEdit: true,
                   encodingType: Camera.EncodingType.PNG,
                   targetWidth: 65,
@@ -90,18 +100,21 @@ angular.module('starter.controllers', [])
 
                     var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
 
-                    $scope.items = $firebaseArray(itemsRef);
+                    var items = $firebaseArray(itemsRef);
                     /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
-                    $scope.items.$add({
+                    items.$add({
                         data: imageData
                     }).then( function(ref) {
                         var id = "";
                         id = ref.key();
                         $scope.obj.lookUpID = id;
+                        /* remove this line  -- only included for testing purposes on ionicView*/
+                        // $scope.obj.sellerEmail = 'zumerani@scu.edu';
                         //$scope.obj.lookUpID = ref.key();
-                        //alert('id is + ' + id );
+                        alert('id is + ' + id );
                         var sendObj = $scope.obj;
                         TransactionsAPI.addTransaction( sendObj );
+
 
                         var list = $firebaseArray(itemsRef);
                         list.$loaded().then( function( arr) {
@@ -119,7 +132,42 @@ angular.module('starter.controllers', [])
             console.log('Item name is: ' + this.swalForm.itemName) // { name: 'user name', nickname: 'what the user sends' }
         })
 
+
     }
+
+    $scope.doRefresh = function() {
+        TransactionsAPI.getTransactions(username).success( function(res) {
+            //console.log('I got the feed: ' + JSON.stringify(res) );
+            results = JSON.stringify(res);
+            console.log('I got the feed: ' + results);
+            var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+            var pictureIDList = $firebaseArray(itemsRef);
+            pictureIDList.$loaded().then( function( arr ) {
+                //console.log('And our picture IDs are ' + JSON.stringify(arr) );
+                // console.log('first id in results: ' + JSON.stringify(res[0]) );
+                // console.log( 'first image data: ' + arr.$getRecord(res[0].lookUpID).data );
+                var finalArray = [];
+                for( var i = 0 ; i < arr.length ; i++ ) {
+                    var item = {
+                        itemName: '' ,
+                        price: '' ,
+                        data: ''
+                    }
+                    item.itemName = res[i].itemName;
+                    item.price = res[i].price;
+                    item.data = arr.$getRecord(res[i].lookUpID).data;
+                    finalArray.push(item);
+                }
+                console.log('final array is: ' + JSON.stringify(finalArray) );
+                $scope.lists = finalArray;
+            });
+
+        })
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  };
 
 }])
 

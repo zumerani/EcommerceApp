@@ -3,8 +3,12 @@
     <ion-floating-button ng-click="display()" class="plusButton" click="myEvent()" has-footer="false" button-color="#276FBF" icon="ion-camera" iconColor="#fff">
 
     </ion-floating-button>
-
     <ion-content class="padding">
+
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+      </ion-refresher>
         <!-- <h1>Feed screen lol!</h1>
 
         <a href="#/tab/seller">
@@ -18,7 +22,7 @@
                         <div class="list card feed_itemCard">
 
                             <div class="item item-image">
-                                <img class="feed_image" src="img/test_image_one.jpg">
+                                <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
                             </div>
 
                             <div class="item item-avatar feed_item">
