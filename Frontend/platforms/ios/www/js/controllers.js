@@ -31,9 +31,10 @@ angular.module('starter.controllers', [])
 
     /* We will use 'username' for browser and ionicView testing purposes */
     var username;
-    var username = { user: 'zumerani@scu.edu' };
+    var username = { user: window.localStorage.getItem("username") };
     var results = [];
     $scope.lists = [];
+    /* replace window.localStorage ... with username.user when browser/ionicView testing */
     TransactionsAPI.getTransactions(username).success( function(res) {
         //console.log('I got the feed: ' + JSON.stringify(res) );
         results = JSON.stringify(res);
@@ -54,7 +55,7 @@ angular.module('starter.controllers', [])
                 item.itemName = res[i].itemName;
                 item.price = res[i].price;
                 item.data = arr.$getRecord(res[i].lookUpID).data;
-                finalArray.push(item);
+                finalArray.unshift(item);
             }
             console.log('final array is: ' + JSON.stringify(finalArray) );
             $scope.lists = finalArray;
@@ -137,7 +138,6 @@ angular.module('starter.controllers', [])
 
     $scope.doRefresh = function() {
         TransactionsAPI.getTransactions(username).success( function(res) {
-            //console.log('I got the feed: ' + JSON.stringify(res) );
             results = JSON.stringify(res);
             console.log('I got the feed: ' + results);
             var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
@@ -156,7 +156,7 @@ angular.module('starter.controllers', [])
                     item.itemName = res[i].itemName;
                     item.price = res[i].price;
                     item.data = arr.$getRecord(res[i].lookUpID).data;
-                    finalArray.push(item);
+                    finalArray.unshift(item);
                 }
                 console.log('final array is: ' + JSON.stringify(finalArray) );
                 $scope.lists = finalArray;

@@ -9,21 +9,34 @@
             pulling-text="Pull to refresh..."
             on-refresh="doRefresh()">
       </ion-refresher>
+        <!-- <h1>Feed screen lol!</h1>
+
+        <a href="#/tab/seller">
+            <button>Go to Seller</button>
+        </a> -->
+
+
 
                 <ul>
                     <li ng-repeat="list in lists">
-                        <div class="list card feed_itemCard">
 
-                            <div class="item item-image">
-                                <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
+                        <a href="#/tab/seller">
+
+                            <div class="list card feed_itemCard">
+
+                                <div class="item item-image">
+                                    <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
+                                </div>
+
+                                <div class="item item-avatar feed_item">
+                                    <h2 id="feed_itemInfo">{{list.itemName}}</h2>
+                                    <p class="feed_itemPrice">{{list.price | currency}}</p>
+                                </div>
+
                             </div>
 
-                            <div class="item item-avatar feed_item">
-                                <h2 id="feed_itemInfo">{{list.itemName}}</h2>
-                                <p class="feed_itemPrice">{{list.price | currency}}</p>
-                            </div>
+                        </a>
 
-                        </div>
                     </li>
                 </ul>
 
