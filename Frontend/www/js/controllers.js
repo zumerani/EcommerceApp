@@ -34,7 +34,8 @@ angular.module('starter.controllers', [])
     var username = { user: 'zumerani@scu.edu' };
     var results = [];
     $scope.lists = [];
-    TransactionsAPI.getTransactions(username).success( function(res) {
+    /* replace window.localStorage ... with username.user when browser/ionicView testing */
+    TransactionsAPI.getTransactions(window.localStorage.getItem("username")).success( function(res) {
         //console.log('I got the feed: ' + JSON.stringify(res) );
         results = JSON.stringify(res);
         console.log('I got the feed: ' + results);
@@ -137,7 +138,6 @@ angular.module('starter.controllers', [])
 
     $scope.doRefresh = function() {
         TransactionsAPI.getTransactions(username).success( function(res) {
-            //console.log('I got the feed: ' + JSON.stringify(res) );
             results = JSON.stringify(res);
             console.log('I got the feed: ' + results);
             var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
