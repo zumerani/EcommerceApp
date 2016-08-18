@@ -417,9 +417,9 @@ a {
 }
 
 #feed_itemInfo {
-    margin-left: -67px;
+    margin-left: -220px;
     display: block;
-    max-width: 100px;
+    //max-width: 100px;
     margin-top: -10px;
     color: #5D5D5D;
 }

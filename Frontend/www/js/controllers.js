@@ -1,8 +1,8 @@
 angular.module('starter.controllers', [])
 
 .controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$cordovaCamera' , '$firebaseArray' ,
-'TransactionsAPI' ,  function($scope , $cordovaOauth , $location , $http , $window ,
-    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI) {
+'TransactionsAPI' , 'Sender' ,  function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI , Sender) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -15,6 +15,10 @@ angular.module('starter.controllers', [])
     //     $location.url('/profile');
     //
     // };
+
+    $scope.printMe = function(item) {
+        Sender.sendOver(item);
+    }
 
     $scope.obj = {
         itemName: '' ,
@@ -31,14 +35,13 @@ angular.module('starter.controllers', [])
 
     /* We will use 'username' for browser and ionicView testing purposes */
     var username;
-    var username = { user: window.localStorage.getItem("username") };
+    var username = { user: 'zumerani@scu.edu' };
     var results = [];
     $scope.lists = [];
     /* replace window.localStorage ... with username.user when browser/ionicView testing */
     TransactionsAPI.getTransactions(username).success( function(res) {
         //console.log('I got the feed: ' + JSON.stringify(res) );
         results = JSON.stringify(res);
-        console.log('I got the feed: ' + results);
         var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
         var pictureIDList = $firebaseArray(itemsRef);
         pictureIDList.$loaded().then( function( arr ) {
@@ -48,16 +51,17 @@ angular.module('starter.controllers', [])
             var finalArray = [];
             for( var i = 0 ; i < arr.length ; i++ ) {
                 var item = {
+                    sellerEmail: '' ,
                     itemName: '' ,
                     price: '' ,
                     data: ''
                 }
+                item.sellerEmail = res[i].sellerEmail;
                 item.itemName = res[i].itemName;
                 item.price = res[i].price;
                 item.data = arr.$getRecord(res[i].lookUpID).data;
                 finalArray.unshift(item);
             }
-            console.log('final array is: ' + JSON.stringify(finalArray) );
             $scope.lists = finalArray;
         });
 
@@ -302,210 +306,216 @@ angular.module('starter.controllers', [])
     }
 
 })
-.controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state) {
+.controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state , Sender) {
+
+    // console.log('In Seller');
+    //
+    // $scope.categoryOne = [ {id:'1' , name:'Sports' , selected:'false'} , {id:'2' , name:'Electronics' , selected:'false'} , { id: '3' , name:'Movies' , selected:'false'} ,
+    // { id:'4' , name:'Music' , selected:'false'} , { id: '5' , name:'Leisure' , selected:'false'} ];
+    //
+    // $scope.categoryTwo = [ 'Textbooks' , 'Fashion' , 'Clothes' , 'Other'];
+    //
+    // $scope.obj = {
+    //     itemName: '' ,
+    //     sellerName: '' ,
+    //     sellerEmail: '' ,
+    //     description: '' ,
+    //     price: '' ,
+    //     category: '' ,
+    //     lookUpID: ''
+    // };
+    //
+    // $scope.selectCategoryOne = function(selectedItem) {
+    //     $scope.obj.category = selectedItem.name;
+    //     for(var i = 0; i < $scope.categoryOne.length; i++) {
+    //         var item = $scope.categoryOne[i];
+    //         if(item.id == selectedItem.id){
+    //             item.selected = !item.selected;
+    //         }else {
+    //             item.selected = true;
+    //         }
+    //     }
+    // }
+    //
+    // $scope.selectCategoryTwo = function(selectedItem) {
+    //     console.log('You just chose: ' + selectedItem );
+    // }
+    //
+    // /* Function to load from device */
+    // $scope.uploadFromDevice = function() {
+    //
+    //     var options = {
+    //       quality: 100,
+    //       destinationType: Camera.DestinationType.DATA_URL,
+    //       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+    //       allowEdit: true,
+    //       encodingType: Camera.EncodingType.PNG,
+    //       targetWidth: 65,
+    //       targetHeight: 65,
+    //       popoverOptions: CameraPopoverOptions,
+    //       saveToPhotoAlbum: false,
+    // 	  correctOrientation:true
+    //     };
+    //     //success function
+    //     $cordovaCamera.getPicture(options).then(function(imageData) {
+    //
+    //         $ionicLoading.show({
+    //           template: 'Uploading...',
+    //           duration: 1000
+    //         });
+    //
+    //         var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+    //
+    //         $scope.items = $firebaseArray(itemsRef);
+    //         /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
+    //         $scope.items.$add({
+    //             data: imageData
+    //         }).then( function(ref) {
+    //             var id = "";
+    //
+    //             id = ref.key();
+    //             $scope.obj.lookUpID = ref.key();
+    //             var list = $firebaseArray(itemsRef);
+    //             list.$loaded().then( function( arr) {
+    //                 // alert('hold is:  ' + $scope.hold );
+    //                 //$scope.hold = arr.$getRecord($scope.id).data;
+    //                 // alert('hold is:  ' + $scope.hold );
+    //             });
+    //         });
+    //     //failure function
+    //     }, function(err) {
+    //         alert("We have an error: " + error );
+    //     });
+    //
+    // };
+    //
+    // $scope.takeAPicture = function() {
+    //
+    //     var options = {
+    //       quality: 100,
+    //       destinationType: Camera.DestinationType.DATA_URL,
+    //       sourceType: Camera.PictureSourceType.CAMERA,
+    //       allowEdit: true,
+    //       encodingType: Camera.EncodingType.PNG,
+    //       targetWidth: 65,
+    //       targetHeight: 65,
+    //       popoverOptions: CameraPopoverOptions,
+    //       saveToPhotoAlbum: false,
+    // 	  correctOrientation:true
+    //     };
+    //     //success function
+    //     $cordovaCamera.getPicture(options).then(function(imageData) {
+    //
+    //         $ionicLoading.show({
+    //           template: 'Uploading...',
+    //           duration: 1000
+    //         });
+    //
+    //         var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+    //
+    //         $scope.items = $firebaseArray(itemsRef);
+    //         /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
+    //         $scope.items.$add({
+    //             data: imageData
+    //         }).then( function(ref) {
+    //             var id = "";
+    //
+    //             id = ref.key();
+    //             $scope.obj.lookUpID = ref.key();
+    //             // var list = $firebaseArray(itemsRef);
+    //             // list.$loaded().then( function( arr) {
+    //             //     // alert('hold is:  ' + $scope.hold );
+    //             //     $scope.hold = arr.$getRecord($scope.id).data;
+    //             //     // alert('hold is:  ' + $scope.hold );
+    //             // });
+    //         });
+    //     //failure function
+    //     }, function(err) {
+    //         alert("We have an error: " + error );
+    //     });
+    //
+    // };
+    //
+    // /* Function to ensure and post data to server */
+    // $scope.post = function() {
+    //     console.log('someone clicked me ... ' );
+    //     //$scope.obj.itemName;
+    //     //ensure all fields in 'obj' are filled
+    //     if( $scope.obj.itemName == '' ) {
+    //         var myPopUp = $ionicPopup.show( {
+    //             title: 'Item name is blank' ,
+    //             buttons: [ {
+    //                 text: "Ok",
+    //                 type: 'button-positive'
+    //             } ] ,
+    //             onTap: function(e) {
+    //                 e.preventDefault();
+    //                 $state.go('signup');
+    //             }
+    //         });
+    //     }
+    //     if( $scope.obj.description == '' ) {
+    //         var myPopUp = $ionicPopup.show( {
+    //             title: 'Description is blank' ,
+    //             buttons: [ {
+    //                 text: "Ok",
+    //                 type: 'button-positive'
+    //             } ] ,
+    //             onTap: function(e) {
+    //                 e.preventDefault();
+    //                 $state.go('signup');
+    //             }
+    //         });
+    //     }
+    //     if( $scope.obj.price == '' ) {
+    //         var myPopUp = $ionicPopup.show( {
+    //             title: "You haven't set a price" ,
+    //             buttons: [ {
+    //                 text: "Ok",
+    //                 type: 'button-positive'
+    //             } ] ,
+    //             onTap: function(e) {
+    //                 e.preventDefault();
+    //                 $state.go('signup');
+    //             }
+    //         });
+    //     }
+    //     if( $scope.obj.category == '' ) {
+    //         var myPopUp = $ionicPopup.show( {
+    //             title: "You haven't selected a category" ,
+    //             buttons: [ {
+    //                 text: "Ok",
+    //                 type: 'button-positive'
+    //             } ] ,
+    //             onTap: function(e) {
+    //                 e.preventDefault();
+    //                 $state.go('signup');
+    //             }
+    //         });
+    //     }
+    //     if( $scope.obj.lookUpID == '' ) {
+    //         var myPopUp = $ionicPopup.show( {
+    //             title: "Taking a picture will help you sell more!" ,
+    //             buttons: [ {
+    //                 text: "Ok",
+    //                 type: 'button-positive'
+    //             } ] ,
+    //             onTap: function(e) {
+    //                 e.preventDefault();
+    //                 $state.go('signup');
+    //             }
+    //         });
+    //     }
+    //     $scope.obj.sellerEmail = window.localStorage.getItem("username");
+    //     var sendObj = $scope.obj;
+    //     TransactionsAPI.addTransaction( sendObj );
+    //     $state.go('tab.feed');
+    // }
 
     console.log('In Seller');
 
-    $scope.categoryOne = [ {id:'1' , name:'Sports' , selected:'false'} , {id:'2' , name:'Electronics' , selected:'false'} , { id: '3' , name:'Movies' , selected:'false'} ,
-    { id:'4' , name:'Music' , selected:'false'} , { id: '5' , name:'Leisure' , selected:'false'} ];
+    $scope.listItem = Sender.get();
 
-    $scope.categoryTwo = [ 'Textbooks' , 'Fashion' , 'Clothes' , 'Other'];
-
-    $scope.obj = {
-        itemName: '' ,
-        sellerName: '' ,
-        sellerEmail: '' ,
-        description: '' ,
-        price: '' ,
-        category: '' ,
-        lookUpID: ''
-    };
-
-    $scope.selectCategoryOne = function(selectedItem) {
-        $scope.obj.category = selectedItem.name;
-        for(var i = 0; i < $scope.categoryOne.length; i++) {
-            var item = $scope.categoryOne[i];
-            if(item.id == selectedItem.id){
-                item.selected = !item.selected;
-            }else {
-                item.selected = true;
-            }
-        }
-    }
-
-    $scope.selectCategoryTwo = function(selectedItem) {
-        console.log('You just chose: ' + selectedItem );
-    }
-
-    /* Function to load from device */
-    $scope.uploadFromDevice = function() {
-
-        var options = {
-          quality: 100,
-          destinationType: Camera.DestinationType.DATA_URL,
-          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-          allowEdit: true,
-          encodingType: Camera.EncodingType.PNG,
-          targetWidth: 65,
-          targetHeight: 65,
-          popoverOptions: CameraPopoverOptions,
-          saveToPhotoAlbum: false,
-    	  correctOrientation:true
-        };
-        //success function
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-
-            $ionicLoading.show({
-              template: 'Uploading...',
-              duration: 1000
-            });
-
-            var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
-
-            $scope.items = $firebaseArray(itemsRef);
-            /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
-            $scope.items.$add({
-                data: imageData
-            }).then( function(ref) {
-                var id = "";
-
-                id = ref.key();
-                $scope.obj.lookUpID = ref.key();
-                var list = $firebaseArray(itemsRef);
-                list.$loaded().then( function( arr) {
-                    // alert('hold is:  ' + $scope.hold );
-                    //$scope.hold = arr.$getRecord($scope.id).data;
-                    // alert('hold is:  ' + $scope.hold );
-                });
-            });
-        //failure function
-        }, function(err) {
-            alert("We have an error: " + error );
-        });
-
-    };
-
-    $scope.takeAPicture = function() {
-
-        var options = {
-          quality: 100,
-          destinationType: Camera.DestinationType.DATA_URL,
-          sourceType: Camera.PictureSourceType.CAMERA,
-          allowEdit: true,
-          encodingType: Camera.EncodingType.PNG,
-          targetWidth: 65,
-          targetHeight: 65,
-          popoverOptions: CameraPopoverOptions,
-          saveToPhotoAlbum: false,
-    	  correctOrientation:true
-        };
-        //success function
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-
-            $ionicLoading.show({
-              template: 'Uploading...',
-              duration: 1000
-            });
-
-            var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
-
-            $scope.items = $firebaseArray(itemsRef);
-            /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
-            $scope.items.$add({
-                data: imageData
-            }).then( function(ref) {
-                var id = "";
-
-                id = ref.key();
-                $scope.obj.lookUpID = ref.key();
-                // var list = $firebaseArray(itemsRef);
-                // list.$loaded().then( function( arr) {
-                //     // alert('hold is:  ' + $scope.hold );
-                //     $scope.hold = arr.$getRecord($scope.id).data;
-                //     // alert('hold is:  ' + $scope.hold );
-                // });
-            });
-        //failure function
-        }, function(err) {
-            alert("We have an error: " + error );
-        });
-
-    };
-
-    /* Function to ensure and post data to server */
-    $scope.post = function() {
-        console.log('someone clicked me ... ' );
-        //$scope.obj.itemName;
-        //ensure all fields in 'obj' are filled
-        if( $scope.obj.itemName == '' ) {
-            var myPopUp = $ionicPopup.show( {
-                title: 'Item name is blank' ,
-                buttons: [ {
-                    text: "Ok",
-                    type: 'button-positive'
-                } ] ,
-                onTap: function(e) {
-                    e.preventDefault();
-                    $state.go('signup');
-                }
-            });
-        }
-        if( $scope.obj.description == '' ) {
-            var myPopUp = $ionicPopup.show( {
-                title: 'Description is blank' ,
-                buttons: [ {
-                    text: "Ok",
-                    type: 'button-positive'
-                } ] ,
-                onTap: function(e) {
-                    e.preventDefault();
-                    $state.go('signup');
-                }
-            });
-        }
-        if( $scope.obj.price == '' ) {
-            var myPopUp = $ionicPopup.show( {
-                title: "You haven't set a price" ,
-                buttons: [ {
-                    text: "Ok",
-                    type: 'button-positive'
-                } ] ,
-                onTap: function(e) {
-                    e.preventDefault();
-                    $state.go('signup');
-                }
-            });
-        }
-        if( $scope.obj.category == '' ) {
-            var myPopUp = $ionicPopup.show( {
-                title: "You haven't selected a category" ,
-                buttons: [ {
-                    text: "Ok",
-                    type: 'button-positive'
-                } ] ,
-                onTap: function(e) {
-                    e.preventDefault();
-                    $state.go('signup');
-                }
-            });
-        }
-        if( $scope.obj.lookUpID == '' ) {
-            var myPopUp = $ionicPopup.show( {
-                title: "Taking a picture will help you sell more!" ,
-                buttons: [ {
-                    text: "Ok",
-                    type: 'button-positive'
-                } ] ,
-                onTap: function(e) {
-                    e.preventDefault();
-                    $state.go('signup');
-                }
-            });
-        }
-        $scope.obj.sellerEmail = window.localStorage.getItem("username");
-        var sendObj = $scope.obj;
-        TransactionsAPI.addTransaction( sendObj );
-        $state.go('tab.feed');
-    }
+    console.log('We have item: ' + $scope.listItem.itemName );
 
 });

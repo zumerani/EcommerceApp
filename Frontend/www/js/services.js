@@ -128,7 +128,7 @@ angular.module('starter.services', [])
 })
 
 .factory( 'TransactionsAPI' , function( $http , $ionicPopup , $state ) {
-    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com";
+    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com"*/
 
     return {
 
@@ -169,6 +169,21 @@ angular.module('starter.services', [])
         }
 
 
+    }
+
+})
+
+.factory('Sender' , function() {
+
+    var object;
+    return {
+        sendOver: function(item) {
+            object = item;
+        },
+
+        get: function() {
+            return object;
+        }
     }
 
 });
