@@ -1,15 +1,17 @@
-<ion-view class="seller_viewTitle" view-title="{{listItem.itemName}}">
+<ion-view class="seller_viewTitle" view-title="{{item.itemName}}">
 
     <ion-content class="seller_background">
-        <img class="seller_image" src="data:image/jpeg;base64,{{listItem.data}}">
+        <img class="seller_image" src="data:image/jpeg;base64,{{item.data}}">
         <div class="seller_information">
-            <h2 id="seller_itemInformation" class="seller_price">{{listItem.price | currency}}</h2>
-            <h2 id="seller_itemInformation" class="seller_itemTitle">• {{listItem.itemName}}</h2>
-            <h2 class="seller_sellerName">Jim Hightower &#8208; Santa Clara University</h2>
-            <h2 class="seller_description">{{listItem.description}}</h2>
+            <h2 id="seller_itemInformation" class="seller_price">{{item.price | currency}}</h2>
+            <h2 id="seller_itemInformation" class="seller_itemTitle">• {{item.itemName}}</h2>
+            <h2 class="seller_sellerName">{{listItem.first}} {{listItem.last}} &#8208; {{listItem.school}}</h2>
+            <h2 class="seller_description">{{item.description}}</h2>
             <div class="seller_buttonHolder">
-                <button class="seller_chat">Chat with Jim</button>
-                <button class="seller_purchase">Venmo</button>
+                <button class="seller_chat">Chat</button>
+                <button class="seller_purchase">
+                    Venmo
+                </button>
             </div>
             <button class="seller_share"><i class="fa fa-facebook-square"></i>Share your purchase!</button>
         </div>

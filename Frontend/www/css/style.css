@@ -280,13 +280,12 @@ a {
 
 .seller_buttonHolder {
     width: 100%;
-    text-align: center;
 }
 
 .seller_chat {
-    width: 150px;
+    width: 90px;
     height: 34px;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: #2F5A6B;
     color: white;
     font-family: 'Work Sans', sans-serif;
@@ -294,34 +293,37 @@ a {
     margin-left: 20px;
     margin-top: 10px;
     display: inline-block;
-    margin-left: auto;
-    margin-right: 10px;
+}
+
+.seller_purchase img {
+    width: 100px;
+    height: 25px;
+    margin-top: 7px;
 }
 
 .seller_purchase {
     width: 150px;
     height: 34px;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: #3D95CE;
     color: white;
     font-family: 'Work Sans', sans-serif;
     border: none;
-    margin-right: auto;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
     display: inline-block;
 }
 
 .seller_share {
-    margin: auto;
+    margin-left: 20px;
     display: block;
     border: 1px solid #3070AE;
-    width: 180px;
+    width: 190px;
     height: 38px;
-    border-radius: 4px;
+    border-radius: 8px;
     color: white;
     font-family: 'Work Sans', sans-serif;
-    margin-top: 30px;
+    margin-top: 15px;
     background-color: #3b5998;
 }
 

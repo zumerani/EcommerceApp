@@ -125,8 +125,27 @@ exports.loginUser = function( req , res ) {
 
 };
 
-exports.addItem = function( req , res ) {
+exports.getUser = function( req , res ) {
 
-    console.log('someone pinged me');
+    Model.User.findOne( { email: req.body.sellerEmail } , function(err , dbres ) {
+        if( !dbres ) {
+            console.log("Can't find a user.");
+            res.writeHead(400, {
+                    'Content-Type': 'application/json; charset=utf-8'
+            });
+            res.end(JSON.stringify ({
+                    error: "Can't find a user" ,
+                    status: '400'
+            }));
+        } else if( dbres ) {
+            console.log('I found a user: ' + dbres.firstName );
+            res.writeHead(200, {
+                    'Content-Type': 'application/json; charset=utf-8'
+                });
+                // remove passowrd hash before sending to the client
+            res.end(JSON.stringify(dbres));
+        }
+    });
+
 
 };

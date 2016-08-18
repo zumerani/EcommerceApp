@@ -35,7 +35,7 @@ angular.module('starter.controllers', [])
 
     /* We will use 'username' for browser and ionicView testing purposes */
     var username;
-    var username = { user: 'zumerani@scu.edu' };
+    var username = { user: window.localStorage.getItem("username"); };
     var results = [];
     $scope.lists = [];
     /* replace window.localStorage ... with username.user when browser/ionicView testing */
@@ -308,7 +308,8 @@ angular.module('starter.controllers', [])
     }
 
 })
-.controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state , Sender) {
+.controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state , Sender ,
+ UserAPI) {
 
     // console.log('In Seller');
     //
@@ -516,10 +517,16 @@ angular.module('starter.controllers', [])
 
     console.log('In Seller');
 
-    $scope.listItem = Sender.get();
+    $scope.item = Sender.get();
 
-    $scope.test = 'SRK';
+    UserAPI.getUser($scope.item).success(function(res) {
+        console.log('We got: ' + JSON.stringify(res) );
+        var temp = res;
+        temp.school.toLowerCase();
+        console.log(temp.school);
+        $scope.listItem = res;
+    });
 
-    console.log('We have item: ' + JSON.stringify($scope.listItem) );
+    //console.log('We have item: ' + JSON.stringify($scope.listItem) );
 
 });

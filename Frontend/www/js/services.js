@@ -49,7 +49,7 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com"
+    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com";
 
     return {
         addUser: function(user) {
@@ -123,12 +123,23 @@ angular.module('starter.services', [])
                     });
                 }
             });
+        } ,
+        getUser: function(item) {
+            return $http({
+                method: 'POST' ,
+                url: base + '/api/v1/users/getUser' ,
+                data: item
+            }).success( function success(res) {
+                console.log('Name of the person is: ' + res.first );
+            }).error( function error(err) {
+                console.log('We have an error in retrieving the user');
+            });
         }
     }
 })
 
 .factory( 'TransactionsAPI' , function( $http , $ionicPopup , $state ) {
-    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com"*/
+    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com";
 
     return {
 
