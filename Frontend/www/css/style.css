@@ -6,7 +6,7 @@
 
 .index_viewTitle {
     color: white;
-    font-family: 'Open Sans', sans-serif; !important;
+    font-family: 'Varela Round', sans-serif; !important;
 }
 
 /* SIGNIN.HTML */
@@ -227,174 +227,110 @@ a {
 }
 
 .seller_background {
-    background-color: #ECECEC;
-    text-align: center;
-}
-
-.seller_itemHolder {
-    width: 90%;
-    height: 500px;
-    display: block;
     background-color: white;
-    margin: auto;
-    margin-top: 15px;
-    border-radius: 8px;
 }
 
-.seller_itemName {
-    padding-top: 200px;
-    //background-color: red;
+.seller_image {
     width: 100%;
-    display: block;
-    border: 1px solid black;
+    height: 340px;
 }
 
-.seller_block {
+.seller_information {
     width: 100%;
-    height: 40px;
-    //background-color: green;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-    border-bottom: 1px solid #eee;
+    height: 150px;
+    margin-top: 10px;
 }
 
-.seller_block p {
-    color: #A4A4A4;
-    text-align: left;
-    padding-left: 8px;
+.seller_price {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
     padding-top: 10px;
+    margin-left: 20px;
+    color: #1471A8;
+    font-weight: 800;
 }
 
-#seller_descriptionBlock {
-    height: 100px;
-    width: 100%;
-    border-bottom: 1px solid #eee;
-}
-
-#seller_descriptionBlock textarea {
-    height: 100%;
-    width: 100%;
-    padding-left: 8px;
+.seller_itemTitle {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
     padding-top: 10px;
-    font-family: 'Varela Round', sans-serif;
-    color: #767676;
-    resize: none;
-}
-
-#seller_categoryBlock {
-    height: 210px;
-    width: 100%;
-    border-bottom: 1px solid #eee;
-}
-
-.seller_categoryBlockOne {
-    /*background-color: red;*/
-    text-align: center;
-}
-
-.seller_categoryBlockOne ul li {
-    padding: 4px;
-}
-
-.seller_categoryBlockOne ul li a {
-    text-decoration: none;
-    color: white;
-}
-
-.seller_categoryBlockTwo {
-    /*background-color: blue;*/
-    text-align: center;
-}
-
-.seller_categoryBlockTwo ul li {
-    padding: 4px;
-}
-
-.seller_categoryBlockTwo ul li a {
-    text-decoration: none;
-    color: white;
-}
-
-.seller_category {
-    width: 82px;
-    height: 22px;
-    display: block;
-    border-radius: 8px;
-    background-color: #808080;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#seller_cameraBlock {
-    height: 110px;
-    text-align: center;
-}
-
-.seller_block input {
-    height: 100%;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-    width: 100%;
-    padding-left: 10px;
-    font-family: 'Varela Round', sans-serif;
-    color: #767676;
-}
-
-#blockOne {
-    //background-color: #eee;
-    height: 90px;
-    border-radius: 10px;
-}
-
-#blockOne i {
+    margin-left: 20px;
     color: black;
+    font-weight: 800;
+    margin-left: -1px;
 }
 
-#blockOne h3 {
-    font-family: 'Varela Round', sans-serif;
-    color: #767676;
-    font-size: 12px;
-    padding-top: -10px;
-}
-
-#blockTwo {
-    //background-color: #eee;
-    height: 90px;
-    border-radius: 10px;
-}
-
-#blockTwo h3 {
-    font-family: 'Varela Round', sans-serif;
-    color: #767676;
-    font-size: 12px;
-    padding-top: -10px;
-}
-
-#blockTwo i {
+.seller_sellerName {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    padding-top: 3px;
+    margin-left: 20px;
     color: black;
+    font-weight: 800;
 }
 
-.seller_row {
-    width: 90%;
-    //background-color: red;
-    margin-left: auto;
-    margin-right: auto;
+.seller_description {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    padding-top: 3px;
+    margin-left: 20px;
+    color: #6D6D6D;
+    font-weight: 800;
 }
 
-.seller_postButton {
-    width: 230px;
-    height: 40px;
-    background-color: #1376AF;
+.seller_buttonHolder {
+    width: 100%;
+    text-align: center;
+}
+
+.seller_chat {
+    width: 150px;
+    height: 34px;
+    border-radius: 4px;
+    background-color: #2F5A6B;
+    color: white;
+    font-family: 'Work Sans', sans-serif;
     border: none;
-    margin-top: 20px;
-    border-radius: 7px;
-    color: white;
-    font-family: 'Varela Round', sans-serif;
+    margin-left: 20px;
+    margin-top: 10px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 10px;
 }
 
-.blue {
-    background-color: #1376AF;
+.seller_purchase {
+    width: 150px;
+    height: 34px;
+    border-radius: 4px;
+    background-color: #3D95CE;
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+    border: none;
+    margin-right: auto;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.seller_share {
+    margin: auto;
+    display: block;
+    border: 1px solid #3070AE;
+    width: 180px;
+    height: 38px;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+    margin-top: 30px;
+    background-color: #3b5998;
+}
+
+.seller_share i {
+    margin-right: 4px;
+}
+
+#seller_itemInformation {
+    display: inline;
 }
 
 /* FEED.HTML */

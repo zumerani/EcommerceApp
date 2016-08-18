@@ -54,9 +54,11 @@ angular.module('starter.controllers', [])
                     sellerEmail: '' ,
                     itemName: '' ,
                     price: '' ,
+                    description: '' ,
                     data: ''
                 }
                 item.sellerEmail = res[i].sellerEmail;
+                item.description = res[i].description;
                 item.itemName = res[i].itemName;
                 item.price = res[i].price;
                 item.data = arr.$getRecord(res[i].lookUpID).data;
@@ -516,6 +518,8 @@ angular.module('starter.controllers', [])
 
     $scope.listItem = Sender.get();
 
-    console.log('We have item: ' + $scope.listItem.itemName );
+    $scope.test = 'SRK';
+
+    console.log('We have item: ' + JSON.stringify($scope.listItem) );
 
 });
