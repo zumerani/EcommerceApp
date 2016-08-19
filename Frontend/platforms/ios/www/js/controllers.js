@@ -35,7 +35,7 @@ angular.module('starter.controllers', [])
 
     /* We will use 'username' for browser and ionicView testing purposes */
     var username;
-    var username = { user: window.localStorage.getItem("username"); };
+    var username = { user: window.localStorage.getItem("username") || 'zumerani@scu.edu' };
     var results = [];
     $scope.lists = [];
     /* replace window.localStorage ... with username.user when browser/ionicView testing */
@@ -520,11 +520,10 @@ angular.module('starter.controllers', [])
     $scope.item = Sender.get();
 
     UserAPI.getUser($scope.item).success(function(res) {
-        console.log('We got: ' + JSON.stringify(res) );
+        //alert('We got: ' + res.first );
         var temp = res;
-        temp.school.toLowerCase();
         console.log(temp.school);
-        $scope.listItem = res;
+        $scope.listItem = temp;
     });
 
     //console.log('We have item: ' + JSON.stringify($scope.listItem) );

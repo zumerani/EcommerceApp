@@ -3,7 +3,7 @@
     <ion-floating-button ng-click="display()" class="plusButton" click="myEvent()" has-footer="false" button-color="#276FBF" icon="ion-camera" iconColor="#fff">
 
     </ion-floating-button>
-    <ion-content class="padding">
+    <ion-content>
 
         <ion-refresher
             pulling-text="Pull to refresh..."
@@ -17,12 +17,12 @@
 
 
 
-                <ul>
+                <ul >
                     <li ng-repeat="list in lists">
 
                         <a ng-click="printMe(list)" href="#/tab/seller">
 
-                            <div class="list card feed_itemCard">
+                            <!-- <div class="list card feed_itemCard">
 
                                 <div class="item item-image">
                                     <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
@@ -33,6 +33,15 @@
                                     <p class="feed_itemPrice">{{list.price | currency}}</p>
                                 </div>
 
+                            </div> -->
+
+                            <div class="feed_itemTest">
+                                <img src="data:image/jpeg;base64,{{list.data}}">
+                                <div class="feed_itemAndPriceHolder">
+                                    <h2>{{list.itemName}}</h2>
+                                    <h4>{{list.price | currency:undefined:0}}</h4>
+                                    <h3>{{list.description}}</h3>
+                                </div>
                             </div>
 
                         </a>

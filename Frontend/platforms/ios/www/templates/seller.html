@@ -3,8 +3,11 @@
     <ion-content class="seller_background">
         <img class="seller_image" src="data:image/jpeg;base64,{{item.data}}">
         <div class="seller_information">
-            <h2 id="seller_itemInformation" class="seller_price">{{item.price | currency}}</h2>
-            <h2 id="seller_itemInformation" class="seller_itemTitle">• {{item.itemName}}</h2>
+            <!-- <h2 id="seller_itemInformation" class="seller_price">{{item.price | currency}}</h2> -->
+            <div class="seller_priceContainer">
+                <h4>{{item.price | currency:undefined:0 }}</h4>
+            </div>
+            <h2 id="seller_itemInformation" class="seller_itemTitle">{{item.itemName}}</h2>
             <h2 class="seller_sellerName">{{listItem.first}} {{listItem.last}} &#8208; {{listItem.school}}</h2>
             <h2 class="seller_description">{{item.description}}</h2>
             <div class="seller_buttonHolder">
@@ -13,7 +16,6 @@
                     Venmo
                 </button>
             </div>
-            <button class="seller_share"><i class="fa fa-facebook-square"></i>Share your purchase!</button>
         </div>
     </ion-content>
 </ion-view>
