@@ -8,14 +8,14 @@
   display: block;
   margin: 5px;
   width: 96%;
-  font-family: sans-serif;
-  font-size: 18px;
+  font-family: 'Open Sans', sans-serif !important;
+  font-size: 13px;
   box-shadow: none;
   padding: 10px;
   border: solid 1px #dcdcdc;
   transition: box-shadow 0.3s, border 0.3s;
   height: initial;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 .swal-form input.nice-input:focus,
 .swal-form input.nice-input.focus {

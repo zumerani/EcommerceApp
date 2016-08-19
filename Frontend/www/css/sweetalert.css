@@ -25,7 +25,7 @@ body.stop-scrolling {
   text-align: center;
   position: fixed;
   left: 50%;
-  top: 60%;
+  top: 48%;
   margin-left: -256px;
   margin-top: -200px;
   overflow: hidden;
@@ -131,7 +131,8 @@ body.stop-scrolling {
     height: 43px;
     margin-top: 10px;
     margin-bottom: 17px;
-    font-size: 18px;
+    font-family: 'Open Sans', sans-serif !important;
+    font-size: 5px;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.06);
     padding: 0 12px;
     display: none;

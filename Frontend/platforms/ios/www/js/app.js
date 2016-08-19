@@ -16,17 +16,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
     /* Remember me feature */
     document.addEventListener("deviceready", function() {
         if( window.localStorage.getItem("username") !== null ) {
-            var myPopUp = $ionicPopup.show( {
-                title: 'Welcome back!' ,
-                buttons: [ {
-                    text: "Let's sell!",
-                    type: 'button-positive'
-                } ] ,
-                onTap: function(e) {
-                    e.preventDefault();
-                    $state.go('signup');
-                }
-            });
+            swal("Welcome back!");
             $state.go("tab.feed");
         }
         else {

@@ -72,9 +72,9 @@ angular.module('starter.controllers', [])
     $scope.display = function() {
         swal.withForm({
             title: 'Fill out the fields.',
-            text: 'We recommend taking a horizontal photo.',
+            text: "'Post' will allow you to upload a photo. We recommend taking a horizontal photo!",
             showCancelButton: true,
-            confirmButtonColor: '#DD6B55',
+            confirmButtonColor: '#276FBF',
             confirmButtonText: 'Post!',
             closeOnConfirm: true,
             formFields: [
@@ -309,7 +309,7 @@ angular.module('starter.controllers', [])
 
 })
 .controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state , Sender ,
- UserAPI) {
+ UserAPI , $cordovaOauth) {
 
     // console.log('In Seller');
     //
@@ -525,6 +525,14 @@ angular.module('starter.controllers', [])
         console.log(temp.school);
         $scope.listItem = temp;
     });
+
+    $scope.venmoMe = function() {
+        $cordovaOauth.venmo('2899' , ["access_profile" , "access_email"]).then(function(result) {
+            alert( 'Woo Venmo!! ' + JSON.stringify(result) );
+        } , function(error) {
+            alert("Error: --> "  + error );
+        });
+    }
 
     //console.log('We have item: ' + JSON.stringify($scope.listItem) );
 
