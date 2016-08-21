@@ -257,7 +257,7 @@ a {
 }
 
 .seller_priceContainer h4 {
-    font-family: Lato;
+    font-family: 'Lato' , sans-serif;
     color: white;
     vertical-align: middle;
     line-height: 20px;
@@ -429,7 +429,8 @@ a {
     margin-left: 20px;
     color: #484F51;
     margin-top: 5px;
-    font-family: 'Work Sans', sans-serif;
+    /*font-family: 'Work Sans', sans-serif;*/
+    font-family: 'Varela Round', sans-serif;
     display: inline-block;
 }
 
@@ -446,8 +447,8 @@ a {
     float: right;
     margin-top: 6px;
     font-size: 13px;
-    //font-family: 'Lato' , sans-serif;
-    font-family: 'Open Sans', sans-serif;
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: 'Varela Round', sans-serif;
     color: #00557C;
     margin-right: 10px;
     font-weight: bold;

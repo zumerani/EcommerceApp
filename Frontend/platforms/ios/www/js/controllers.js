@@ -309,7 +309,7 @@ angular.module('starter.controllers', [])
 
 })
 .controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state , Sender ,
- UserAPI , $cordovaOauth) {
+ UserAPI , $cordovaOauth , $cordovaInAppBrowser) {
 
     // console.log('In Seller');
     //
@@ -527,11 +527,24 @@ angular.module('starter.controllers', [])
     });
 
     $scope.venmoMe = function() {
-        $cordovaOauth.venmo('2899' , ["access_profile" , "access_email"]).then(function(result) {
-            alert( 'Woo Venmo!! ' + JSON.stringify(result) );
-        } , function(error) {
-            alert("Error: --> "  + error );
-        });
+        // $cordovaOauth.venmo('2899' , ["access_profile" , "access_email"]).then(function(result) {
+        //     alert( 'Woo Venmo!! ' + JSON.stringify(result) );
+        // } , function(error) {
+        //     alert("Error: --> "  + error );
+        // });
+
+        alert('hi');
+
+        $cordovaInAppBrowser.open('https://api.venmo.com/v1/oauth/authorize?client_id=2899&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code', '_blank')
+
+            .then(function(event) {
+         // success
+            })
+
+            .catch(function(event) {
+         // error
+            });
+
     }
 
     //console.log('We have item: ' + JSON.stringify($scope.listItem) );

@@ -309,7 +309,7 @@ angular.module('starter.controllers', [])
 
 })
 .controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state , Sender ,
- UserAPI , $cordovaOauth) {
+ UserAPI , $cordovaOauth ) {
 
     // console.log('In Seller');
     //
@@ -527,11 +527,14 @@ angular.module('starter.controllers', [])
     });
 
     $scope.venmoMe = function() {
-        $cordovaOauth.venmo('2899' , ["access_profile" , "access_email"]).then(function(result) {
-            alert( 'Woo Venmo!! ' + JSON.stringify(result) );
-        } , function(error) {
-            alert("Error: --> "  + error );
-        });
+        // $cordovaOauth.venmo('2899' , ["access_profile" , "access_email"]).then(function(result) {
+        //     alert( 'Woo Venmo!! ' + JSON.stringify(result) );
+        // } , function(error) {
+        //     alert("Error: --> "  + error );
+        // });
+
+        alert('hi');
+
     }
 
     //console.log('We have item: ' + JSON.stringify($scope.listItem) );
