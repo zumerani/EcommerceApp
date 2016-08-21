@@ -31,17 +31,18 @@ angular.module('starter.controllers', [])
     };
 
     /* The following line is only for emulator */
-    $scope.obj.sellerEmail = window.localStorage.getItem("username");
+    $scope.obj.sellerEmail = 'zumerani@scu.edu'; /* window.localStorage.getItem("username"); */
 
     /* We will use 'username' for browser and ionicView testing purposes */
-    var username;
-    var username = { user: window.localStorage.getItem("username") || 'zumerani@scu.edu' };
+    var username = { user: 'zumerani@scu.edu' };
     var results = [];
     $scope.lists = [];
     /* replace window.localStorage ... with username.user when browser/ionicView testing */
     TransactionsAPI.getTransactions(username).success( function(res) {
         //console.log('I got the feed: ' + JSON.stringify(res) );
-        results = JSON.stringify(res);
+        alert('success');
+        results = /*JSON.stringify(res);*/ res;
+        console.log(results);
         var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
         var pictureIDList = $firebaseArray(itemsRef);
         pictureIDList.$loaded().then( function( arr ) {
@@ -57,16 +58,19 @@ angular.module('starter.controllers', [])
                     description: '' ,
                     data: ''
                 }
-                item.sellerEmail = res[i].sellerEmail;
-                item.description = res[i].description;
-                item.itemName = res[i].itemName;
-                item.price = res[i].price;
-                item.data = arr.$getRecord(res[i].lookUpID).data;
+                console.log('results[i] email is: ' + results[i].sellerEmail );
+                item.sellerEmail = results[i].sellerEmail;
+                item.description = results[i].description;
+                item.itemName = results[i].itemName;
+                item.price = results[i].price;
+                item.data = arr.$getRecord(results[i].lookUpID).data;
                 finalArray.unshift(item);
             }
             $scope.lists = finalArray;
         });
 
+    }).error( function(error) {
+        alert('ERRRRORRR');
     });
 
     $scope.display = function() {
@@ -309,7 +313,7 @@ angular.module('starter.controllers', [])
 
 })
 .controller('SellerCtrl' , function( $scope , $cordovaCamera , $ionicLoading , $firebaseArray , $ionicPopup , TransactionsAPI , $state , Sender ,
- UserAPI , $cordovaOauth , $cordovaInAppBrowser) {
+ UserAPI , $cordovaOauth ) {
 
     // console.log('In Seller');
     //
@@ -534,16 +538,6 @@ angular.module('starter.controllers', [])
         // });
 
         alert('hi');
-
-        $cordovaInAppBrowser.open('https://api.venmo.com/v1/oauth/authorize?client_id=2899&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code', '_blank')
-
-            .then(function(event) {
-         // success
-            })
-
-            .catch(function(event) {
-         // error
-            });
 
     }
 

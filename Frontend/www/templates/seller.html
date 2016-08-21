@@ -8,8 +8,8 @@
                 <h4>{{item.price | currency:undefined:0 }}</h4>
             </div>
             <h2 id="seller_itemInformation" class="seller_itemTitle">{{item.itemName}}</h2>
-            <h2 class="seller_sellerName">{{listItem.first}} {{listItem.last}} &#8208; {{listItem.school}}</h2>
             <h2 class="seller_description">{{item.description}}</h2>
+            <h2 class="seller_sellerName">{{listItem.first}} {{listItem.last}} &#8208; {{listItem.school}}</h2>
             <div class="seller_buttonHolder">
                 <button class="seller_chat">Chat</button>
                 <button ng-click="venmoMe()" class="seller_purchase">

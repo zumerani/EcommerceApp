@@ -1,14 +1,14 @@
 /* INDEX.HTML */
 
 .index_navbar {
-    background: #1376AF !important;
+    background: #006C82 !important;
 }
 
 .index_viewTitle {
     color: white;
     font-family: 'Open Sans', sans-serif !important;
     font-weight: bold !important;
-    background: #034D68 !important;
+    background: #276FBF !important;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
@@ -269,30 +269,31 @@ a {
 }
 
 .seller_itemTitle {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
     padding-top: 10px;
     margin-left: 20px;
-    color: #586163;
+    color: #204B57;
     font-weight: 800;
 }
 
 .seller_sellerName {
     font-family: 'Lato', sans-serif;
-    font-size: 13px;
+    font-size: 11px;
     padding-top: 3px;
     margin-left: 20px;
-    color: black;
-    font-weight: 800;
+    color: #8E9E9E;
+    font-weight: 500;
 }
 
 .seller_description {
     font-family: 'Lato', sans-serif;
-    font-size: 15px;
+    font-size: 12px;
     padding-top: 3px;
     margin-left: 20px;
-    color: #6D6D6D;
+    color: #8E9E9E;
     font-weight: 800;
+    max-width: 70%;
 }
 
 .seller_buttonHolder {
