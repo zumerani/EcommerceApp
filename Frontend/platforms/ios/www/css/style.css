@@ -269,20 +269,19 @@ a {
 }
 
 .seller_itemTitle {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Work Sans', sans-serif;
     font-size: 17px;
     padding-top: 10px;
     margin-left: 20px;
     color: #204B57;
     font-weight: 800;
 }
-
 .seller_sellerName {
     font-family: 'Lato', sans-serif;
     font-size: 11px;
     padding-top: 3px;
     margin-left: 20px;
-    color: #8E9E9E;
+    color: #5E6872;
     font-weight: 500;
 }
 
@@ -291,7 +290,7 @@ a {
     font-size: 12px;
     padding-top: 3px;
     margin-left: 20px;
-    color: #8E9E9E;
+    color: #5E6872;
     font-weight: 800;
     max-width: 70%;
 }
