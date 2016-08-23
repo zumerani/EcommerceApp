@@ -58,7 +58,6 @@ exports.addItem = function( req , res ) {
 };
 
 exports.getItems = function( req , res ) {
-    console.log('Someone just pinged me for some items ... ' + req.body.user );
 
     Model.User.findOne( { email: req.body.user } , function(err , dbres ) {
         if( !dbres ) {

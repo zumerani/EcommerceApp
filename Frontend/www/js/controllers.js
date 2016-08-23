@@ -35,13 +35,13 @@ angular.module('starter.controllers', [])
 
     /* We will use 'username' for browser and ionicView testing purposes */
     var username = { user: 'zumerani@scu.edu' };
+
     var results = [];
     $scope.lists = [];
     /* replace window.localStorage ... with username.user when browser/ionicView testing */
     TransactionsAPI.getTransactions(username).success( function(res) {
         //console.log('I got the feed: ' + JSON.stringify(res) );
-        alert('success');
-        results = /*JSON.stringify(res);*/ res;
+        results = res;
         console.log(results);
         var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
         var pictureIDList = $firebaseArray(itemsRef);
@@ -526,7 +526,7 @@ angular.module('starter.controllers', [])
     UserAPI.getUser($scope.item).success(function(res) {
         //alert('We got: ' + res.first );
         var temp = res;
-        console.log(temp.school);
+        console.log('Item is: ' + JSON.stringify(res) );
         $scope.listItem = temp;
     });
 
