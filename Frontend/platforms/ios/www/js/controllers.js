@@ -35,13 +35,13 @@ angular.module('starter.controllers', [])
 
     /* We will use 'username' for browser and ionicView testing purposes */
     var username = { user: 'zumerani@scu.edu' };
+
     var results = [];
     $scope.lists = [];
     /* replace window.localStorage ... with username.user when browser/ionicView testing */
     TransactionsAPI.getTransactions(username).success( function(res) {
         //console.log('I got the feed: ' + JSON.stringify(res) );
-        alert('success');
-        results = /*JSON.stringify(res);*/ res;
+        results = res;
         console.log(results);
         var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
         var pictureIDList = $firebaseArray(itemsRef);
@@ -159,16 +159,20 @@ angular.module('starter.controllers', [])
                 var finalArray = [];
                 for( var i = 0 ; i < arr.length ; i++ ) {
                     var item = {
+                        sellerEmail: '' ,
                         itemName: '' ,
                         price: '' ,
+                        description: '' ,
                         data: ''
                     }
-                    item.itemName = res[i].itemName;
-                    item.price = res[i].price;
-                    item.data = arr.$getRecord(res[i].lookUpID).data;
+                    console.log('results[i] email is: ' + results[i].sellerEmail );
+                    item.sellerEmail = results[i].sellerEmail;
+                    item.description = results[i].description;
+                    item.itemName = results[i].itemName;
+                    item.price = results[i].price;
+                    item.data = arr.$getRecord(results[i].lookUpID).data;
                     finalArray.unshift(item);
                 }
-                console.log('final array is: ' + JSON.stringify(finalArray) );
                 $scope.lists = finalArray;
             });
 
@@ -285,7 +289,8 @@ angular.module('starter.controllers', [])
             if( result ) {
                 console.log('result is: ' + result.email );
                 window.localStorage.setItem("username" , result.email);
-                alert("Welcome: " + window.localStorage.getItem("username") );
+                swal("Welcome!", "Start selling!" , "success");
+                $state.go('tab.feed');
             } else {
                 console.log('Could not grab user ... ' );
             }
@@ -526,7 +531,7 @@ angular.module('starter.controllers', [])
     UserAPI.getUser($scope.item).success(function(res) {
         //alert('We got: ' + res.first );
         var temp = res;
-        console.log(temp.school);
+        console.log('Item is: ' + JSON.stringify(res) );
         $scope.listItem = temp;
     });
 

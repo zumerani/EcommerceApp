@@ -371,19 +371,22 @@ a {
 }
 
 #feed_itemInfo {
-    margin-left: -220px;
+    margin-left: -65px;
     display: block;
-    //max-width: 100px;
+    max-width: 80px;
     margin-top: -10px;
-    color: #5D5D5D;
+    color: black;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif !important;
 }
 
 .feed_itemPrice {
     float: right;
     margin-top: -20px;
-    font-size: 14px !important;
+    font-size: 13px !important;
     color: #00557C !important;
     font-weight: bold !important;
+    margin-right: -10px;
 }
 
 .feed_item {
@@ -393,7 +396,7 @@ a {
 }
 
 #feed_secondColumn {
-    margin-top: 50px;
+    margin-top: 25px;
 }
 
 /* NEW FEED STUFF */

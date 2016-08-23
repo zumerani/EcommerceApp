@@ -49,7 +49,7 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = "http://localhost:8080";  /*"https://stormy-taiga-50511.herokuapp.com";*/
+    var base = /*"http://localhost:8080";*/  "https://stormy-taiga-50511.herokuapp.com";
 
     return {
         addUser: function(user) {
@@ -139,7 +139,7 @@ angular.module('starter.services', [])
 })
 
 .factory( 'TransactionsAPI' , function( $http , $ionicPopup , $state ) {
-    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com";*/
+    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com";
 
     return {
 

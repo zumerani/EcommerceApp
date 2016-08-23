@@ -15,14 +15,14 @@
             <button>Go to Seller</button>
         </a> -->
 
-
-
+        <div class="row">
+            <div class="col col-50">
                 <ul >
                     <li ng-repeat="list in lists">
 
                         <a ng-click="printMe(list)" href="#/tab/seller">
 
-                            <!-- <div class="list card feed_itemCard">
+                            <div class="list card feed_itemCard">
 
                                 <div class="item item-image">
                                     <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
@@ -33,21 +33,60 @@
                                     <p class="feed_itemPrice">{{list.price | currency}}</p>
                                 </div>
 
-                            </div> -->
+                            </div>
 
-                            <div class="feed_itemTest">
+                            <!-- <div class="feed_itemTest">
                                 <img src="data:image/jpeg;base64,{{list.data}}">
                                 <div class="feed_itemAndPriceHolder">
                                     <h2>{{list.itemName}}</h2>
                                     <h4>{{list.price | currency:undefined:0}}</h4>
                                     <h3>{{list.description}}</h3>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </a>
 
                     </li>
                 </ul>
+            </div>
+
+            <div id="feed_secondColumn" class="col col-50">
+                <ul >
+                    <li ng-repeat="list in lists">
+
+                        <a ng-click="printMe(list)" href="#/tab/seller">
+
+                            <div class="list card feed_itemCard">
+
+                                <div class="item item-image">
+                                    <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
+                                </div>
+
+                                <div class="item item-avatar feed_item">
+                                    <h2 id="feed_itemInfo">{{list.itemName}}</h2>
+                                    <p class="feed_itemPrice">{{list.price | currency}}</p>
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="feed_itemTest">
+                                <img src="data:image/jpeg;base64,{{list.data}}">
+                                <div class="feed_itemAndPriceHolder">
+                                    <h2>{{list.itemName}}</h2>
+                                    <h4>{{list.price | currency:undefined:0}}</h4>
+                                    <h3>{{list.description}}</h3>
+                                </div>
+                            </div> -->
+
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
 
     </ion-content>
 </ion-view>
