@@ -206,53 +206,59 @@ angular.module('starter.controllers', [])
 
 .controller('AccountCtrl', function($scope , $ionicPopup , UserAPI , $http , $firebaseArray , $cordovaCamera , $ionicLoading) {
 
-    var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+    // var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+    //
+    // $scope.upload = function() {
+    //     var options = {
+    //       quality: 100,
+    //       destinationType: Camera.DestinationType.DATA_URL,
+    //       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+    //       allowEdit: true,
+    //       encodingType: Camera.EncodingType.PNG,
+    //       targetWidth: 65,
+    //       targetHeight: 65,
+    //       popoverOptions: CameraPopoverOptions,
+    //       saveToPhotoAlbum: false,
+    // 	  correctOrientation:true
+    //     };
+    //     //success function
+    //     $cordovaCamera.getPicture(options).then(function(imageData) {
+    //
+    //         $ionicLoading.show({
+    //           template: 'Uploading...',
+    //           duration: 1000
+    //         });
+    //
+    //
+    //         var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
+    //
+    //         $scope.items = $firebaseArray(itemsRef);
+    //         /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
+    //         $scope.items.$add({
+    //             name: 'Ben' ,
+    //             data: imageData
+    //         }).then( function(ref) {
+    //             $scope.id = "";
+    //
+    //             $scope.id = ref.key();
+    //             var list = $firebaseArray(itemsRef);
+    //             list.$loaded().then( function( arr) {
+    //                 // alert('hold is:  ' + $scope.hold );
+    //                 $scope.hold = arr.$getRecord($scope.id).data;
+    //                 // alert('hold is:  ' + $scope.hold );
+    //             });
+    //         });
+    //     //failure function
+    //     }, function(err) {
+    //         alert("We have an error: " + error );
+    //     });
+    //
+    // }
 
-    $scope.upload = function() {
-        var options = {
-          quality: 100,
-          destinationType: Camera.DestinationType.DATA_URL,
-          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-          allowEdit: true,
-          encodingType: Camera.EncodingType.PNG,
-          targetWidth: 65,
-          targetHeight: 65,
-          popoverOptions: CameraPopoverOptions,
-          saveToPhotoAlbum: false,
-    	  correctOrientation:true
-        };
-        //success function
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-
-            $ionicLoading.show({
-              template: 'Uploading...',
-              duration: 1000
-            });
-
-
-            var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
-
-            $scope.items = $firebaseArray(itemsRef);
-            /* We need to wait for the list to load first and then we grab ... This solves the problem of 'id' just add a scope.*/
-            $scope.items.$add({
-                name: 'Ben' ,
-                data: imageData
-            }).then( function(ref) {
-                $scope.id = "";
-
-                $scope.id = ref.key();
-                var list = $firebaseArray(itemsRef);
-                list.$loaded().then( function( arr) {
-                    // alert('hold is:  ' + $scope.hold );
-                    $scope.hold = arr.$getRecord($scope.id).data;
-                    // alert('hold is:  ' + $scope.hold );
-                });
-            });
-        //failure function
-        }, function(err) {
-            alert("We have an error: " + error );
-        });
-
+    $scope.info = {
+        name: 'Zain Umerani' ,
+        sold: 4 ,
+        bought: 3
     }
 
 
