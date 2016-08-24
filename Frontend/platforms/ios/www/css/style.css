@@ -291,7 +291,7 @@ a {
     padding-top: 3px;
     margin-left: 20px;
     color: #5E6872;
-    font-weight: 800;
+    font-weight: 100;
     max-width: 70%;
 }
 
@@ -564,20 +564,3 @@ and (orientation : portrait) {
         margin-top: 25px;
     }
 }
-
-@media only screen
-and (min-device-width : 375px)
-and (max-device-width : 667px)
-and (orientation : portrait) {
-    #account_buttons {
-        width: 160px;
-        height: 35px;
-        margin-left: auto;
-        margin-right: auto;
-        display: inline-block;
-        border: none;
-        margin-top: 60px;
-        border-radius: 4px;
-        color: white;
-    }
- }
