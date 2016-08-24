@@ -6,10 +6,10 @@
 
 .index_viewTitle {
     color: white;
-    font-family: 'Open Sans', sans-serif !important;
+    font-family: 'Work Sans', sans-serif !important;
     font-weight: bold !important;
-    background: #276FBF !important;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background: #6699CC !important;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 2px 3px rgba(0,0,0,0.23);
 }
 
 /* SIGNIN.HTML */
@@ -230,7 +230,7 @@ a {
 }
 
 .seller_background {
-    background-color: white;
+    background-color: #f7fafc;
 }
 
 .seller_image {
@@ -247,7 +247,7 @@ a {
 .seller_priceContainer {
     width: 48px;
     height: 24px;
-    background-color: #2081C3;
+    background-color: #6699CC;
     display: table;
     border-radius: 4px;
     text-align: center;
@@ -354,6 +354,10 @@ a {
 
 /* FEED.HTML */
 
+.feed_background {
+    background-color: #f7fafc;
+}
+
 .feed_viewTitle {
     color: white;
     font-family: 'Open Sans', sans-serif; !important;
@@ -377,7 +381,7 @@ a {
     margin-top: -10px;
     color: black;
     font-size: 13px;
-    font-family: 'Open Sans', sans-serif !important;
+    font-family: 'Work Sans', sans-serif;
 }
 
 .feed_itemPrice {
@@ -387,6 +391,7 @@ a {
     color: #00557C !important;
     font-weight: bold !important;
     margin-right: -10px;
+    font-family: 'Work Sans', sans-serif;
 }
 
 .feed_item {
@@ -456,3 +461,123 @@ a {
     margin-right: 10px;
     font-weight: bold;
 }
+
+/* ACCOUNT.HTML */
+
+.account_background {
+    background-color: #f7fafc;
+    text-align: center;
+}
+
+.account_name {
+    padding-top: 50px;
+    text-align: center;
+    color: #6699CC;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 40px;
+}
+
+#account_boughtSold {
+    margin-top: 45px;
+}
+
+#account_sold {
+    text-align: center;
+    border-right: 1px solid #eee;
+}
+
+#account_bought {
+    text-align: center;
+}
+
+#account_values {
+    font-size: 36px;
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    color: #4C5B5C;
+}
+
+.account_span {
+    font-family: 'Work Sans', sans-serif;
+    color: #4C5B5C;
+    font-size: 12px;
+}
+
+#account_contact {
+    margin-top: 55px;
+}
+
+#account_username {
+    //text-align: center;
+    border-right: 1px solid #eee;
+}
+
+#account_school {
+    //text-align: center;
+}
+
+.account_contactInfo {
+    font-size: 13px;
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    color: #4C5B5C;
+}
+
+#account_buttons {
+    width: 160px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    border: none;
+    margin-top: 60px;
+    border-radius: 4px;
+    color: white;
+}
+
+.account_changePassword {
+    background-color: #6699CC;
+}
+
+.account_logout {
+    background-color: #06A77D;
+}
+
+
+/* MEDIA QUERIES */
+
+/* iPhone 5/5s */
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : portrait) {
+
+    /* ACCOUNT.HTML */
+
+    #account_buttons {
+        width: 130px;
+        font-size: 10px;
+    }
+
+    #account_contact {
+        margin-top: 25px;
+    }
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation : portrait) {
+    #account_buttons {
+        width: 160px;
+        height: 35px;
+        margin-left: auto;
+        margin-right: auto;
+        display: inline-block;
+        border: none;
+        margin-top: 60px;
+        border-radius: 4px;
+        color: white;
+    }
+ }

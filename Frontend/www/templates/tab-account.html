@@ -1,11 +1,40 @@
 <ion-view view-title="My Account">
-  <ion-content>
+  <ion-content class="account_background">
 
-      <h1>Hi</h1>
+      <h2 class="account_name">Zain Umerani</h2>
 
-      <button ng-click="upload()">Upload Image</button>
+      <div id="account_boughtSold" class="row">
+          <div id="account_sold" class="col col-50">
+              <h3 id="account_values">7</h3>
+              <span class="account_span">sold</span>
+          </div>
 
-      <img ng-src="data:image/jpeg;base64,{{hold}}"/>
+          <div id="account_bought" class="col col-50">
+              <h3 id="account_values">4</h3>
+              <span class="account_span">bought</span>
+          </div>
+
+      </div>
+
+      <div id="account_contact" class="row">
+
+          <div id="account_username" class="col col-50">
+              <h3 class="account_contactInfo">Username:<br /> zumerani@scu.edu</h3>
+          </div>
+
+          <div id="account_school" class="col col-50">
+              <h3 class="account_contactInfo">School:<br /> Santa Clara University</h3>
+          </div>
+
+      </div>
+
+      <button class="account_changePassword" id="account_buttons">Change Password</button>
+
+      <button class="account_logout" id="account_buttons">Logout</button>
+
+      <!-- <button ng-click="upload()">Upload Image</button>
+
+      <img ng-src="data:image/jpeg;base64,{{hold}}"/> -->
 
   </ion-content>
 </ion-view>

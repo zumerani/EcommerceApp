@@ -14,17 +14,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
     // for form inputs)
 
     /* Remember me feature */
-    // document.addEventListener("deviceready", function() {
-    //     if( window.localStorage.getItem("username") !== null ) {
-    //         swal("Welcome back!");
-    //         $state.go("tab.feed");
-    //     }
-    //     else {
-    //         $state.go("signin");
-    //         alert("who the hell are you??");
-    //     }
-    //     //alert("Hello! " + window.localStorage.getItem("username") );
-    // }, false);
+    document.addEventListener("deviceready", function() {
+        if( window.localStorage.getItem("username") !== null ) {
+            swal("Welcome back!");
+            $state.go("tab.feed");
+        }
+        else {
+            $state.go("signin");
+            alert("who the hell are you??");
+        }
+        //alert("Hello! " + window.localStorage.getItem("username") );
+    }, false);
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
