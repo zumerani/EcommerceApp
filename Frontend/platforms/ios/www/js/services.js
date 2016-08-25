@@ -49,7 +49,7 @@ angular.module('starter.services', [])
   };
 })
 .factory('UserAPI' , function($http , $ionicPopup , $state) {
-    var base = "http://localhost:8080";  /*"https://stormy-taiga-50511.herokuapp.com";*/
+    var base = /*"http://localhost:8080";*/  "https://stormy-taiga-50511.herokuapp.com";
 
     return {
         addUser: function(user) {
@@ -139,7 +139,7 @@ angular.module('starter.services', [])
 })
 
 .factory( 'TransactionsAPI' , function( $http , $ionicPopup , $state ) {
-    var base = "http://localhost:8080"; /*"https://stormy-taiga-50511.herokuapp.com";*/
+    var base = /*"http://localhost:8080";*/ "https://stormy-taiga-50511.herokuapp.com";
 
     return {
 
@@ -174,6 +174,7 @@ angular.module('starter.services', [])
                 data: item
             }).success( function success(result) {
                 //swal("Got it!", "I got it!!" , "success");
+                alert(JSON.stringify(result));
             }).error( function error(err) {
                 swal("There seems to be a network issue.", "Try again soon." , "error");
             });

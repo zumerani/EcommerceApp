@@ -395,13 +395,13 @@ a {
 }
 
 .feed_item {
-    //background-color: blue;
     min-height: 5px !important;
     height: 5px !important;
+    max-height: 10px !important;
 }
 
 #feed_secondColumn {
-    margin-top: 25px;
+    //margin-top: 25px;
 }
 
 /* NEW FEED STUFF */

@@ -58,7 +58,6 @@ angular.module('starter.controllers', [])
                     description: '' ,
                     data: ''
                 }
-                console.log('results[i] email is: ' + results[i].sellerEmail );
                 item.sellerEmail = results[i].sellerEmail;
                 item.description = results[i].description;
                 item.itemName = results[i].itemName;
@@ -70,7 +69,7 @@ angular.module('starter.controllers', [])
         });
 
     }).error( function(error) {
-        alert('ERRRRORRR');
+        console.log('ERRRRORRR');
     });
 
     $scope.display = function() {
@@ -147,8 +146,9 @@ angular.module('starter.controllers', [])
     }
 
     $scope.doRefresh = function() {
+        alert('refreshing');
         TransactionsAPI.getTransactions(username).success( function(res) {
-            results = JSON.stringify(res);
+            results = res;
             console.log('I got the feed: ' + results);
             var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
             var pictureIDList = $firebaseArray(itemsRef);
@@ -165,7 +165,6 @@ angular.module('starter.controllers', [])
                         description: '' ,
                         data: ''
                     }
-                    console.log('results[i] email is: ' + results[i].sellerEmail );
                     item.sellerEmail = results[i].sellerEmail;
                     item.description = results[i].description;
                     item.itemName = results[i].itemName;
@@ -182,6 +181,25 @@ angular.module('starter.controllers', [])
        $scope.$broadcast('scroll.refreshComplete');
      });
   };
+
+  $scope.randomHeight = function(max){
+          var height = Math.floor((Math.random()*max)+188);
+          return height;
+  };
+
+  $scope.resultBoxOne = function(){
+                var res = $scope.randomHeight(190);
+               return {
+                   height: res +'px' ,
+                   textAlign:'center',
+                   marginTop: '40' + 'px' ,/*$scope.randomMargin(-4) + 'px' ,*/
+                   borderRadius:'5px'
+               };
+
+              }
+
+
+
 
 }])
 

@@ -58,7 +58,7 @@ angular.module('starter.controllers', [])
                     description: '' ,
                     data: ''
                 }
-                console.log('results[i] email is: ' + results[i].sellerEmail );
+                alert('results[i] email is: ' + results[i].sellerEmail );
                 item.sellerEmail = results[i].sellerEmail;
                 item.description = results[i].description;
                 item.itemName = results[i].itemName;
@@ -147,9 +147,11 @@ angular.module('starter.controllers', [])
     }
 
     $scope.doRefresh = function() {
+        alert('refreshing');
         TransactionsAPI.getTransactions(username).success( function(res) {
-            results = JSON.stringify(res);
+            results = res;
             console.log('I got the feed: ' + results);
+            alert('results first time is : ' + results );
             var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
             var pictureIDList = $firebaseArray(itemsRef);
             pictureIDList.$loaded().then( function( arr ) {
@@ -165,7 +167,8 @@ angular.module('starter.controllers', [])
                         description: '' ,
                         data: ''
                     }
-                    console.log('results[i] email is: ' + results[i].sellerEmail );
+                    alert('results second time is: ' + results );
+                    alert('results[0] email is: ' + results[0].sellerEmail );
                     item.sellerEmail = results[i].sellerEmail;
                     item.description = results[i].description;
                     item.itemName = results[i].itemName;
@@ -174,6 +177,7 @@ angular.module('starter.controllers', [])
                     finalArray.unshift(item);
                 }
                 $scope.lists = finalArray;
+                alert('lists: ' + $scope.lists);
             });
 
         })
@@ -182,6 +186,25 @@ angular.module('starter.controllers', [])
        $scope.$broadcast('scroll.refreshComplete');
      });
   };
+
+  $scope.randomHeight = function(max){
+          var height = Math.floor((Math.random()*max)+188);
+          return height;
+  };
+
+  $scope.resultBoxOne = function(){
+                var res = $scope.randomHeight(190);
+               return {
+                   height: res +'px' ,
+                   textAlign:'center',
+                   marginTop: '40' + 'px' ,/*$scope.randomMargin(-4) + 'px' ,*/
+                   borderRadius:'5px'
+               };
+
+              }
+
+
+
 
 }])
 
