@@ -183,17 +183,16 @@ angular.module('starter.controllers', [])
   };
 
   $scope.randomHeight = function(max){
-          var height = Math.floor((Math.random()*max)+188);
+          var height = Math.floor((Math.random()*max)+75);
           return height;
   };
 
   $scope.resultBoxOne = function(){
-                var res = $scope.randomHeight(190);
+                var res = $scope.randomHeight(120);
                return {
                    height: res +'px' ,
                    textAlign:'center',
-                   marginTop: '40' + 'px' ,/*$scope.randomMargin(-4) + 'px' ,*/
-                   borderRadius:'5px'
+                   /*$scope.randomMargin(-4) + 'px' ,*/
                };
 
               }

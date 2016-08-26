@@ -547,7 +547,7 @@ a {
 /* MEDIA QUERIES */
 
 /* iPhone 5/5s */
-
+/* Use this for iPhone 5 settings */
 @media only screen
 and (max-device-width : 370px)
 and (orientation : portrait) {
