@@ -58,7 +58,6 @@ angular.module('starter.controllers', [])
                     description: '' ,
                     data: ''
                 }
-                alert('results[i] email is: ' + results[i].sellerEmail );
                 item.sellerEmail = results[i].sellerEmail;
                 item.description = results[i].description;
                 item.itemName = results[i].itemName;
@@ -70,7 +69,7 @@ angular.module('starter.controllers', [])
         });
 
     }).error( function(error) {
-        alert('ERRRRORRR');
+        console.log('ERRRRORRR');
     });
 
     $scope.display = function() {
@@ -151,7 +150,6 @@ angular.module('starter.controllers', [])
         TransactionsAPI.getTransactions(username).success( function(res) {
             results = res;
             console.log('I got the feed: ' + results);
-            alert('results first time is : ' + results );
             var itemsRef = new Firebase("https://images-10387.firebaseio.com/Images");
             var pictureIDList = $firebaseArray(itemsRef);
             pictureIDList.$loaded().then( function( arr ) {
@@ -167,8 +165,6 @@ angular.module('starter.controllers', [])
                         description: '' ,
                         data: ''
                     }
-                    alert('results second time is: ' + results );
-                    alert('results[0] email is: ' + results[0].sellerEmail );
                     item.sellerEmail = results[i].sellerEmail;
                     item.description = results[i].description;
                     item.itemName = results[i].itemName;
@@ -177,7 +173,6 @@ angular.module('starter.controllers', [])
                     finalArray.unshift(item);
                 }
                 $scope.lists = finalArray;
-                alert('lists: ' + $scope.lists);
             });
 
         })
