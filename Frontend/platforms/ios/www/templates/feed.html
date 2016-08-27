@@ -22,7 +22,7 @@
 
                         <a ng-click="printMe(list)" href="#/tab/seller">
 
-                            <div class="list card feed_itemCard">
+                            <!-- <div class="list card feed_itemCard">
 
                                 <div class="item item-image">
                                     <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
@@ -33,6 +33,14 @@
                                     <p class="feed_itemPrice">{{list.price | currency}}</p>
                                 </div>
 
+                            </div> -->
+
+                            <div class="feed_test" >
+                                <img ng-style="resultBoxOne()" src="data:image/jpeg;base64,{{list.data}}">
+                                <div class="feed_contentItem">
+                                    <h4 class="feed_listItem">{{list.itemName}}</h4>
+                                    <h6 class="feed_price">{{list.price | currency }}</h6>
+                                </div>
                             </div>
 
                             <!-- <div class="feed_itemTest">
@@ -56,7 +64,7 @@
 
                         <a ng-click="printMe(list)" href="#/tab/seller">
 
-                            <div class="list card feed_itemCard">
+                            <!-- <div class="list card feed_itemCard">
 
                                 <div class="item item-image">
                                     <img class="feed_image" src="data:image/jpeg;base64,{{list.data}}">
@@ -67,6 +75,14 @@
                                     <p class="feed_itemPrice">{{list.price | currency}}</p>
                                 </div>
 
+                            </div> -->
+
+                            <div class="feed_test" >
+                                <img ng-style="resultBoxOne()" ng-src="data:image/jpeg;base64,{{list.data}}">
+                                <div class="feed_contentItem">
+                                    <h4 class="feed_listItem">{{list.itemName}}</h4>
+                                    <h6 class="feed_price">{{list.price | currency }}</h6>
+                                </div>
                             </div>
 
                             <!-- <div class="feed_itemTest">

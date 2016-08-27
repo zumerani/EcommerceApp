@@ -98,9 +98,9 @@ angular.module('starter.controllers', [])
                   destinationType: Camera.DestinationType.DATA_URL,
                   sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                   allowEdit: true,
-                  encodingType: Camera.EncodingType.PNG,
-                  targetWidth: 65,
-                  targetHeight: 65,
+                  encodingType: Camera.EncodingType.JPEG,
+                  targetWidth: 510,
+                  targetHeight: 500,
                   popoverOptions: CameraPopoverOptions,
                   saveToPhotoAlbum: false,
                   correctOrientation:true
@@ -183,17 +183,16 @@ angular.module('starter.controllers', [])
   };
 
   $scope.randomHeight = function(max){
-          var height = Math.floor((Math.random()*max)+188);
+          var height = Math.floor((Math.random()*max)+75);
           return height;
   };
 
   $scope.resultBoxOne = function(){
-                var res = $scope.randomHeight(190);
+                var res = $scope.randomHeight(120);
                return {
                    height: res +'px' ,
                    textAlign:'center',
-                   marginTop: '40' + 'px' ,/*$scope.randomMargin(-4) + 'px' ,*/
-                   borderRadius:'5px'
+                   /*$scope.randomMargin(-4) + 'px' ,*/
                };
 
               }
