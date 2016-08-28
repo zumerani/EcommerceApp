@@ -1,8 +1,8 @@
 angular.module('starter.controllers', [])
 
 .controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$cordovaCamera' , '$firebaseArray' ,
-'TransactionsAPI' , 'Sender' ,  function($scope , $cordovaOauth , $location , $http , $window ,
-    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI , Sender) {
+'TransactionsAPI' , 'Sender' , '$rootScope' , function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI , Sender , $rootScope) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -15,6 +15,8 @@ angular.module('starter.controllers', [])
     //     $location.url('/profile');
     //
     // };
+
+    $rootScope.value = 1;
 
     $scope.printMe = function(item) {
         Sender.sendOver(item);
@@ -172,30 +174,35 @@ angular.module('starter.controllers', [])
                     item.data = arr.$getRecord(results[i].lookUpID).data;
                     finalArray.unshift(item);
                 }
+                $scope.lists.length = 0;
                 $scope.lists = finalArray;
             });
 
-        })
-     .finally(function() {
-       // Stop the ion-refresher from spinning
-       $scope.$broadcast('scroll.refreshComplete');
-     });
-  };
+        }).finally(function() {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
 
   $scope.randomHeight = function(max){
-          var height = Math.floor((Math.random()*max)+75);
-          return height;
+      var height = Math.floor((Math.random()*max)+75);
+      return height;
   };
 
   $scope.resultBoxOne = function(){
-                var res = $scope.randomHeight(120);
-               return {
-                   height: res +'px' ,
-                   textAlign:'center',
-                   /*$scope.randomMargin(-4) + 'px' ,*/
-               };
 
-              }
+            if( $rootScope.value ) {
+
+                var res = $scope.randomHeight(120);
+                return {
+                    height: res +'px' ,
+                    textAlign:'center',
+                    /*$scope.randomMargin(-4) + 'px' ,*/
+                };
+                $rootScope.value = 0;
+            }
+
+  };
 
 
 
