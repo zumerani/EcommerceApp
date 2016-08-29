@@ -488,15 +488,18 @@ a {
 .feed_contentItem {
     width: 100%;
     height: 25px;
+    text-overflow: ellipsis;
 }
 
 .feed_listItem {
-    display: inline;
-    float: left;
+    //display: inline;
+    //float: left;
     margin-top: 5px;
     margin-left: 5px;
     font-size: 9px;
     max-width: 80px;
+    text-overflow: ellipsis;
+    text-align: left;
     font-family: 'Work Sans', sans-serif;
 }
 
