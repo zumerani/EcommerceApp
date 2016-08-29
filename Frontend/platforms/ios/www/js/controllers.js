@@ -1,8 +1,8 @@
 angular.module('starter.controllers', [])
 
 .controller('FeedCtrl', ['$scope' , '$cordovaOauth', '$location' , '$http' , '$window', 'UserAPI' , '$cordovaCamera' , '$firebaseArray' ,
-'TransactionsAPI' , 'Sender' , '$rootScope' , function($scope , $cordovaOauth , $location , $http , $window ,
-    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI , Sender , $rootScope) {
+'TransactionsAPI' , 'Sender' , '$rootScope' , '$ionicLoading' , function($scope , $cordovaOauth , $location , $http , $window ,
+    UserAPI , $cordovaCamera , $firebaseArray , TransactionsAPI , Sender , $rootScope , $ionicLoading ) {
 
     // $scope.login = function() {
     //     $cordovaOauth.facebook("877800308993381", ["email", "user_website", "user_location", "user_relationships"]).then(function(result) {
@@ -41,6 +41,12 @@ angular.module('starter.controllers', [])
     var results = [];
     $scope.lists = [];
     /* replace window.localStorage ... with username.user when browser/ionicView testing */
+    $ionicLoading.show({
+      template: 'Loading...'
+    }).then(function(){
+       console.log("The loading indicator is now displayed");
+    });
+
     TransactionsAPI.getTransactions(username).success( function(res) {
         //console.log('I got the feed: ' + JSON.stringify(res) );
         results = res;
@@ -68,6 +74,12 @@ angular.module('starter.controllers', [])
                 finalArray.unshift(item);
             }
             $scope.lists = finalArray;
+
+            $ionicLoading.hide().then(function(){
+                console.log("The loading indicator is now hidden");
+                swal("Welcome back!", "Take your pick." , "success");
+            });
+
         });
 
     }).error( function(error) {
@@ -123,7 +135,7 @@ angular.module('starter.controllers', [])
                         /* remove this line  -- only included for testing purposes on ionicView*/
                         // $scope.obj.sellerEmail = 'zumerani@scu.edu';
                         //$scope.obj.lookUpID = ref.key();
-                        alert('id is + ' + id );
+                        //alert('id is + ' + id );
                         var sendObj = $scope.obj;
                         TransactionsAPI.addTransaction( sendObj );
 
@@ -148,7 +160,13 @@ angular.module('starter.controllers', [])
     }
 
     $scope.doRefresh = function() {
-        alert('refreshing');
+
+        $ionicLoading.show({
+          template: 'Loading...'
+        }).then(function(){
+           console.log("The loading indicator is now displayed");
+        });
+
         TransactionsAPI.getTransactions(username).success( function(res) {
             results = res;
             console.log('I got the feed: ' + results);
@@ -176,6 +194,9 @@ angular.module('starter.controllers', [])
                 }
                 $scope.lists.length = 0;
                 $scope.lists = finalArray;
+                $ionicLoading.hide().then(function(){
+                    console.log("The loading indicator is now hidden");
+                });
             });
 
         }).finally(function() {

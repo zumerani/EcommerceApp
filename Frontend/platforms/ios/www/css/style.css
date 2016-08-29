@@ -275,6 +275,8 @@ a {
     margin-left: 20px;
     color: #204B57;
     font-weight: 800;
+    max-width: 75%;
+    display: block;
 }
 .seller_sellerName {
     font-family: 'Lato', sans-serif;
@@ -356,6 +358,7 @@ a {
 
 .feed_background {
     background-color: #eee;
+    text-align: center;
 }
 
 .feed_viewTitle {
@@ -488,7 +491,7 @@ a {
 }
 
 .feed_listItem {
-    display: inline-block;
+    display: inline;
     float: left;
     margin-top: 5px;
     margin-left: 5px;
@@ -498,7 +501,7 @@ a {
 }
 
 .feed_price {
-    display: inline-block;
+    display: inline;
     float: right;
     margin-top: 5px;
     margin-right: 5px;
@@ -610,7 +613,7 @@ and (orientation : portrait) {
     }
 
     .feed_price {
-        display: inline-block;
+        display: inline;
         float: right;
         margin-top: 5px;
         margin-right: 5px;

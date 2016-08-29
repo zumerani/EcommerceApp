@@ -16,7 +16,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 
     /* Remember me feature */
     document.addEventListener("deviceready", function() {
         if( window.localStorage.getItem("username") !== null ) {
-            swal("Welcome back!");
+            //swal("Welcome back!");
             $state.go("tab.feed");
         }
         else {

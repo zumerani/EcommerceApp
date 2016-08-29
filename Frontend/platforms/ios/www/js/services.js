@@ -174,7 +174,7 @@ angular.module('starter.services', [])
                 data: item
             }).success( function success(result) {
                 //swal("Got it!", "I got it!!" , "success");
-                alert(JSON.stringify(result));
+                //alert(JSON.stringify(result));
             }).error( function error(err) {
                 swal("There seems to be a network issue.", "Try again soon." , "error");
             });
