@@ -127,6 +127,9 @@ exports.loginUser = function( req , res ) {
 
 exports.getUser = function( req , res ) {
 
+    console.log('Someone just pinged me');
+    console.log('I just got: ' + req.body.sellerEmail );
+
     Model.User.findOne( { email: req.body.sellerEmail } , function(err , dbres ) {
         if( !dbres ) {
             console.log("Can't find a user.");
@@ -138,7 +141,7 @@ exports.getUser = function( req , res ) {
                     status: '400'
             }));
         } else if( dbres ) {
-            console.log('I found a user: ' + dbres.firstName );
+            console.log('I found a user: ' + dbres.first );
             res.writeHead(200, {
                     'Content-Type': 'application/json; charset=utf-8'
                 });

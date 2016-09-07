@@ -68,7 +68,7 @@ exports.getItems = function( req , res ) {
                 if( !dbSchool ) {
                     console.log('Cannot find school.');
                 } else {
-                    console.log('I found it: ' + JSON.stringify(dbSchool.feed));
+                    //console.log('I found it: ' + JSON.stringify(dbSchool.feed));
                     res.writeHead(200, {
                         'Content-Type': 'application/json; charset=utf-8'
                     });

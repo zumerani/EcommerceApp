@@ -496,7 +496,8 @@ a {
     //float: left;
     margin-top: 5px;
     margin-left: 5px;
-    font-size: 9px;
+    font-size: 11px;
+    max-width: 70px;
     max-width: 80px;
     text-overflow: ellipsis;
     text-align: left;
@@ -506,7 +507,7 @@ a {
 .feed_price {
     display: inline;
     float: right;
-    margin-top: 5px;
+    margin-top: -22px;
     margin-right: 5px;
     font-size: 11px;
     font-family: 'Work Sans', sans-serif;
@@ -618,7 +619,7 @@ and (orientation : portrait) {
     .feed_price {
         display: inline;
         float: right;
-        margin-top: 5px;
+        margin-top: -20px;
         margin-right: 5px;
         font-size: 9px;
         font-family: 'Work Sans', sans-serif;

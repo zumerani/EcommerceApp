@@ -16,6 +16,8 @@ angular.module('starter.controllers', [])
     //
     // };
 
+    console.log('I am in feed');
+
     $rootScope.value = 1;
 
     $scope.printMe = function(item) {
@@ -578,12 +580,15 @@ angular.module('starter.controllers', [])
     console.log('In Seller');
 
     $scope.item = Sender.get();
-
+    $scope.fieldData = $scope.item.data;
+    $scope.item.data = "";
+    console.log('item is: ' + JSON.stringify($scope.item) );
     UserAPI.getUser($scope.item).success(function(res) {
         //alert('We got: ' + res.first );
         var temp = res;
         console.log('Item is: ' + JSON.stringify(res) );
         $scope.listItem = temp;
+        $scope.item.data = $scope.fieldData;
     });
 
     $scope.venmoMe = function() {
